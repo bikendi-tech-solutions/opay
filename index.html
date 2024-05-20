@@ -1,0 +1,147 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/main-page.css?ver=<?php echo $rand;?>" />
+
+
+        <div class="container" id="main-page">
+            <!--HEADER-->
+            <div  id="opay-header" class="row mx-1 pt-3 pb-md-2 opay-header-main d-flex justify-content-around">
+                <div id="theader-icon-left" class="col d-flex flex-row justify-content-start align-items-center">
+                    <div class="plan-icon me-2" link="?vend=settings"><i class="fa-solid fa-award"></i></div>
+                    <span class="greetings" link="?vend=settings">Hi, <?php echo ucfirst($username);?></span>
+                </div>
+                <div id="theader-icon-right" class="col d-flex justify-content-end  align-items-center ">
+                   <span  class="header-icon mx-2 position-relative"> <i class="fs-5 top-info-message dbadge message fa-solid fa-volume-high"></i></span>
+                   <span  class="header-icon mx-2"><i class="fs-5 fa-regular fa-comment"></i></span>
+                   <span  class="header-icon ms-2  position-relative"> <i class="fs-5 dbadge fa-regular fa-bell"></i> </span>
+                </div>
+        
+            </div>
+
+            <div class="top-info top-info-message  cursor-pointer py-1 px-3 d-flex justify-content-between align-items-center">
+                <span class="icon"><i class="fa-solid fa-volume-high"></i></span>
+                <span class="message d-flex flex-column justify-content-center"><marquee>This is me and my life</marquee></span>
+                <span class="icon"><i class="fa-solid fa-angle-right"></i></span>
+            </div>
+            <!--USER BAL-->
+            <div  class="row opay-main-2nd mt-1 mb-3 mx-1 px-2 py-3 ">
+                <div class="col ">
+                    <span class="" id="general-text"> <i class="fa-solid fa-shield me-1"></i>Available Balance <i class="fa-solid cursor-pointer fa-eye toggle-bal-visible"></i></span>
+                    <span class="mt-2 available-balance  d-flex justify-content-start align-items-baseline " id="general-text">
+                        <span class="amount-currency">₦</span>
+                        <span class="amount"><?php echo number_format($bal);?></span>
+                    </span>
+                </div>
+                <div class="col">
+                    <span class="d-flex justify-content-end align-items-center cursor-pointer" link="?vend=history&sub=wallet" id="general-text"><span class="me-2">Transaction History</span> <i class="fa-solid fa-angle-right"></i></span>
+                    <a href="?vend=wallet" class="float-end mt-2 btn btn-light text-success add-money" id="general-text"><span>+ Add Money</span></a>
+                </div>
+
+            </div>
+
+            <!--1st ACT-->
+            <div  class="row action1 my-3 mx-1 p-2  " id="action1">
+                <div class="col d-flex flex-column align-items-center ">
+                    <a href="?vend=wallet" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image "><i class="fa-solid fa-wallet"></i></div>
+                        <div class="icon-text" id="general-text">Fund Wallet</div>
+                    </a>
+                </div>
+
+                <div class="col d-flex flex-column service-transfer align-items-center ">
+                    <a href="?vend=transfer" class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image "><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <div class="icon-text" id="general-text">W2W Transfer</div>
+                    </a>
+                </div>
+
+                <div class="col d-flex service-withdraw flex-column align-items-center ">
+
+                    <a href="?vend=withdraw" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image "><i class="fa-solid fa-arrow-down-up-across-line"></i></div>
+                        <div class="icon-text" id="general-text">Withdraw</div>
+                    </a>
+                </div>
+
+            </div>
+
+            <!--2nd ACT-->
+            <div class="row action1 action2 my-3 mx-1 p-2  " id="action1">
+
+                <!--FIRST COLUMN-->
+                <div class="col service-airtime d-flex flex-column align-items-center ">
+                    <a href="?vend=airtime" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image "><i class="fa-solid fa-mobile"></i></div>
+                        <div class="icon-text" id="general-text">Airtime</div>
+                    </a>
+                </div>
+
+                <div class="col service-data d-flex flex-column align-items-center ">
+                    <a href="?vend=data" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image"><span class="badge" >very cheap</span><i class="fa-solid fa-wifi"></i></div>
+                        <div class="icon-text" id="general-text">Data</div>
+                    </a>
+                </div>
+                <div class="col service-cable d-flex flex-column align-items-center ">
+                    <a href="?vend=cable" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image"><i class="fa-solid fa-tv"></i></div>
+                        <div class="icon-text" id="general-text">Tv</div>
+                    </a>
+                </div>
+                <div class="col service-bill d-flex flex-column align-items-center ">
+                    <a href="?vend=bill" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image"><i class="fa-regular fa-lightbulb"></i></div>
+                        <div class="icon-text" id="general-text">Bill</div>
+                    </a>
+                </div>
+
+                <div class="action-divider" id="divider"></div>
+
+                <!--SECOND COLUMN-->
+                <div class="col service-bet d-flex flex-column align-items-center ">
+                    <a href="?vend=bet" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image"><i class="fa-solid fa-futbol"></i></div>
+                        <div class="icon-text" id="general-text">Bet</div>
+                    </a>
+                </div>
+                <div class="col service-crypto d-flex flex-column align-items-center ">
+                    <a href="#" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black crypto-trade" for="crypto">
+                        <div class="icon-image"><i class="fa-brands fa-bitcoin"></i></div>
+                        <div class="icon-text" id="general-text">Crypto</div>
+                    </a>
+                </div>
+                <div class="col service-giftcard d-flex flex-column align-items-center ">
+                    <a href="#" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                        <div class="icon-image"><i class="fa-brands fa-cc-apple-pay"></i></div>
+                        <div class="icon-text" id="general-text">Giftcard</div>
+                    </a>
+                </div>
+
+            </div>
+
+
+            <!--Click 2 Action-->
+            <?php
+                if(strtolower($kyc_data[0]->enable) == "yes"){
+            ?>
+            <div class="row action1 action3 my-3 mx-1 p-2 " id="action1">
+                <div jlink="?vend=kyc" class="col d-flex flex-row">
+                    <div class="icon-image position-relative">
+                        <i class="fa-solid fa-user-check"></i>
+                        <i class="fa-solid fa-naira-sign naira position-absolute"></i>
+                    </div>
+                    <div class="icon-text ms-2 d-flex flex-column justify-content-start align-items-start" id="general-text">
+                        <span class="action-title">Verify Account</span>
+                        <span class="action-text">Verify your account to get no limit. </span>
+                    </div>
+                </div>
+            </div>
+            <?php
+                }
+            ?>
+
+            
+        </div>
+    
+
+<script src="<?php echo plugins_url('opay/');?>js/main-page.js?ver=<?php echo $rand;?>" ></script>
+
+

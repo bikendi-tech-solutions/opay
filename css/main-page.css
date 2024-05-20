@@ -1,0 +1,214 @@
+
+
+/* HEADER */
+#opay-header{
+    color:#4f4d4d;
+}
+#opay-header #theader-icon-right {
+    padding-right:0px;
+
+}
+#opay-header #theader-icon-left {
+    padding-left:0px;
+
+}
+
+#opay-header #theader-icon-left .plan-icon{
+    font-size:25px;
+}
+
+#opay-header #theader-icon-left .greetings{
+    font-size:16px;
+    font-weight: 500;
+}
+
+.dbadge::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: red;
+    top: 0;
+    right: 0;
+    transform: translate(4px, -4px);
+    border-radius: 50px;
+}
+
+
+/*INFO*/
+.top-info{
+    border-radius: 50px;
+    font-size: 12px;
+    background-color: #faeee2;
+    color: #e9aa47;
+    text-shadow: 1px 0 #f3b24b;
+}
+
+.top-info span:not(.message){
+    color:#f9d7a0ab;
+    text-shadow: 0 0 #f3b24b;
+
+}
+
+.top-info span.message {
+    width: 85%;
+}
+
+/* USER BAL SEC ON MAIN PAGE  */
+
+#main-page .opay-main-2nd{
+    background-color: var(--major-primary-color);
+    border-radius: 10px;
+   /* color:#aef2e1; */
+   color:white;
+    font-size:small;
+}
+
+#main-page .opay-main-2nd div span{
+    display: block;
+
+}
+
+#general-text.available-balance .amount{
+    font-size: x-large;
+    font-weight:700;
+}
+#general-text.amount-currency{
+    font-size:small;
+}
+
+#general-text.add-money{
+    font-size:large;
+    border-radius: 25px;
+    font-size:10px;
+}
+
+#general-text.add-money *{
+    text-shadow: 0 0 2px var(--major-primary-color);
+}
+
+
+/* THE ACTION SECTION OF e.g TO OPAY ON MAINPAGE */
+#main-page #action1{
+    background-color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+
+#main-page #action1 div.icon-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width:40px;
+    height:40px;
+}
+
+#main-page #action1 div.icon-image i{
+    font-size: 16px;
+    color:var(--major-primary-color);
+    z-index: 2;
+}
+
+#main-page #action1 div.icon-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e8faf3;
+    z-index: 1;
+    border-radius: 10px;
+  /*  transform: scale(1);*/
+
+}
+
+span.badge {
+    position: absolute;
+    top: 0;
+    left: 27px;
+    padding:3px;
+    min-width: fit-content;
+    min-height: fit-content;
+    background-color: red;
+    color:white;
+    z-index: 3;
+    font-size:8px;
+    border-radius: 10px 10px 10px 0;
+  /*  transform: scale(1);*/
+
+}
+
+
+/*Main Actions 2*/
+#main-page #action1.action2 div.icon-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e8faf3;
+    z-index: 1;
+    border-radius: 50px;
+  /*  transform: scale(1);*/
+
+}
+
+/*Main Actions 3*/
+#main-page #action1.action3 span{
+    display: block;
+    color:var(--major-secondary-color);
+    font-weight: 400;
+}
+
+#main-page #action1.action3 .action-title{
+    font-weight: bold;
+}
+
+#main-page #action1.action3 .action-text{
+    font-weight:500;
+}
+
+
+
+
+
+#main-page #action1.action3 div.icon-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #d5fef5;
+    border: 2px solid #b2eadb;
+    z-index: 1;
+    border-radius: 50px;
+  /*  transform: scale(1);*/
+
+}
+
+#main-page #action1.action3 div.icon-image i.naira {
+font-size:10px;
+bottom:7.5px;
+left:7px;
+border:1px solid green;
+border-radius:50px;
+color:white;
+}
+
+
+#divider.action-divider{
+    display: block;
+    margin:7px;
+}
+
+a.unavailable div.icon-image i {
+    color: grey !important;
+}
+
+

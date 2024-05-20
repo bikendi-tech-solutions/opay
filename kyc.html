@@ -1,0 +1,247 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/settings.css?ver=<?php echo $rand;?>" />
+
+
+        <div class="container position-relative" id="main-page">
+
+            <div id="airtime-page-header" class="row p-4 bg-white">
+                <div class="col d-flex flex-row justify-content-start align-items-start">
+                   <span class="general-text"><a href="#" class="back text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Kyc</span>
+                </div>
+            </div>
+
+            <span class="d-flex mt-2 sec-top mx-3">Do Kyc</span>
+
+            <div class="lower-part-1 mt-2 mx-3 bg-white px-4 py-4 m-auto">
+
+                <span for="status" link="#" class="open-setting cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3 d-flex align-items-center"><i class="fa-solid fa-stopwatch-20"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Current Limit</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <span for="verify" link="#" class="open-setting cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3 d-flex align-items-center"><i class="fa-solid fa-user-check"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Verify Account</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+
+
+            </div>
+
+            <div class="position-absolute w-100 d-flex  change-details-div d-none">
+                
+                <div class="change-details p-4 align-self-end w-100  bg-white p-3">
+                    <span class="d-flex justify-content-end align-items-center">
+                        <i class="fa-solid fa-xmark close-settings cursor-pointer"></i>
+                    </span>
+
+
+
+                    <span class="verify all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <?php
+                            if($data == NULL || strtolower($data[0]->status) == "retry" && strtolower($data[0]->status) != "review" && strtolower($data[0]->status) != "verfified" && strtolower($data[0]->status) != "ban" ){
+
+                        ?>
+                        <span class="topic text-muted " >Method:</span>
+                        <select class="form-control type">
+                            <option value="">--Please Select--</option>
+                            <option value="nin">National Id. Number</option>
+                            <option value="bvn">Bank Verification Number</option>
+                        </select>
+
+                        <span class="topic text-muted mt-2 "  >Enter Value:</span>
+                        <input type="number" class="form-control"  autocomplete="off">
+                        <button class="bg-major-primary mt-3 text-white save-settings" for="email">Verify @ ₦<?php echo intval(vp_getoption('bvn_verification_charge'));?></button>
+                        
+                        <?php
+                            }
+                            elseif(strtolower($data[0]->status) == "verified"){
+                        ?>
+                                <span class="d-flex w-100 justify-content-center align-items-centers text-successful">
+                                    <span>Your Account Is Verified!</span>
+                                </span>
+                        <?php
+                            }
+                            elseif(strtolower($data[0]->status) == "ban"){
+                            ?>
+                            <span class="d-flex w-100 justify-content-center align-items-centers text-failed">
+                                <span>Your Account Is Banned From Verification!</span>
+                            </span>
+                            <?php
+                            }
+                            elseif(strtolower($data[0]->status) == "review"){
+
+                            ?>
+                            <span class="d-flex w-100 justify-content-center align-items-centers text-processing">
+                                <span>Your Account Is Under Review!</span>
+                            </span>
+                            <?php
+                        }
+                        ?>
+                    </span>
+
+                    <span class="status all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <?php
+
+                    if($data == NULL || strtolower($data[0]->status) != "verified"){
+
+                    ?>
+                        <span class="topic text-muted " >Limit:</span>
+                        <input type="text" disabled class="disabled form-control" value="<?php echo $kyc_data[0]->kyc_limit;?>" autocomplete="off">
+
+                        <span class="topic text-muted " >Per:</span>
+                        <input type="text" disabled class="disabled form-control" value="<?php echo strtoupper($kyc_data[0]->duration);?>" autocomplete="off">
+
+                        <span class="topic text-muted " >Used:</span>
+                        <input type="text" disabled class="disabled form-control" value="<?php echo $kyc_total;?>" autocomplete="off">
+
+                        <span class="topic text-muted " >Expires On:</span>
+                        <input type="text" disabled class="disabled form-control" value="<?php echo $kyc_end;?>" autocomplete="off">
+
+                        <span class="topic text-muted " >Status:</span>
+                        <input type="text" disabled class="disabled form-control" value="<?php echo $kyc_status;?>" autocomplete="off">
+
+                    <?php
+                    }else{
+                    ?>
+                        <span class="d-flex w-100 justify-content-center align-items-centers text-successful">
+                            <span>Unlimited!</span>
+                        </span>
+                    <?php
+                        }
+                    ?>
+
+                    </span>
+
+                </div>
+            </div>
+
+            <script>
+                jQuery(".close-settings").on("click",function(){
+                    jQuery(".change-details-div, .all-settings ").addClass("d-none");
+                });
+
+                jQuery(".open-setting").on("click",function(){
+                    jQuery(".change-details-div, .all-settings ").addClass("d-none");
+
+                    var forThis = jQuery(this).attr("for");
+                    jQuery(".change-details-div, ."+forThis).removeClass("d-none");
+                });
+
+
+
+                jQuery(".save-settings").on("click",function(){
+                    var forThis = jQuery("select.type").val();
+                    var type;
+                    var value;
+                    var name = "<?php echo $fn.' '.$ln;?>";
+                    var reset_text;
+
+                    reset_text = "Verify @ ₦<?php echo intval(vp_getoption('bvn_verification_charge'));?>";
+
+                    
+                    if(forThis == "nin" || forThis == "bvn"){
+                        value =  jQuery("span.verify input[type=number]").val();
+                        
+                        if(value == ""){
+                            showToast("Enter a value","red");
+                            jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+                            return;
+                        }else if(value.length < 9){
+                            showToast("Enter a valid value","red");
+                            jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+                            return;
+                        }
+                    }
+                    else{
+
+                        showToast("Please select a method","red");
+                        return;
+                    }
+
+                    if(value == "" || type == ""){
+                        showToast("All Field Required*","red");
+                        return;
+                    }
+
+
+                    jQuery(this).text("Processing...");
+                    jQuery.ajax({
+                    url:"/wp-content/plugins/opay/saves/kycupload.php",
+                    method:"POST",
+                    data:{
+                        'method':forThis,
+                        'name':name,
+                        'bvn_value':value,
+                    },
+                    error: function (jqXHR, exception) {
+                        jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+
+                        var msg;
+                        if (jqXHR.status === 0) {
+                            msg = "No Network!";
+
+                        }
+                        else if (exception === "timeout") {
+                            msg = "Timed Out";
+
+                        }
+                        else if (exception === "abort") {
+                            msg = "Ajax Request Aborted";
+
+                        }else{
+                            msg = jqXHR.status;
+
+                        }
+
+                        showToast(msg,"red");
+
+                    },
+                    success:function(data){
+                        jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+
+                        var msg;
+                        var color;
+                        if(data == "100"){
+                            msg = "Successful";
+                            setTimeout(function(){
+                                jQuery(".close-settings").click();
+                                location.reload();
+                            },1000);
+                            color = "green";
+
+                        }else{
+                            msg = data;
+                            color = "red";
+
+                        }
+                        showToast(msg,color);
+
+
+
+                    }
+                });
+
+
+
+
+                });
+
+
+
+
+
+            </script>
+
+
+
+        
+        </div>
+

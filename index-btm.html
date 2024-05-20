@@ -1,0 +1,53 @@
+<div class="container  bottom-menu" id="btm-menu">
+    <div class="row  p-3" >
+        <!--BUTTOM MENU-->
+        <div class="col " id="dashboard">
+            <a href="?vend=dashboard" class="popup-load text-decoration-none d-flex flex-column align-items-center" >
+                    <div class="icon-image"><i class=" cursor-pointer fa-regular fa-circle-dot"></i></div>
+                    <div class="icon-text" id="general-text">Home</div>
+            </a>
+        </div>
+        <div class="col d-none " id="rewards">
+            <a href="?vend=rewards" class=" cursor-pointer popup-load text-decoration-none d-flex flex-column align-items-center" >
+                    <div class="icon-image"><i class="fa-regular fa-gem"></i></div>
+                    <div class="icon-text" id="general-text">Rewards</div>
+            </a>
+        </div>
+        <div class="col " id="me">
+            <a href="?vend=me" class=" cursor-pointer popup-load text-decoration-none d-flex flex-column align-items-center" >
+                <div class="icon-image"><i class="fa-regular fa-face-smile-wink"></i></div>
+                <div class="icon-text" id="general-text">Me</div>
+            </a>
+        </div>
+        <?php
+        if(current_user_can("vtupress_admin")){
+            ?>
+            <div class="col " id="template-settings">
+                <a href="?vend=template-settings" class=" cursor-pointer popup-load text-decoration-none d-flex flex-column align-items-center" >
+                    <div class="icon-image"><i class="fa-solid fa-gears"></i></div>
+                    <div class="icon-text" id="general-text">Settings</div>
+                </a>
+            </div>
+
+        <?php
+        }
+        ?>
+
+    </div>
+</div>
+
+<script>
+    
+    var url = location.href;
+    let pattern = /vend=(\w+-*\w*)/;
+
+    if(pattern.test(url)){
+        
+       let match = url.match(pattern);
+       let active = match[1];
+
+
+       jQuery(`.bottom-menu .col`).removeClass("active");
+       jQuery(`.bottom-menu .col[id=${active}]`).addClass("active");
+    }
+</script>

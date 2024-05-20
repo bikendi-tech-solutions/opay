@@ -1,0 +1,511 @@
+/*
+####
+#
+#
+# --- AIRTIME PAGE
+#
+#
+*/
+
+
+
+/* STICKY WHITE HEADER */
+#airtime-page-header{
+    position:sticky;
+    top:0;
+    left:0;
+    border-radius: 0;
+    z-index:999;
+}
+
+#airtime-page-header #general-text{
+    font-size:large;
+}
+#airtime-page-header .hisotry-text{
+  color:  var(--major-primary-color);
+  text-shadow: 0 0 2px var(--major-primary-color);
+}
+
+/* ADS HEADER */
+
+#main-page-content .ads{
+    background-color: var(--major-primary-color);
+    height:100px;
+    border-radius: 10px;
+}
+
+
+/*SERVICE TYPE*/
+.service-type-col .service-type{
+    background-color: var(--minor-secondary-color);
+    border-radius: 10px;
+}
+
+ .service-type-col.active{
+    background-color: var(--minor-secondary-color);
+    border-radius: 10px;
+    border: 3px solid var(--major-primary-color);
+}
+
+
+
+/* RECIPIENT */
+
+#drop-down-image-select, #drop-down-image-option{
+    width:45px;
+    height:35px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100%;
+}
+
+
+#network-select #drop-down-image-select + i.fa-solid{
+    color: var(--major-secondary-color);
+}
+#network-select #first-col{
+    border-right:1.5px solid var(--major-secondary-color);
+}
+#network-select #third-col{
+    color:var(--major-primary-color);
+    font-size:30px;
+ }
+
+#network-select .input-recipient{
+    border:0px;
+}
+
+#network-select .input-recipient:placeholder-shown{
+    font-size: 16px;
+    color: var(--minor-secondary-color);
+    font-weight:bold;
+}
+
+
+/*THE DROPDOWN OPTS */
+#dropdown-for-networks{
+    position: absolute;
+    top:230px;
+    left: 0;
+    height:80vh;
+    border-radius: 0 0 10px 10px;
+    background-color: #00000080;
+    z-index: 10;
+}
+
+#dropdown-for-networks .choice-row{
+    background-color: #ffffff;
+    border-radius: 0 0 10px 10px;
+}
+
+#dropdown-for-networks .choice-div{
+background-color: var(--minor-secondary-color);
+border-radius: 15px;
+}
+
+
+#dropdown-for-networks .net-choice .network-name{
+    font-weight: 500;
+}
+
+#dropdown-for-networks input[type=radio]{
+    width:20px;
+    height:20px;
+    border:10px solid var(--minor-secondary-color);
+}
+
+#dropdown-for-networks label.network-label{
+    width:20px;
+    height:20px;
+    background-color: var(--minor-secondary-color);
+    border: 1px solid var(--major-secondary-color);
+    border-radius: 100%;
+
+}
+
+#dropdown-for-networks input[type=radio]:checked + label.network-label{
+    background-color: var(--major-primary-color);
+}
+
+#dropdown-for-networks input[type=radio]:checked + label.network-label::before{
+    content: "\2713";
+    position: absolute;
+    top: 0;
+    left: 4px;
+    font-size:16px;
+    font-weight:bold;
+    color:white;
+}
+
+
+/*COUPON*/
+
+#coupon-row #d-coupon-design::after{
+    content:"";
+    position: absolute;
+    right:50px;
+    bottom:70px;
+    border-radius:0 0 50px 50px;
+    background-color: var(--minor-secondary-color);
+    /*border-bottom: 2px solid red;*/
+    z-index: 2;
+    width:20px;
+    height:10px;
+}
+
+#coupon-row #d-coupon-design::before{
+    content:"";
+    position: absolute;
+    right:50px;
+    top:70px;
+    border-radius:50px 50px 0px 0px;
+    background-color: var(--minor-secondary-color);
+   /*border-top: 2px solid red;*/
+    z-index: 2;
+    width:20px;
+    height:10px;
+}
+
+#coupon-row #d-coupon-design #coupon-description{
+    background-color: white;
+    border-radius: 15px 0px 0px 15px;
+}
+
+#coupon-row #d-coupon-design #coupon-action{
+    background-color: var(--minor-primary-color);
+    border-radius: 0px 15px 15px 0px;
+}
+
+
+/*AMOUNT CHOICES*/
+
+#amount-choice-div #top-green{
+    border-radius: 15px 15px 10px 10px;
+    font-weight: bold;
+    background: url("/wp-content/plugins/opay/image/coins-falling.png");
+    background-position: center;
+    background-size: cover;
+    color:white;
+}
+#amount-choice-div #top-green::before{
+    content: "";
+    border-radius: 15px 15px 10px 10px;
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background-color: var(--major-primary-color);
+    opacity: 0.7;
+
+}
+
+#amount-choice-div #top-green::after{
+    content: "";
+    position: absolute;
+    width:100%;
+    height:20px;
+    top:50px;
+    border-radius: 30px 30px 0 0 ;
+    left:0;
+    background-color: white;
+
+}
+#amount-choice-div #top-green button{
+    border-radius: 15px;
+    color:var(--major-primary-color);
+    text-shadow: 0 0 2px var(--major-primary-color);
+    z-index: 1;
+}
+
+#amount-choice-div #top-green span:nth-child(1){
+    text-shadow: 0px 1px 3px var(--major-primary-color);
+    z-index: 1;
+}
+
+#amount-choice-div #amount-choices{
+    border-radius: 5px 5px 20px 20px;
+
+    
+}
+#amount-choice-div #amount-choices span:nth-child(1){
+    font-weight: bold;
+    color: var(--major-secondary-color);
+}
+
+#amount-choice-div #each-list{
+    background-color: var(--minor-secondary-color);
+    border-radius: 10px;
+}
+#amount-choice-div .amount-list #each-list span:nth-child(1):not(.naira-symbol){
+    color:var(--major-primary-color);
+    font-size:small;
+}
+#amount-choice-div .amount-list #each-list span:nth-child(2){
+    font-size:18px;
+   /* font-weight: bold; */
+   /* color:var(--major-secondary-color); */
+    color:#000000;
+}
+#amount-choice-div .amount-list #each-list span:nth-child(3){
+    font-size:14px;
+    color:var(--major-secondary-color);
+    font-weight: normal;
+}
+#amount-choice-div .amount-list #each-list span.naira-symbol{
+    color:var(--major-secondary-color);
+    font-weight: normal;
+}
+
+#amount-choice-div .amount-list #each-list span:nth-child(2) span.naira-symbol{
+   /* color:var(--major-secondary-color); */
+    color: #000000;
+    font-size:12px;
+    font-weight: normal;
+}
+
+/*FORM SUBMIT SECTION*/
+
+#form-submit-section .naira-symbol{
+    font-size:25px;
+    color: var(--major-secondary-color);
+}
+
+
+#form-submit-section .first{
+    border-bottom: 1px solid var(--major-secondary-color);
+}
+
+#form-submit-section .second button{
+   background-color: var(--major-primary-color);
+   border-radius: 26px;
+   width:100px;
+   color:white;
+   text-shadow: 0 0 2px var(--minor-primary-color);
+}
+
+#form-submit-section .second button.inactive{
+    background-color: var(--major-primary-color);
+}
+
+#form-submit-section input.input-amount{
+    border:0;
+}
+
+#form-submit-section input.input-amount:placeholder-shown{
+    font-size:16px;
+    color: var(--minor-secondary-color);
+}
+
+
+/*CONFIRM TRANSACTION*/
+#confirm-transaction{
+    position: absolute;
+    bottom:0;
+    left: 0;
+    height:100%;
+    width:100%;
+    border-radius: 0 0 10px 10px;
+    background-color: #00000080;
+    z-index: 10;
+}
+
+
+#confirm-transaction .confirm-transaction-container, #confirm-transaction .enter-pin-container{
+    background-color: white;
+    border-radius:20px 20px 0 0;
+    width: 100%;
+}
+
+#confirm-transaction .confirm-transaction-container .payment-method{
+    font-size:20px;
+    font-weight: bolder;
+}
+
+#confirm-transaction .confirm-transaction-container .amount{
+    font-size:35px;
+}
+
+#confirm-transaction .confirm-transaction-container .payment-method-div{
+    border-radius: 10px;
+    background-color: var(--minor-secondary-color);
+}
+
+#confirm-transaction .confirm-transaction-container .wallet-div{
+    width:60px;
+    height:60px;
+    background-color: var(--minor-primary-color);
+    color:var(--major-primary-color);
+    font-size: large;
+    border-radius: 50%;
+    padding:20px;
+}
+
+#confirm-transaction .confirm-transaction-container .wallet-div + span{
+    font-size:large;
+    font-weight: bold;
+}
+
+#confirm-transaction .confirm-transaction-container .check-sign{
+    font-size:x-large;
+    font-weight: bolder;
+    color:var(--major-primary-color);
+}
+
+#confirm-transaction .confirm-transaction-container .checkout-div .info-div{
+    background-color: var(--minor-primary-color);
+    height:70px;
+    padding:10px;
+    border-radius:10px;
+
+}
+
+#confirm-transaction .confirm-transaction-container .checkout-div .large-pay-div{
+    position:absolute;
+    width:100%;
+    top:60px;
+    left:0;
+}
+
+
+#enter-pin-container h4.checkout.inactive{
+    font-size: large;
+    background-color: var(--minor-primary-color);
+    padding:9px;
+    width:70%;
+    border-radius:100px;
+    color:white;
+    text-align: center;
+}
+
+#confirm-transaction .confirm-transaction-container .checkout-div .large-pay-div h4, #enter-pin-container h4.checkout.active {
+    font-size: large;
+    background-color: var(--major-primary-color);
+    padding:9px;
+    width:70%;
+    border-radius:100px;
+    color:white;
+    text-align: center;
+    
+}
+
+#confirm-transaction .pin_input{
+    width:50px;
+    height:50px;
+    background-color: var(--minor-secondary-color);
+    text-align: center;
+    border-radius: 15px;
+    border:1px solid var(--major-secondary-color);
+}
+
+
+#confirm-transaction .pin_input.error{
+
+    border-color: #a6150a;
+}
+
+
+#confirm-transaction .close-pin-container{
+    float:right;
+}
+
+#confirm-transaction .pin_input:focus{
+    border-color: var(--major-secondary-color);
+}
+
+#transaction-response {
+    position: absolute;
+    top:0;
+    left: 0;
+    height:100%;
+    width:100%;
+    border-radius: 0 0 10px 10px;
+    background-color: #ffffff;
+    z-index: 999999999;
+}
+
+#transaction-response .done-btn{
+    font-size:16px;
+    color: var(--major-primary-color);
+    font-weight: bold;
+}
+
+#transaction-response .comp{
+    height:100%;
+}
+
+#transaction-response .confirmation i{
+    font-size: 50px;
+    color: var(--major-primary-color);
+    text-shadow: 0 0 2px var(--major-primary-color);
+}
+
+#transaction-response .confirmation span:nth-child(2){
+    font-size: 20px;
+    color: #000000;
+    text-shadow: 0 0 1px #000000;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#transaction-response .actions .work-on{
+    background-color: var(--minor-secondary-color);
+    border-radius: 10px;
+}
+
+#transaction-response .get-rewards{
+    background-color: var(--minor-primary-color);
+    border-radius: 20px;
+}
+
+#transaction-response .get-rewards .get-reward-statement{
+    font-size:16px;
+    font-weight: bold;
+
+}
+
+#transaction-response .benefit-image{
+    border-radius: 10px;
+}
+#transaction-response .benefit-image i{
+    font-weight: bold;
+    font-size:30px;
+    color:var(--major-primary-color);
+}
+#transaction-response .benefit-topic{
+    font-weight: bold;
+    font-size:14px;
+    color:#000000;
+}
+
+#transaction-response .benefit-message{
+    font-weight: normal;
+    font-size:14px;
+    color:#000000;
+}
+
+
+
+
+
+
+
+
+#transaction-response .benefit-button{
+    font-weight: bold;
+    font-size:20px;
+    color:white;
+    background-color: var(--major-primary-color);
+    width:fit-content;
+    height:fit-content;
+    padding:5px 20px;
+    border-radius: 25px;
+    border:0;
+}
+
+#transaction-response .action-data-message{
+    max-width: 100%;
+    max-height:50%;
+    overflow:auto;
+}
+
+

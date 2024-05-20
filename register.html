@@ -1,0 +1,245 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/login.css?ver=<?php echo $rand;?>" />
+
+
+<div class="container position-relative bg-white  " id="main-page">
+
+<div class="major1 d-flex flex-column justify-content-between" style="height:100%;">
+
+
+    <div class="login-div flex-grow-1 d-flex flex-column py-5 align-items-center justify-content-center" >
+
+        <span class="login-image">
+            <img src="<?php echo get_site_icon_url( 75, '/wp-content/plugins/opay/image/vlogo.png');?>" alt="site icon" style="height:75px; width:75px;">
+        </span>
+        <span class="login-text mb-4 text-center d-flex flex-column">
+            <span class="fw-bold">Welcome to <?php echo ucfirst($site_name);?></span>
+        </span>
+        <!--Input FirstName-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+            <input type="text" autocomplete="off" class="form-control fun" placeholder="FirstName" aria-label="FirstName" aria-describedby="basic-addon1">
+        </div>
+        <!--Input LastName-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+            <input type="text" autocomplete="off" class="form-control lun" placeholder="LastName" aria-label="FirstName" aria-describedby="basic-addon1">
+        </div>
+        <!--Input userName-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+            <input type="text" autocomplete="off" class="form-control username" placeholder="UserName" aria-label="FirstName" aria-describedby="basic-addon1">
+        </div>
+        <!--Input email-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-at"></i></span>
+            <input type="email" autocomplete="off" class="form-control email" placeholder="Email" aria-label="FirstName" aria-describedby="basic-addon1">
+        </div>
+        <!--Input phone-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-phone"></i></span>
+            <input type="number" maxlength="11" minlength="11" autocomplete="off" class="form-control phone" placeholder="phone number" aria-label="Phone" aria-describedby="basic-addon1">
+        </div>
+
+        <?php
+        if(is_plugin_active("vpmlm/vpmlm.php")){
+            if(strtolower(vp_getoption("id_on_reg")) == "yes"){
+
+                if(isset($_GET["ref"])){
+                    $ref = $_GET["ref"];
+                }else{
+                    $ref = "1";
+                }
+        ?>
+        <!--Input ref Link-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+            <input type="number" value="<?php echo $ref;?>" autocomplete="off" class="form-control ref" placeholder="referal id" aria-label="ref" aria-describedby="basic-addon1">
+        </div>
+        <?php
+            }
+            else{
+        ?>
+        <!--Input Pin-->
+        <div class="input-group mb-3 d-none">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+            <input type="number" value="1" autocomplete="off" class="form-control ref" placeholder="referal id" aria-label="ref" aria-describedby="basic-addon1">
+        </div>
+        <?php
+            }
+        }
+        ?>
+        <!--Input Pin-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-key"></i></span>
+            <input type="number" minlength="4" maxlength="4" autocomplete="off" class="form-control pin" placeholder="pin" aria-label="pin" aria-describedby="basic-addon1">
+        </div>
+        <!--Input Password-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+            <input type="password"  autocomplete="off"  class="form-control password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+        </div>
+        <!--Input Password-->
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+            <input type="password"  autocomplete="off"  class="form-control password confirm" placeholder="Confirm Password" aria-label="Password Confirm" aria-describedby="basic-addon1">
+        </div>
+        <!--Login Button-->
+        <button type="button" class="btn login  bg-major-primary text-white btn-block">Register</button>
+
+
+    </div>
+    
+    <div class="d-flex mb-3 flex-column justify-content-center align-items-center">
+        <span class="general-text">Already have an account?</span>
+        <a href="/vpaccount?login" class="text-decoration-none text-major-primary">Login</a>
+    </div>
+
+</div>
+
+
+
+
+</div>
+
+<script>
+    jQuery(document).ready(function(){
+        hideLoader();
+
+        
+        jQuery("button.login").on("click",function(){
+            var reset_text = "Register";
+            var firstname = jQuery("input.fun").val();
+            var lastname = jQuery("input.lun").val();
+            var username = jQuery("input.username").val();
+            var email = jQuery("input.email").val();
+            var phone = jQuery("input.phone").val();
+            var ref = jQuery("input.ref").val();
+            var pin = jQuery("input.pin").val();
+            var password = jQuery("input.password").val();
+            var confirm = jQuery("input.confirm").val();
+            var pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+            
+
+            if(firstname == ""){
+                showToast("Input A Valid First Name","red");
+                return;
+            }
+            else if(lastname == ""){
+                showToast("Input A Valid Last Name","red");
+                return;
+            }
+            else if(username == ""){
+                showToast("Input A Valid Username","red");
+                return;
+            }
+            else if(email == "" || !pattern.test(email)){
+                showToast("Input A Valid Email","red");
+                return;
+            }
+            else if(phone == ""){
+                showToast("Input A Valid Phone Number","red");
+                return;
+            }
+            else if(pin == "" || pin.length != 4){
+                showToast("Input A Valid 4 Digits Pin","red");
+                return;
+            }
+            else if(password == ""){
+                showToast("Input A Valid Password","red");
+                return;
+            }
+            else if(confirm == ""){
+                showToast("Input A Valid Confirm Password","red");
+                return;
+            }
+            else if(password!= confirm){
+                showToast("Password Doesn't Match","red");
+                return;
+            }
+           
+            //create a data object using the classname as object key and the variable as value
+            var data = {
+                fun:firstname,
+                lun:lastname,
+                username:username,
+                email:email,
+                phone:phone,
+                ref:ref,
+                pin:pin,
+                pswd:password
+            }
+
+            jQuery(this).text("Processing...");
+                    jQuery.ajax({
+                    url:"/wp-content/plugins/vtupress/userlogin.php",
+                    method:"POST",
+                    data:data,
+                    error: function (jqXHR, exception) {
+                        jQuery("button.login").text(reset_text);
+
+                        var msg;
+                        if (jqXHR.status === 0) {
+                            msg = "No Network!";
+
+                        }
+                        else if (exception === "timeout") {
+                            msg = "Timed Out";
+
+                        }
+                        else if (exception === "abort") {
+                            msg = "Ajax Request Aborted";
+
+                        }else{
+                            msg = jqXHR.status;
+
+                        }
+
+                        showToast(msg,"red");
+
+                    },
+                    success:function(data){
+                        jQuery("button.login").text(reset_text);
+
+
+                        
+                        var msg;
+                        var color;
+                        if(data.includes("100")){
+                            msg = "Successful";
+
+                            jQuery("button.login").text("Hold...");
+                            setTimeout(function(){
+                                location.href = "?login";
+                            },1000);
+                            color = "green";
+
+                        }
+                        else if(data.includes("Wrong")){
+                            msg = "Wrong Credentials";
+
+                            color = "red";
+                            showToast(msg,color);
+                        }
+                        else{
+
+                            var obj = JSON.parse(data);
+                            msg = obj.message;
+                            color = "red";
+                            showToast(msg,color);
+
+
+                        }
+                        
+
+
+
+                    }
+                });
+
+        });
+
+    });
+
+
+
+</script>

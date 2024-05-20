@@ -1,0 +1,213 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/transactions.css?ver=<?php echo $rand;?>" />
+
+<script src="<?php echo plugins_url('opay/');?>js/transactions.js?ver=<?php echo $rand;?>"></script>
+
+        <div class="container" id="main-page">
+
+            <div id="history-page-header" class="row p-4 bg-white position-relative">
+                <div class="col d-flex flex-row justify-content-start align-items-start">
+                   <span class="general-text"><a href="#" class="back text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Transactions</span>
+                </div>
+                <div class="select-history d-flex justify-content-around mt-2">
+                    <span id="general-text" class="text-muted categories cursor-pointer"><span class="text me-1">Wallet</span> Categ.<i class="fa-solid fa-angle-down"></i></span>
+                    <span id="general-text" class="text-muted status cursor-pointer"><span class="text me-1">All</span> Status <i class="fa-solid fa-angle-down"></i></span>
+                    <span id="general-text" class="text-muted limit cursor-pointer">Limit <span class="text me-1">10</span>  <i class="fa-solid fa-angle-down"></i></span>
+                </div>
+
+                <div class="categories-dropdown drpdown position-absolute  bg-white d-none">
+                    <span class="quick-select fs-6 text-dark my-3">Quick Select</span>
+                    <span class="list-categories p-2 d-flex justify-content-start row">
+                        <span class="wallet-cat col cursor-pointer" link="?vend=history&sub=wallet">Wallet</span>
+                        <span class="airtime-cat col cursor-pointer" link="?vend=history&sub=airtime">Airtime</span>
+                        <span class="data-cat col cursor-pointer" link="?vend=history&sub=data">Data</span>
+                        <span class="cable-cat col cursor-pointer" link="?vend=history&sub=cable">Cable</span>
+                        <span class="bill-cat col cursor-pointer" link="?vend=history&sub=bill">Bill</span>
+                        <span class="bet-cat col cursor-pointer " link="?vend=history&sub=bet">Bet</span>
+                    </span>
+                    <span class="trans-black"></span>
+                </div>
+                <div class="status-dropdown drpdown position-absolute  bg-white d-none">
+                    <span class="quick-select fs-6 text-dark my-3">Status Select</span>
+                    <span class="list-categories p-2 d-flex justify-content-start row">
+                        <span class="all-cat col cursor-pointer" link="&status=all">All</span>
+
+                        <?php
+                            if(!isset($_GET["sub"])){
+                                ?>
+                                <span class="credit-cat col cursor-pointer" link="&status=approved">Credit</span>
+                                <span class="debit-cat col cursor-pointer"  link="&status=debit">Debit</span>
+                            <?php
+                            }elseif($_GET["sub"] == "wallet"){
+                                ?>
+                                <span class="credit-cat col cursor-pointer" link="&status=approved">Credit</span>
+                                <span class="debit-cat col cursor-pointer"  link="&status=debit">Debit</span>
+
+                                <?php
+                            }else{
+                                ?>
+                                <span class="credit-cat col cursor-pointer" link="&status=successful">Successful</span>
+                                <span class="debit-cat col cursor-pointer"  link="&status=failed">Failed</span>
+
+                                <?php
+                            }
+                            ?>
+
+
+                        <span class="processing-cat col cursor-pointer"  link="&status=pending">Processing</span>
+                    </span>
+                </div>
+                <div class="limit-dropdown drpdown position-absolute  bg-white d-none">
+                    <span class="quick-select fs-6 text-dark my-3">Select Limit</span>
+                    <span class="list-categories p-2 d-flex justify-content-start row">
+                        <span for="10" class=" col cursor-pointer" link="&limit=10">10</span>
+                        <span for="20" class=" col cursor-pointer" link="&limit=20">20</span>
+                        <span for="30" class=" col cursor-pointer" link="&limit=30">30</span>
+                        <span for="50" class=" col cursor-pointer" link="&limit=50">50</span>
+                        <span for="100" class=" col cursor-pointer" link="&limit=100">100</span>
+                        <span for="200" class=" col cursor-pointer" link="&limit=200">200</span>
+                        <span for="500" class=" col cursor-pointer" link="&limit=500">500</span>
+                        <span for="1000" class=" col cursor-pointer" link="&limit=1000">1000</span>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="lower-part-1 mt-2 mx-1 bg-white px-2 py-4 m-auto">
+
+
+                <?php
+
+                $user_id = $id;
+                global $wpdb;
+                
+                $sub = $_GET["sub"];
+            
+                switch($sub){
+                    case"wallet":
+            
+                        $table = $wpdb->prefix."vp_wallet";
+                            
+                    break;
+                    case"airtime":
+                            
+                            $table = $wpdb->prefix."sairtime";
+                                
+                    break;
+                    case"data":
+                        
+                        $table = $wpdb->prefix."sdata";
+                            
+                    break;
+                    case"cable":
+                        
+                    $table = $wpdb->prefix."scable";
+                        
+                    break;
+                    case"bill":
+                        
+                    $table = $wpdb->prefix."sbill";
+                        
+                    break;
+                    case"bet":
+                        
+                    $table = $wpdb->prefix."sbet";
+                        
+                    break;
+
+                }
+                
+            
+            
+                if(isset($_GET["limit"])){
+                    $limit = $_GET["limit"];
+                }else{
+                    $limit = 10;
+                }
+
+                if(isset($_GET["status"])){
+                    $status = $_GET["status"];
+
+                    if($status == "approved"){
+                        $status = " AND before_amount < now_amount";
+                    }
+                    elseif($status == "successful"){
+                        $status = " AND status = 'successful' OR status = 'success'";
+                    }
+                    elseif($status == "failed"){
+                        $status = " AND status  = 'failed' OR status = 'fail' ";
+                    }
+                    elseif($status == "pending" || $status == "processing"){
+                        $status = " AND status = 'pending' OR status = 'processing'";
+                    }
+                    elseif($status == "debit"){
+                        $status = " AND before_amount > now_amount";
+                    }
+                    else{
+                        $status = "";
+                    }
+                }else{
+                    $status = "";
+                }
+                $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s $status ORDER BY ID DESC LIMIT $limit ",$user_id);
+                $results = $wpdb->get_results($prepare);
+            
+            
+                if($results != NULL && !empty($results)){
+
+                foreach($results as $thisResult){
+                    if(!empty($thisResult)){
+
+                        $tid = $thisResult->id;
+
+                        include(__DIR__."/functions.php");
+
+                    
+
+
+
+?>
+
+
+<span link="&id=<?php echo $tid;?>" class="my-1 cursor-pointer d-flex justify-content-between <?php echo $status;?>">
+    <span class="icon icon-div me-3 d-flex align-items-center"><?php echo $icon;?></span>
+    <span class="icon-text flex-grow-1 d-flex flex-column">
+        <span class="topic"><?php echo $type;?></span>
+        <span class="message text-muted" id="general-text"><?php echo $time;?></span>
+    </span>
+    <span class="icon ms-2 d-flex flex-column align-items-end justify-content-center">
+        <span class="amount-span"><?php echo $sign;?> ₦<span class="amount"><?php echo number_format($amount);?></span></span>
+        <span class="status"><?php echo ucfirst($status);?></span>
+    </span>
+
+</span>
+
+
+
+
+
+<?php
+                    }
+                }
+
+            }
+            else{
+                ?>
+
+                <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
+
+                    <span class="">No Transaction Recorded</span>
+                
+                </span>
+
+                <?php
+            }
+?>
+
+
+
+            </div>
+
+
+
+        </div>
+

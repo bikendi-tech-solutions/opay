@@ -1,0 +1,385 @@
+</div>
+
+<script>
+
+jQuery("a.back").on("click",function(){
+  event.preventDefault();
+  window.history.back();
+})
+jQuery(".generate_account").on("click",function(){
+
+  showLoader();
+  var forG = jQuery(this).attr("for");
+        
+        if(forG != "gtb" && forG != "ncwallet" && forG !="monnify" && forG != "kuda" && forG != "vpay"){
+    
+          hideLoader();
+            alert(forG+" is not a valid gateway");
+            return;
+        }
+        var obj = {};
+        obj["for"] = forG;
+        jQuery.ajax({
+              url: '<?php echo esc_url(plugins_url('vtupress/generateAccounts.php'));?>',
+              data: obj,
+              dataType: 'text',
+              'cache': false,
+              "async": true,
+              type: 'POST',    
+              success: function(data) {
+                  hideLoader();
+                  
+                    if(data == "100" || data == 100){
+                      location.reload();
+                    }
+                  }
+              });
+});
+
+jQuery("a.unavailable").on("click",function(event){
+  event.preventDefault();
+
+  var topic = "Status Info";
+  var msg = "Oops! This service is currently not available";
+
+      args = {
+            icon: {
+                show:true,
+                color: 'white',
+                type: 'notification'
+            },
+            topic: topic,
+            message: msg
+        }
+        popup(args);
+/*
+  jQuery("#popup.top-image").removeClass("d-none");
+  jQuery("#popup.pop-up-topic").text("Oops!");
+  jQuery("#popup.pop-up-message").text("This service is currently unavailable.");
+  jQuery("#popup").removeClass("d-none");
+*/
+
+});
+
+jQuery(".go-back").on("click",function(){
+  event.preventDefault();
+  window.history.back();
+});
+
+function closepopup(){
+                    jQuery("#popup .top-image").addClass("d-none");
+                    jQuery("#popup .pop-up-topic").text("");
+                    jQuery("#popup .pop-up-message").text("");
+                    jQuery("#popup").addClass("d-none");
+                    jQuery("#popup").remove();
+
+    }
+
+
+
+  // Function to calculate and set popup height
+function setPopupHeight() {
+    var totalHeight = document.body.scrollHeight;
+    jQuery(".pulser-div, #confirm-transaction, #main-page-content").css({"height":totalHeight+"px"});
+}
+
+// Event listener for window resize
+window.addEventListener('resize', setPopupHeight);
+
+
+document.addEventListener("DOMContentLoaded",function(){
+
+
+  //Load Services Availability
+
+  var disabled_services = [];
+  <?php
+
+
+  $array = [
+
+    'wallet_to_wallet' => 'transfer',
+    'allow_withdrawal' => 'withdraw',
+    'setdata' => 'data',
+    'alphacontrol' => 'alpha',
+    'smilecontrol' => 'smile',
+    'setairtime' => 'airtime',
+    'setcable' => 'cable',
+    'epinscontrol' => 'epins',
+    'cardscontrol' => 'ecards',
+    'datascontrol' => 'data-card',
+    'smscontrol' => 'sms',
+    'setbvn' => 'bvn',
+    'allow_crypto' => 'crypto',
+    'allow_cards' => 'giftcard',
+    'allow_card_method' => 'card-payment',
+    'airtime_to_cash' => 'airtime-to-cash',
+    'enable_coupon' => 'coupon',
+    'mlm' => 'mlm',
+
+  ];
+
+  foreach($array as $key => $value){
+
+    $status = vp_option_array($option_array, $key);
+
+    if($status != "yes" && $status != "checked"){
+
+    ?>
+    disabled_services[disabled_services.length] = "<?php echo $value;?>";
+
+<?php
+
+    }
+
+  }
+?>
+
+
+
+
+  jQuery.each(disabled_services, function(index, service){
+    
+    jQuery(".service-"+service).remove();
+
+  });
+
+
+    hideLoader();
+    setPopupHeight();
+                  // For modern browsers
+                  window.scrollTo(0, 0);
+
+// For older browsers
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+document.body.scrollTop = 0; // For Safari
+
+
+
+    jQuery("[link]").on("click",function(){
+      var link = jQuery(this).attr("link");
+      var url = location.href;
+
+      var pattern = /^&(\w+)=([a-zA-Z0-9]+)/;
+
+      let linkUrl = link.match(pattern);
+
+      if(linkUrl){
+
+        
+
+        var linkkey = linkUrl[1];
+        var linkvalue = linkUrl[2];
+
+
+        var url1 = url.replace("#","");
+
+        var url2 = url1.replace(new RegExp('&'+linkkey+'=[a-zA-Z0-9]+'), "");
+        
+        link = url2+"&"+linkkey+"="+linkvalue;
+
+      }
+
+
+      
+      if(link.indexOf("#") == -1){
+        showLoader();
+      }
+      
+
+      //CUSTOM RULES
+      link = link.replace(/&amp;/g, "&");
+
+      location.href = link;
+      
+
+
+    });
+
+    jQuery("a").on("click",function(){
+
+      var href = jQuery(this).attr(href);
+
+      if(href.indexOf("#") == 0){
+        return false;
+      }
+      showLoader();
+      location.href = href;
+
+    });
+
+    jQuery(".top-info-message").on("click",function(){
+      var mainMessage = jQuery(".top-info-message span.message").text();
+      args = {
+            icon: {
+                type:"notification",
+                show:true,
+                color: 'white'
+            },
+            button : {
+              close:"Got It"
+            },
+            topic: "Notification",
+            message: mainMessage
+        }
+        popup(args);
+
+    });
+    jQuery(".crypto-trade,.giftcard-trade").on("click",function(){
+      
+      var thisFor = jQuery(this).attr("for");
+      var icon;
+      if(thisFor == "crypto"){
+        icon = '<i class="fa-brands fa-bitcoin"></i>';
+        topic = "<b>Redeem Your Coin</b>";
+        msg = `We offer the best server at the best and affordable rate. Do you want to redeem any of the follow crypto coins which includes: <br>
+          <p>Bitcoin, Ethereum, Litecoin, Dogecoin, Dash, Monero, Ripple, Stellar, Cardano, and more..</p>
+        `;
+
+        var thisBtn = {
+          '<i class="fa-brands fa-whatsapp me-2"></i> Redeem On Whatsapp':"<?php echo whatsapp_message('I want to redeem a coin');?>"
+        }
+      }
+      else if(thisFor == "giftcard"){
+        icon = '<i class="fa-brands fa-cc-apple-pay"></i>';
+        topic = "Redeem Your Card";
+        msg = "Redeem any kind of giftcard such as: <p>iTunes, Apple, Razor Gold and many more</p>";
+
+        var thisBtn = {
+          '<i class="fa-brands fa-whatsapp me-2"></i> Redeem On Whatsapp':"<?php echo whatsapp_message('I want to redeem a giftcard');?>"
+        }
+      }
+
+        args = {
+            icon: {
+                show:true,
+                icon: icon,
+                color: 'white',
+                bgcolor: '<?php echo $minorp;?>'
+            },
+            image:{
+              type: thisFor
+            },
+            button : thisBtn,
+            topic: topic,
+            message: msg
+        }
+        popup(args);
+    });
+  });
+
+
+function continueThread(performTransaction){
+
+        if(performTransaction == "success"){
+            jQuery("#confirm-transaction").addClass("d-none");
+            jQuery("#transaction-response").removeClass("d-none");
+            jQuery("#transaction-response .comp").removeClass("d-none");
+            jQuery("#transaction-response .failed").addClass("d-none");
+        }
+        else if(performTransaction == "pin"){
+            jQuery(".ajax-error-response").text("Please enter a valid pin");
+
+        }
+        else{
+            jQuery("#confirm-transaction").addClass("d-none");
+            jQuery("#transaction-response").removeClass("d-none");
+            jQuery("#transaction-response .failed").removeClass("d-none");
+            jQuery("#transaction-response .comp").addClass("d-none");
+            jQuery("#transaction-response .action-data-message").text(performTransaction);
+        }
+
+
+
+}
+function runAirtimeTransaction(obj){
+
+  showLoader();
+
+        var msg = "";
+        //showLoader();
+
+        jQuery.ajax({
+            url: '<?php echo esc_url(plugins_url('vtupress/vend.php'));?>',
+            data: obj,
+           dataType: 'text',
+            'cache': false,
+            "async": true,
+            error: function (jqXHR, exception) {
+                
+                hideLoader();
+                 
+                  if (jqXHR.status === 0) {
+                      msg = "No Connection.\n Verify Network.";
+            
+                  } else if (jqXHR.status == 404) {
+                      msg = "Requested page not found. [404]";
+
+                  } else if (jqXHR.status == 500) {
+                      msg = "Internal Server Error [500].";
+
+                  } else if (exception === "parsererror") {
+                      msg = "Requested JSON parse failed.";
+
+                  } else if (exception === "timeout") {
+                      msg = "Time out error.";
+
+                  } else if (exception === "abort") {
+                      msg = "Ajax request aborted.";
+
+                  } else {
+                      msg = "Uncaught Error.\n" + jqXHR.responseText;
+
+                  }
+
+                continueThread(msg);
+                 
+              },
+            
+            success: function(data) {
+                
+
+                hideLoader();
+                let result = data.includes("status");
+                
+                  if(data == "100" || data == 100){
+
+                    msg = "success";
+                }
+                else if(data == "pin"){
+                  //hideLoader();
+
+                  msg = "pin";
+                }
+                else if(data == "processing"){
+                  //hideLoader();
+                    msg = "processing"
+                }
+                else if(data == "browser"){
+                  //hideLoader();
+
+                    msg = "browser";
+
+                }
+                else if(data == "202"){
+
+                    msg = "failed";
+                }
+                else{
+                   //hideLoader();
+                   msg = data;
+                }
+
+
+              
+                continueThread(msg);
+
+            },
+            type: 'POST'
+          });
+
+          
+    }
+</script>
+</body>
+</html>

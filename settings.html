@@ -1,0 +1,536 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/settings.css?ver=<?php echo $rand;?>" />
+
+<?php
+    $red = vp_getoption("vp_redirect");
+    if(strtolower($red) == "false"){
+    $logout = wp_logout_url(get_permalink());
+    
+    }
+    else{
+    $link = get_site_url().'/'.$red;
+    
+    $logout = wp_logout_url($link);
+    }
+							
+							
+?>
+        <div class="container position-relative" id="main-page">
+
+            <div id="airtime-page-header" class="row p-4 bg-white">
+                <div class="col d-flex flex-row justify-content-start align-items-start">
+                   <span class="general-text flex-grow-1"><a href="#" class="back text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Settings</span>
+                   <span link="<?php echo  $logout;?>" class="general-text"><a href="#" class="text-decoration-none text-black"><i class="fa-solid fa-power-off me-2"></i></a>Logout</span>
+                </div>
+            </div>
+
+            <span class="d-flex mt-2 sec-top mx-3">Personal Settings</span>
+
+            <div class="lower-part-1 mt-2 mx-3 bg-white px-4  pt-4 pb-2  m-auto">
+
+                <span for="username" link="#" class="open-setting cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3 d-flex align-items-center"><i class="fa-solid fa-user"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Change Fullname</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+
+
+            </div>
+
+            <span class="d-flex mt-2 sec-top mx-3">Login Settings</span>
+
+            <div class="lower-part-1 mt-2 mx-3 bg-white px-4 py-4 m-auto">
+
+                <span for="email" link="#" class="open-setting cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3 d-flex align-items-center"><i class="fa-solid fa-at"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Change Email</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <span for="password" link="#" class="open-setting cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3 d-flex align-items-center"><i class="fa-solid fa-key"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Change Password</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <span for="forgot-password" link="#" class="open-setting  cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3  d-flex align-items-center"><i class="fa-solid fa-unlock-keyhole"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Forgot Password</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <span link="#" class=" cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3  d-flex align-items-center"><i class="fa-solid fa-arrow-down-up-lock"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic"><span class="text me-2">Two-steps authentication</span> <span class="text-muted" id="general-text">(Coming Soon)</span></span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+
+
+            </div>
+
+            <span class="d-flex mt-2 sec-top mx-3">Payment Settings</span>
+
+            <div class="lower-part-1 mt-2 mx-3 bg-white px-4 py-4 m-auto">
+
+                <span for="pin" link="#" class="open-setting cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3 d-flex align-items-center"><i class="fa-solid fa-1"></i><i class="fa-solid fa-2"></i><i class="fa-solid fa-3"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Change PIN</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <span for="forgot-pin" link="#" class="open-setting cursor-pointer d-flex justify-content-between">
+                    <span class="icon me-3  d-flex align-items-center"><i class="fa-solid fa-1"></i><i class="fa-solid fa-2"></i><i class="fa-regular fa-circle-question"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Forgot PIN</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+
+
+            </div>
+       
+            <div class="position-absolute w-100 d-flex  change-details-div d-none">
+                
+                <div class="change-details p-4 align-self-end w-100  bg-white p-3">
+                    <span class="d-flex justify-content-end align-items-center">
+                        <i class="fa-solid fa-xmark close-settings cursor-pointer"></i>
+                    </span>
+
+
+
+                    <span class="username all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <span class="topic text-muted " >Full Name:</span>
+                        <input type="text" class="form-control" autocomplete="off">
+                        <span class="topic text-muted " >Verification Code:</span>
+                        <input type="number" class="form-control" autocomplete="off">
+                        <small class="align-self-end text-major-primary fw-bold get-code" for="username">Get Code</small>
+                        
+
+                        <button class="bg-major-primary mt-3 text-white save-settings" for="username">Correct Fullname</button>
+                        
+                    </span>
+
+                    <span class="email all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <span class="topic text-muted " >New Email:</span>
+                        <input type="email" class="form-control" autocomplete="off">
+                        <span class="topic text-muted " >Verification Code:</span>
+                        <input type="number" class="form-control" autocomplete="off">
+                        <small class="align-self-end text-major-primary fw-bold get-code" for="email">Get Code</small>
+                        
+                        <span class="topic text-muted mt-2 "  >Enter Password:</span>
+                        <input type="password" class="form-control"  autocomplete="off">
+                        <button class="bg-major-primary mt-3 text-white save-settings" for="email">Reset Email</button>
+                        
+                    </span>
+
+
+
+                    <span class="password all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <span class="topic text-muted " >Old Password:</span>
+                        <input type="password" class="form-control old" autocomplete="off">
+
+                        <span class="topic text-muted " >New Password:</span>
+                        <input type="password" class="form-control new" autocomplete="off">
+
+                        <span class="topic text-muted mt-2 "  >Confirm Password:</span>
+                        <input type="password" class="form-control confirm"  autocomplete="off">
+                        <button class="bg-major-primary mt-3 text-white save-settings" for="password">Reset Password</button>
+                        
+                    </span>
+
+
+                    <span class="forgot-password all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <span class="topic text-muted " >Password Reset Code:</span>
+                        <input type="number" class="form-control" autocomplete="off">
+
+                        <span class="d-flex w-100 justify-content-between align-items-center">
+                            <small class="text-muted " >Click Get Code to get your reset code</small>
+
+                            <small class="fw-bold text-major-primary get-code " for="password">Get Code</small>
+                        </span>
+                        
+                        <span class="topic text-muted mt-2 "  >Enter New Password:</span>
+                        <input type="password" class="form-control new"  autocomplete="off">
+
+                        <span class="topic text-muted mt-2 "  >Confirm New Password:</span>
+                        <input type="password" class="form-control confirm"  autocomplete="off">
+
+                        <button class="bg-major-primary mt-3 text-white save-settings" for="forgot-password">Reset Password</button>
+                        
+                    </span>
+
+                    <span class="pin all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <span class="topic text-muted " >Old Pin:</span>
+                        <input type="number" class="form-control old" autocomplete="off">
+
+                        <span class="topic text-muted " >New Pin:</span>
+                        <input type="number" class="form-control new" autocomplete="off">
+
+                        <span class="topic text-muted mt-2 "  >Enter Password:</span>
+                        <input type="password" class="form-control "  autocomplete="off">
+                        <button class="bg-major-primary mt-3 text-white save-settings" for="pin">Reset Pin</button>
+                        
+                    </span>
+
+                    <span class="forgot-pin all-settings mt-3 col-12 d-flex flex-column justify-content-center align-items-start">
+
+                        <span class="topic text-muted " >Pin Reset Code:</span>
+                        <input type="number" class="form-control old" autocomplete="off">
+
+                        <span class="d-flex w-100 justify-content-between align-items-center">
+                            <small class="text-muted " >Click Get Code to get your reset code</small>
+
+                            <small class="fw-bold text-major-primary get-code " for="pin">Get Code</small>
+                        </span>
+                        
+                        <span class="topic text-muted mt-2 "  >Enter New Pin:</span>
+                        <input type="number" class="form-control new"  autocomplete="off">
+
+
+                        <button class="bg-major-primary mt-3 text-white save-settings" for="forgot-pin">Reset Pin</button>
+                        
+                    </span>
+
+                </div>
+            </div>
+
+            <script>
+                jQuery(".close-settings").on("click",function(){
+                    jQuery(".change-details-div, .all-settings ").addClass("d-none");
+                });
+
+                jQuery(".open-setting").on("click",function(){
+                    jQuery(".change-details-div, .all-settings ").addClass("d-none");
+
+                    var forThis = jQuery(this).attr("for");
+                    jQuery(".change-details-div, ."+forThis).removeClass("d-none");
+                });
+
+
+                jQuery(".get-code").on("click",function(){
+                    var forThis = jQuery(this).attr("for");
+                    var value;
+
+                    jQuery(this).text("Sending..");
+
+                    if(forThis == "email"){
+                        value =  jQuery("span.email input[type=email]").val();
+                        if(value == ""){
+                            jQuery(this).text("Enter Email");
+
+                            setTimeout(function(){
+                                jQuery(".get-code").text("Get Code");
+                            },2000);
+                            return;
+                        }
+
+                    }
+                    else if(forThis == "password"){
+                        value =  "none";
+
+                    }
+                    else if(forThis == "username"){
+                        value =  "none";
+
+                    }
+                    else if(forThis == "pin"){
+                        value =  "none";
+
+                    }
+                    else{
+                        jQuery(this).text("Get Code");
+                        showToast("Can't Determine","red");
+
+                        return;
+                    }
+
+
+
+                    jQuery.ajax({
+                    url:"/wp-content/plugins/opay/saves/get-code.php",
+                    method:"POST",
+                    data:{
+                        'for':forThis,
+                        'value':value,
+                    },
+                    error: function (jqXHR, exception) {
+                        if (jqXHR.status === 0) {
+                            jQuery(".get-code").text("No Network!");
+
+                        }
+                        else if (exception === "timeout") {
+                            jQuery(".get-code").text("Timed Out");
+
+                        }
+                        else if (exception === "abort") {
+                            jQuery(".get-code").text("Ajax Request Aborted");
+
+                        }else{
+                            jQuery(".get-code").text(jqXHR.status);
+
+                        }
+                    },
+                    success:function(data){
+
+                        if(data == "100"){
+                            jQuery(".get-code").text("Sent!");
+
+                        }else{
+                            jQuery(".get-code").text(data);
+
+                        }
+
+                        setTimeout(function(){
+                                jQuery(".get-code").text("Get Code");
+                            },2000);
+
+                    }
+                });
+
+                });
+
+
+
+                jQuery(".save-settings").on("click",function(){
+                    var forThis = jQuery(this).attr("for");
+                    var oldvalue;
+                    var value;
+                    var password;
+                    var reset_text;
+
+                    
+
+                    if(forThis == "email"){
+                        reset_text = "Reset Email";
+                        oldvalue = jQuery("span.email input[type=number]").val();
+                        value =  jQuery("span.email input[type=email]").val();
+                        password =  jQuery("span.email input[type=password]").val();
+
+                    }
+                    else if(forThis == "username"){
+                        reset_text = "Correct Fullname";
+                        oldvalue = jQuery("span.username input[type=number]").val();
+                        value =  jQuery("span.username input[type=text]").val();
+                        password =  "none";
+                        if(value == ""){
+                            showToast("Enter Fullname","red");
+                            jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+                            return;
+                        }
+                        else if(oldvalue == ""){
+                            showToast("Enter reset code","red");
+                            jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+                            return;
+                        }
+
+                        var pattern = new RegExp('^\\w{3,}\\s{1}\\w{3,}$');
+                        if(!pattern.test(value)){
+                            showToast("Enter Fullname in this format: Firstname Lastname and your names must be at least 3 characters","red");
+                            jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+                            return;
+                        }
+                    }
+                    else if(forThis == "password"){
+                        reset_text = "Reset Password";
+
+                        oldvalue = jQuery("span.password input[type=password].new").val();
+                        value =  jQuery("span.password input[type=password].confirm").val();
+                        password =  jQuery("span.password input[type=password].old").val();
+
+
+                        if(oldvalue != value){
+                            showToast("New Password Doesn't Match","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Password");
+                            return;
+                        }else if(value == password){
+                            showToast("Do not use same password as old","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Password");
+                            return;
+                        }
+
+                    }
+                    else if(forThis == "forgot-password"){
+                        reset_text = "Reset Password";
+                        oldvalue = jQuery("span.forgot-password input[type=number]").val();
+                        value =  jQuery("span.forgot-password input[type=password].new").val();
+                        password =  jQuery("span.forgot-password input[type=password].confirm").val();
+
+                        if(oldvalue == ""){
+                            showToast("Enter your reset code","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Password");
+                            return;
+                        }else if(value == ""){
+                            showToast("Enter New Password","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Password");
+                            return;
+                        }
+                        else if(value != password){
+                            showToast("New Password Doesn't Match","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Password");
+                            return;
+                        }
+                    }
+                    else if(forThis == "pin"){
+                        reset_text = "Reset Pin";
+                        oldvalue = jQuery("span.pin input[type=number].old").val();
+                        value =  jQuery("span.pin input[type=number].new").val();
+                        password =  jQuery("span.pin input[type=password]").val();
+                        if(oldvalue == ""){
+                            showToast("Enter Old Pin","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }else if(value == ""){
+                            showToast("Enter New Pin","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }
+                        else if(password == ""){
+                            showToast("Enter correct password","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }
+                        else if(value == oldvalue){
+                            showToast("Do not use same pin as old","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }
+                        else if(value.length != 4){
+                            showToast("Pin must be 4 digits","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }
+
+
+                    }
+                    else if(forThis == "forgot-pin"){
+                        reset_text = "Reset Pin";
+                        oldvalue = jQuery("span.forgot-pin input[type=number].old").val();
+                        value =  jQuery("span.forgot-pin input[type=number].new").val();
+                        password =  "None";
+
+
+                        if(oldvalue == ""){
+                            showToast("Pin reset code needed","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }else if(value == ""){
+                            showToast("Enter New Pin","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }
+                        else if(password == ""){
+                            showToast("Enter correct password","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }
+                        else if(value.length != 4){
+                            showToast("Pin must be 4 digits","red");
+                            jQuery(".save-settings[for="+forThis+"]").text("Reset Pin");
+                            return;
+                        }
+                    }
+                    else{
+
+                        showToast("Can't Determine","red");
+                        return;
+                    }
+
+                    if(value == "" || password == "" || oldvalue == ""){
+                        showToast("All Field Required*","red");
+                        return;
+                    }
+
+
+                    jQuery(this).text("Processing...");
+                    jQuery.ajax({
+                    url:"/wp-content/plugins/opay/saves/reset.php",
+                    method:"POST",
+                    data:{
+                        'for':forThis,
+                        'oldvalue':oldvalue,
+                        'value':value,
+                        'password':password,
+                    },
+                    error: function (jqXHR, exception) {
+                        jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+
+                        var msg;
+                        if (jqXHR.status === 0) {
+                            msg = "No Network!";
+
+                        }
+                        else if (exception === "timeout") {
+                            msg = "Timed Out";
+
+                        }
+                        else if (exception === "abort") {
+                            msg = "Ajax Request Aborted";
+
+                        }else{
+                            msg = jqXHR.status;
+
+                        }
+
+                        showToast(msg,"red");
+
+                    },
+                    success:function(data){
+                        jQuery(".save-settings[for="+forThis+"]").text(reset_text);
+
+                        var msg;
+                        var color;
+                        if(data == "100"){
+                            msg = "Successful";
+                            setTimeout(function(){
+                                jQuery(".close-settings").click();
+                                location.reload();
+                            },1000);
+                            color = "green";
+
+                        }else{
+                            msg = data;
+                            color = "red";
+
+                        }
+                        showToast(msg,color);
+
+
+
+                    }
+                });
+
+
+
+
+                });
+
+
+
+
+
+            </script>
+
+
+
+        
+        </div>
+

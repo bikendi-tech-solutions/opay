@@ -1,0 +1,226 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/transactions.css?ver=<?php echo $rand;?>" />
+
+<script src="<?php echo plugins_url('opay/');?>js/transactions.js?ver=<?php echo $rand;?>"></script>
+<script src="<?php echo plugins_url('opay/');?>js/canvas.js?ver=<?php echo $rand;?>"></script>
+<script src="<?php echo plugins_url('opay/');?>js/filesaver.js?ver=<?php echo $rand;?>"></script>
+
+
+        <div class="container" id="main-page" >
+
+            <div class="lower-part-1 px-1 receipt">
+
+                <?php
+                    if(!isset($_GET["id"]) && !isset($_GET["generate"])){
+                        ?>
+                        <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
+
+                            <span class="">No Transaction Id Received</span>
+                        
+                        </span>
+                        <?php
+                    }
+
+                    if(isset($_GET["id"])){
+
+                        $id = $_GET["id"];
+                        
+                    }else{
+                        $id = "0";
+
+                    }
+                
+                
+                    $user_id = get_current_user_id();
+                    global $wpdb;
+                    
+                    $sub = $_GET["sub"];
+                
+                    switch($sub){
+                        case"wallet":
+                
+                            $table = $wpdb->prefix."vp_wallet";
+                            $info = "Your account should be credit/debited almost instantly";
+                                
+                        break;
+                        case"airtime":
+                                
+                                $table = $wpdb->prefix."sairtime";
+                            $info = "The recipient phone number is expected to be credited within 2 minutes (max). Subject to notification by network provider";
+
+                                    
+                        break;
+                        case"data":
+                            
+                            $table = $wpdb->prefix."sdata";
+                            $info = "The recipient phone number is expected to be credited within 2 minutes (max). Subject to notification by network provider";
+
+                                
+                        break;
+                        case"cable":
+                            
+                        $table = $wpdb->prefix."scable";
+                        $info = "The recipient cableTv is expected to be renewed within 2 minutes (max).";
+
+                            
+                        break;
+                        case"bill":
+                            
+                        $table = $wpdb->prefix."sbill";
+                        $info = "The recipient bill is expected to be credited within 5 minutes (max). ";
+
+                            
+                        break;
+                        case"bet":
+                            
+                        $table = $wpdb->prefix."sbet";
+                        $info = "The recipient account is expected to be credited within 5 minutes (max). ";
+
+                            
+                        break;
+    
+                    }
+
+
+                    if(isset($_GET["generate"])){
+
+                        $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s ORDER BY ID DESC LIMIT 1",$user_id);
+
+                    }else{
+                        $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s AND id = %d LIMIT 1",$user_id,$id);
+                    }
+
+
+                    $results = $wpdb->get_results($prepare);
+
+
+                    if($results != NULL && !empty($results)){
+
+                        $thisResult = $results[0];
+
+                        include(__DIR__."/functions.php");
+
+                        if(strtolower($status) == "credit"){
+                            $statusText = "Credited";
+                            $status = "successful";
+                        }
+                        elseif(strtolower($status) == "debit"){
+                            $statusText = "Debited";
+                            $status = "failed";
+                        }
+                        else{
+                            $statusText = $status;
+                        }
+?>
+
+                        <div id="plain-receipt" class="container  mt-2 px-4 py-5 m-auto sections first-section d-flex bg-white flex-column justify-content-center">
+
+                            <div class="logo-top d-flex justify-content-between align-items-center">
+                                <img src="<?php echo get_site_icon_url( 75, '/wp-content/plugins/opay/image/vlogo.png');?>" alt="site icon" style="height:40px; width:40px;">
+                                <span class="general-text fw-bold">Transaction Receipt</span>
+                            </div>
+                            <div class="content d-flex justify-content-center flex-column align-items-center">
+                                <span class="text-<?php echo $status;?> amount fs-3"><?php echo $sign;?> ₦<?php echo number_format($amount);?></span>
+                                <span class=" mt-2 fw-bold"><?php echo ucfirst($statusText);?></span>
+                                <span class="time"><?php echo $time;?></span>
+                            </div>
+
+                                <hr>
+                                <div class=" dets">
+
+                                    <span class="mt-2 detail d-flex  justify-content-between align-items-center">
+                                        <span class="key">Transaction Type</span>
+                                        <span class="value recipient-typ"><?php echo $type;?></span>
+                                    </span>
+                                    <span class="mt-2 detail d-flex justify-content-between align-items-center">
+                                        <span class="key">Recipient Details</span>
+                                        <span class="value recipient-det"><?php echo $recipient;?></span>
+                                    </span>
+                                    <?php
+                                    if($_GET["sub"] == "bill"){
+
+                                    ?>
+                                    <span class="mt-2 detail d-flex justify-content-between align-items-center">
+                                        <span class="key">Meter Token</span>
+                                        <span class="value"><?php echo $meter_token;?></span>
+                                    </span>
+                                    <?php
+                                        }
+                                    ?>
+                                    <span class="mt-2 detail d-flex justify-content-between align-items-center">
+                                        <span class="key">Transaction Id</span>
+                                        <span class="value"><?php echo $id;?></span>
+                                    </span>
+                                    <span class="mt-2 detail d-flex justify-content-between align-items-center">
+                                        <span class="key">Payment Method</span>
+                                        <span class="value">Wallet</span>
+                                    </span>
+                                    <span class="mt-2 detail d-flex justify-content-between align-items-center">
+                                        <span class="key">Transaction Date</span>
+                                        <span class="value"><?php echo $time;?></span>
+                                    </span>
+
+                                </div>
+
+                                <div class="support-info mt-3 mb-2 d-flex flex-column justify-content-center align-items-center">
+
+                                    <span class="sup text-muted">Support</span>
+                                    <span class="support-email "><?php echo get_option('admin_email');?></span>
+
+                                </div>
+
+                                <span class="dash-line mb-2"></span>
+                                <div class="info-text d-flex  justify-content-center align-items-center">
+                                    <span >We are loved to have you transact with us and hope you do more at a more cheaper price.</span>
+                                </div>
+
+                                
+
+                        </div>
+
+                        <div class="download-sect d-flex justify-content-center align-items-center">
+
+                            <span class="download-image cursor-pointer"><i class="fa-solid fa-download"></i> Download</span>
+                        </div>
+
+
+                        <script>
+                            //Download image
+                
+                jQuery(".download-image").on("click",function(){
+                       var ret =  jQuery(".recipient-typ").text();
+                       var rec =  jQuery(".recipient-det").text();
+           
+                            html2canvas(document.getElementById('plain-receipt'), {
+                                onrendered: function(canvas) {
+                                    canvas.toBlob(function(blob) {
+                                        saveAs(blob, ret+"-"+rec+'.jpeg');
+                                    }, 'image/jpeg');
+                                }
+                            });
+
+                });
+                        </script>
+
+<?php
+
+
+                    }else{
+                        ?>
+                        <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
+
+                            <span class="">No Transaction With Id <?php echo $id;?> Recorded</span>
+                        
+                        </span>
+
+                        <?php
+                    }
+?>
+
+            </div>
+
+
+
+        </div>
+
+
+

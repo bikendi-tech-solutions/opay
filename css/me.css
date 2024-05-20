@@ -1,0 +1,137 @@
+.main-page-content #main-page {
+    height: 100%;
+    padding: 0;
+}
+
+.top-part{
+    background-color: var(--major-primary-color);
+}
+
+
+/* Each aza divs */
+.go-btn i{
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+.go-btn i::after {
+    content: "";
+    position: absolute;
+    background-color: red;
+    width: 7px;
+    height: 7px;
+    border-radius: 50px;
+    top: 0;
+    /* right: 0; */
+    transform: translate(1px, -7px);
+}
+
+.top-part-actions *{
+    font-size:18px;
+    color: #ffffff;
+}
+
+.icon-sect .icon-div {
+    border-radius: 100px;
+    background-color: #ffffff9e;
+    width: fit-content;
+    height: fit-content;
+}
+
+.icon-sect .icon-div i{
+    font-size:40px;
+    color: var(--minor-secondary-color);
+    
+}
+
+.icon-sect .text-div span:nth-child(1) {
+    font-weight: bold;
+}
+
+.icon-text-message{
+    background-color: #ffffff;
+    border-radius: 50px;
+    color: #000000db;
+    font-size: 12px;
+    width: 135px;
+    transform: translate(9.5px, 0);
+}
+
+span.icon-text-message .d-icon-div {
+    background-color: white;
+    font-weight: bold;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 150px;
+    top: 0;
+    left: 0;
+    transform: translate(-10px, -2px);
+}
+
+span.icon-text-message .d-icon-div i {
+    color: grey !important;
+    font-size: 18px;
+}
+
+
+/*SECOND PART*/
+.second-part *{
+    color:#ffffff;
+
+}
+
+span.the-balance {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+span.cashback{
+    border-radius: 50px;
+    background-color:var(--minor-secondary-color);
+    color: var(--major-primary-color);
+    width:fit-content;
+    
+}
+
+span.cashback .amount{
+    color:orange;
+}
+
+.kyc-info {
+    font-size: 12px;
+    background-color: var(--minor-primary-color);
+    border-radius: 15px;
+    width: 90%;
+    position: absolute;
+    bottom: 0;
+    transform: translate(1.5%, 45%);
+}
+
+.kyc-info span.the-info {
+    color: var(--major-primary-color);
+    font-weight: bold;
+}
+
+.kyc-info button.btn {
+    background: var(--major-primary-color);
+    border-radius: 50px;
+    color: var(--minor-secondary-color);
+}
+
+.lower-part-1{
+    width:90%;
+    border-radius: 15px;
+}
+
+.lower-part-1 span{
+    color:#000000db;
+}
+
+.lower-part-1 .icon-text > span:nth-child(2){
+    font-size:12px;
+}
+.lower-part-1 span.icon.me-3{
+    color:var(--major-primary-color);
+    font-size: 18px;
+}

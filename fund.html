@@ -1,0 +1,442 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/add-money.css?ver=<?php echo $rand;?>" />
+
+<?php
+
+$opay_account_bank = vp_option_array($option_array,"opay_account_bank");
+$opay_account_name = vp_option_array($option_array,"opay_account_name");
+$opay_account_number = vp_option_array($option_array,"opay_account_number");
+
+if(empty($opay_account_number) || $opay_account_number == "false"){
+    $opay_account_number = "No Account No!";
+    $opay_account_name = "---";
+    $opay_account_number = "---";
+}
+
+function banks_log($name=""){
+    if(strtolower($name) == "wema"){
+        echo plugins_url('opay')."/image/Wema_Bank_Plc.jpg";
+    }
+    elseif(strtolower($name) == "monniepoint"){
+        echo plugins_url('opay')."/image/monie.png";
+    }
+    elseif(strtolower($name) == "sterling"){
+        echo plugins_url('opay')."/image/ster.png";
+    }
+    elseif(strtolower($name) == "gtbank"){
+        echo plugins_url('opay')."/image/gtbank.png";
+    }
+    elseif(strtolower($name) == "kuda"){
+        echo plugins_url('opay')."/image/kuda.jpeg";
+    }
+    elseif(strtolower($name) == "vpay"){
+        echo plugins_url('opay')."/image/vpay.jpg";
+    }
+    elseif(strtolower($name) == "ncwallet"){
+        echo plugins_url('opay')."/image/safe.svg";
+    }
+    
+    else{
+        echo plugins_url('opay')."/image/bank.png";
+    }
+}
+
+?>
+
+            <div class="container position-relative" id="main-page">
+
+                <div id="airtime-page-header" class="row p-4 bg-white">
+                    <div class="col d-flex flex-row justify-content-start align-items-start">
+                       <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Add Money</span>
+                    </div>
+                </div>
+
+                <div class=" p-3 mx-1 manual-transfer  bg-white my-2">
+                    <div class="first-part pb-3 d-flex justify-content-between d-none">
+
+                        <div>
+                            <span class="icon-sect d-flex justify-content-start align-items-center">
+                                <span class="icon-div">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </span>
+                                <span class="ms-3 text-div icon-text d-flex flex-column">
+                                    <span class="icon-text-title">Bank Transfer</span>
+                                    <span class="icon-text-message text-muted">Admin manual bank</span>
+
+                                </span>
+
+                            </span>
+                        </div>
+                        <div class="go-btn d-flex justify-content-end align-items-center">
+                            <i class="fa-solid fa-angle-right"></i>
+
+                        </div>
+
+                    </div>
+                    <div class="second-part pt-2 d-flex flex-column align-items-start">
+                        <span class="text-muted first-text">Admin Account Number</span>
+                        <span class="account-number this-aza-main"><?php echo $opay_account_number;?></span>
+                        <div class="aza-btn mt-3 row">
+                            <div class="col">
+                                <button class="btn p-2 copy-account copy-this" for="main">Copy Acct. No</button>
+                            </div>
+                            <div class="col">
+                                <button class="btn p-2 credit-information">Information</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="or-div my-2 d-flex justify-content-center align-items-center text-mutted">
+                    <span class="arrows mx-2"></span>
+                    <span class="or-text">OR</span>
+                    <span class="arrows mx-2"></span>
+
+                </div>
+
+
+
+                <?php
+
+                if(vp_getoption('enablevpay') == "yes"  && vp_getoption("vtupress_custom_vpay") == "yes"){
+                    $bankid = "1";
+                    $AccountNumber = vp_getuser($id,"vpayAccountNumber");
+                    $Bank = "Vpay / Vfd";
+                    $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
+
+                    if(empty($AccountNumber) || $AccountNumber == "false"){
+                        $AccountNumber = "Generate Account Number";
+                        $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="vpay"></i>';
+                    }
+
+
+                    if(vp_getoption("vpay_charge_method") == "fixed"){
+                        $charge =  "₦".floatval(vp_getoption("vpay_charge_back"));
+                    }
+                    else{
+                         $charge =  floatval(vp_getoption("vpay_charge_back"))."%";
+                    }
+
+                    ?>
+
+                <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                    <div class="first-part-bnk-opt  d-flex justify-content-between">
+                        <span class="icon-sect d-flex justify-content-start align-items-center">
+                            <span class="icon-div p-3">
+                                <img src="<?php banks_log("vpay");?>" height="35" width="35" alt="Visa Logo">
+                            </span>
+                            <span class="ms-3 text-div icon-text d-flex flex-column">
+                                <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                                <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+
+                            </span>
+
+                        </span>
+                        <div class="go-btn d-flex justify-content-end align-items-center">
+                            <span class="charge" > <?php echo $charge;?> Charge</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <?php
+
+                }
+
+
+                if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
+
+
+                    $bankid = "2";
+                    $AccountNumber = vp_getuser($id,"ncwallet_accountnumber");
+                    $Bank = "Safehaven";
+                    $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
+
+                    if(empty($AccountNumber) || $AccountNumber == "false"){
+                        $AccountNumber = "Generate Account Number";
+                        $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="ncwallet"></i>';
+                    }
+
+                    if(vp_getoption("ncwallet_charge_method") == "fixed"){
+                        $charge =  "₦".floatval(vp_getoption("ncwallet_charge_back"));
+                    }
+                    else{
+                         $charge =  floatval(vp_getoption("ncwallet_charge_back"))."%";
+                    }
+
+                ?>
+
+                <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                    <div class="first-part-bnk-opt  d-flex justify-content-between">
+                        <span class="icon-sect d-flex justify-content-start align-items-center">
+                            <span class="icon-div p-3">
+                                <img src="<?php banks_log("ncwallet");?>" height="35" width="35" alt="Visa Logo">
+                            </span>
+                            <span class="ms-3 text-div icon-text d-flex flex-column">
+                                <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                                <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+
+                            </span>
+
+                        </span>
+                        <div class="go-btn d-flex justify-content-end align-items-center">
+                            <span class="charge" > <?php echo $charge;?> Charge</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            
+            <?php
+
+                }
+
+
+            if(vp_getoption('enablesquadco') == "yes"  && vp_getoption("vtupress_custom_gtbank") == "yes"){
+           
+
+            if(vp_getoption("gtb_charge_method") == "fixed"){
+                $charge =  "₦".floatval(vp_getoption("gtb_charge_back"));
+            }
+            else{
+                $charge =  floatval(vp_getoption("gtb_charge_back"))."%";
+            }
+
+                $bankid = "3";
+                $AccountNumber = vp_getuser($id,"squadAccountNumber");
+                $Bank = "GTBank";
+                $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
+
+                if(empty($AccountNumber) || $AccountNumber == "false"){
+                    $AccountNumber = "Generate Account Number";
+                    $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="gtb"></i>';
+                }
+
+            ?>
+
+            <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                <div class="first-part-bnk-opt  d-flex justify-content-between">
+                    <span class="icon-sect d-flex justify-content-start align-items-center">
+                        <span class="icon-div p-3">
+                            <img src="<?php banks_log("gtbank");?>" height="35" width="35" alt="Visa Logo">
+                        </span>
+                        <span class="ms-3 text-div icon-text d-flex flex-column">
+                            <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+
+                        </span>
+
+                    </span>
+                    <div class="go-btn d-flex justify-content-end align-items-center">
+                        <span class="charge" > <?php echo $charge;?> Charge</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <?php
+                }
+
+            if(vp_getoption('enablekuda') == "yes"  && vp_getoption("vtupress_custom_kuda") == "yes"){
+
+                if(vp_getoption("kuda_charge_method") == "fixed"){
+                    $charge =  "₦".floatval(vp_getoption("kuda_charge_back"));
+                }
+                else{
+                    $charge =  floatval(vp_getoption("kuda_charge_back"))."%";
+                }
+
+                    
+                $bankid = "4";
+                $AccountNumber = vp_getuser($id,"kudaAccountNumber");
+                $Bank = "Kuda";
+                $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
+
+                if(empty($AccountNumber) || $AccountNumber == "false"){
+                    $AccountNumber = "Generate Account Number";
+                    $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="kuda"></i>';
+                }
+                    
+                        
+                    
+            ?>
+            <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                <div class="first-part-bnk-opt  d-flex justify-content-between">
+                    <span class="icon-sect d-flex justify-content-start align-items-center">
+                        <span class="icon-div p-3">
+                            <img src="<?php banks_log("kuda");?>" height="35" width="35" alt="Visa Logo">
+                        </span>
+                        <span class="ms-3 text-div icon-text d-flex flex-column">
+                            <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+
+                        </span>
+
+                    </span>
+                    <div class="go-btn d-flex justify-content-end align-items-center">
+                        <span class="charge" > <?php echo $charge;?> Charge</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <?php
+
+                }
+
+
+                $bank_mode = vp_getuser($id,"account_mode",true);
+                if($bank_mode == "live"){
+
+					if(vp_getoption("charge_method") == "fixed"){
+						$charge =  "₦".floatval(vp_getoption("charge_back"));
+					}
+					else{
+						 $charge =  floatval(vp_getoption("charge_back"))."%";
+					}
+    
+                        
+                    $bankid = "5";
+                    $AccountNumber = vp_getuser($id,"account_number1");
+                    $Bank = "Wema";
+                    $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
+
+    
+                    if(empty($AccountNumber) || $AccountNumber == "false" || !is_numeric($AccountNumber)){
+                        $AccountNumber = "Generate Account Number";
+                        $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="monnify"></i>';
+                    }
+            ?>
+
+            <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                <div class="first-part-bnk-opt  d-flex justify-content-between">
+                    <span class="icon-sect d-flex justify-content-start align-items-center">
+                        <span class="icon-div p-3">
+                            <img src="<?php banks_log("wema");?>" height="35" width="35" alt="Visa Logo">
+                        </span>
+                        <span class="ms-3 text-div icon-text d-flex flex-column">
+                            <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+
+                        </span>
+
+                    </span>
+                    <div class="go-btn d-flex justify-content-end align-items-center">
+                        <span class="charge" > <?php echo $charge;?> Charge</span>
+                    </div>
+
+                </div>
+            </div>
+                
+
+            <?php
+
+              
+            $bankid = "6";
+            $AccountNumber = vp_getuser($id,"account_number");
+            $Bank = "Sterling";
+            $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
+
+            if(empty($AccountNumber) || $AccountNumber == "false" || !is_numeric($AccountNumber)){
+                $AccountNumber = "Generate Account Number";
+                $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="monnify"></i>';
+            }
+
+            ?>
+            <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                <div class="first-part-bnk-opt  d-flex justify-content-between">
+                    <span class="icon-sect d-flex justify-content-start align-items-center">
+                        <span class="icon-div p-3">
+                            <img src="<?php banks_log("sterling");?>" height="35" width="35" alt="Visa Logo">
+                        </span>
+                        <span class="ms-3 text-div icon-text d-flex flex-column">
+                            <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+
+                        </span>
+
+                    </span>
+                    <div class="go-btn d-flex justify-content-end align-items-center">
+                        <span class="charge" > <?php echo $charge;?> Charge</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <?php
+
+
+                }
+            ?>
+            </div>
+
+
+
+            <script>
+                jQuery(".copy-this").on("click",function(){
+                    var forThis = jQuery(this).attr("for");
+
+                    var textToCopy = jQuery(".this-aza-"+forThis).text();
+                    navigator.clipboard.writeText(textToCopy).then(function() {
+                        alert('copied!');
+                    }).catch(function(err) {
+                        alert('error copying!');
+
+                    });
+
+                });
+
+               
+                jQuery(".credit-information").on("click",function(){
+
+                    var account_number = jQuery(".account-number").text();
+                    var account_name = "<?php echo $opay_account_name;?>";
+                    var account_bank = "<?php echo $opay_account_bank;?>";
+
+                    var msg = `
+                        <style>
+                            span.pop-up-message{
+                                width:100%;
+                                padding:0 30px;                                   
+                             }
+                        </style>
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <span class="text-muted first-text">Account Number</span>
+                            <span class="account-number  fw-bold"><?php echo $opay_account_number;?></span>
+                        </div>
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <span class="text-muted first-text">Account Name</span>
+                            <span class="account-name fw-bold"><?php echo $opay_account_name;?></span>
+                        </div>
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <span class="text-muted first-text">Account Bank</span>
+                            <span class="account-bank  fw-bold"><?php echo $opay_account_bank;?></span>
+                        </div>
+                    `;
+                    
+                    var thisBtn = {
+                    '<i class="fa-brands fa-whatsapp me-2"></i>I made a transfer':"<?php echo whatsapp_message('I made a manual transfer of ');?>"
+                    }
+                        args = {
+                        icon: {
+                            show:true,
+                            type: "notification"
+                        },
+                        button : thisBtn,
+                        topic: "Manual Funding!",
+                        message: msg
+                    }
+                    popup(args);
+
+                });
+            </script>
+
+
+
+</div>

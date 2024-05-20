@@ -1,0 +1,106 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/me.css?ver=<?php echo $rand;?>" />
+
+        <div class="container" id="main-page">
+
+            <div class="top-part pb-5 py-4 px-3 position-relative">
+
+                <div class="top-part-actions  d-flex justify-content-between">
+                            <span class="icon-sect flex-grow-1 d-flex justify-content-start align-items-center">
+                                <span class="icon-div p-1  d-flex justify-content-center align-items-center">
+                                    <i class="fa-regular fa-circle-user"></i>
+                                </span>
+                                <span class="ms-3 text-div icon-text d-flex flex-column">
+                                    <span class="icon-text-title">Bank Transfer</span>
+                                    <span class="icon-text-message d-flex justify-content-end p-1 px-3 position-relative "> <span class="d-icon-div p-1 d-flex justify-content-center align-items-center"><i class="fa-solid fa-medal"></i></span>  Upgrade your plan</span>
+    
+                                </span>
+    
+                            </span>
+                            <div class="go-btn d-flex justify-content-end align-items-center">
+                                <i class=" cursor-pointer fa-solid fa-gear position-relative" link="?vend=settings"></i>
+                            </div>
+
+                </div>
+
+                <div class="second-part mt-3 d-flex flex-column ">
+                    <span class="total-balance-text" id="general-text">Total Balance <i class="fa-regular fa-eye"></i></span>
+
+                    <span class="the-balance mt-1">₦ <?php echo number_format($bal);?></span>
+
+                    <span class="cashback px-2" id="general-text"> & Cashback <span class="amount">₦200</span></span>
+
+                </div>
+
+                <div class="kyc-info p-2 px-md-4 d-flex justify-content-between align-items-center m-auto">
+                    <span class="the-info ps-3 flex-grow-1 text-md-center">Complete your personal information and enjoy higher transaction limit</span>
+                    <span class=""><button class="btn ms-3">Go</button></span>
+                </div>
+
+               
+
+
+            </div>
+
+            <div class="lower-part-1 mt-5 bg-white px-3 py-4 m-auto">
+                <span link="?vend=history&sub=airtime" class="  cursor-pointer mb-3 d-flex justify-content-between">
+                    <span class="icon me-3 d-flex align-items-center"><i class="fa-solid fa-sheet-plastic"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Transaction History</span>
+                        <span class="message">See transaction history</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <span link="?vend=history" class=" cursor-pointer mb-3 d-flex justify-content-between">
+                    <span class="icon me-3  d-flex align-items-center"><i class="fa-solid fa-wallet"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Wallet History</span>
+                        <span class="message">See wallet history</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <?php
+                    if(strtolower($kyc_data[0]->enable) == "yes"){
+                ?>
+                <span link="?vend=kyc" class=" cursor-pointer mb-3 d-flex justify-content-between">
+                    <span class="icon me-3  d-flex align-items-center"><i class="fa-solid fa-user-check"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Verify Account</span>
+                        <span class="message">See/Verify Account Status</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+                <?php
+                    }
+                ?>
+
+                <span link="?vend=wallet" class=" cursor-pointer mb-3 d-flex justify-content-between">
+                    <span class="icon me-3  d-flex align-items-center"><i class="fa-solid fa-filter-circle-dollar"></i></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic">Wallet Funding</span>
+                        <span class="message">Topup your account balance</span>
+                    </span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+
+
+            </div>
+
+            <div class="lower-part-1 mt-3 bg-white px-3 py-4 m-auto">
+                <span link="<?php echo whatsapp_message();?>" class=" cursor-pointer mb-3 d-flex justify-content-between">
+                    <span class="icon me-3  d-flex align-items-center"><i class="fa-solid fa-headset"></i></span>
+                    <span class="icon-text flex-grow-1">Customer Care Support</span>
+                    <span class="icon ms-2"><i class="fa-solid fa-angle-right"></i></span>
+
+                </span>
+
+
+            </div>
+
+            
+
+        </div>
+

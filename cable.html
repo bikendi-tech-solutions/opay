@@ -1,0 +1,853 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/airtime-page.css?ver=<?php echo $rand;?>" />
+
+
+
+            <div class="container position-relative" id="main-page">
+
+                <div id="airtime-page-header" class="row p-4 bg-white">
+                    <div class="col d-flex flex-row justify-content-start align-items-start">
+                       <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Cable Tv</span>
+                    </div>
+                    <div class="col d-flex flex-row justify-content-end align-items-end">
+                        <span link="?vend=history&sub=cable" class="general-text hisotry-text cursor-pointer">History</span>
+                    </div>
+                </div>
+
+                <div id="network-select" class="row mt-2 p-2 bg-white rounded ">
+
+                
+                    <div class="col-12 ads position-relative">
+                        
+                    </div>
+              
+
+                    <div class="col-12 mt-3 border-bottom pb-2 position-relative">
+                        <div class="row">
+                            <div id="first-col" class="networks col-3 col-md-1 d-flex justify-content-start align-items-center">
+                                <img src="<?php echo plugins_url('opay/');?>image/dstv.jpeg;?>" id="drop-down-image-select" class="me-3 me-md-2 changeNetworkLogo" for="dstv" value=""><i class="fa-solid fa-caret-down"></i>
+                            </div>
+                            <div id="second-col" class="col-7 col-md-10">
+                                <input type="number"  min="0" max="9" class="form-control input-recipient" placeholder="0XX XXXX XXXX" />
+                            </div>
+                            <div id="third-col" class="col-2 col-md-1 d-flex justify-content-center align-items-center verify-cable cursor-pointer">
+                                <!--<i class="fa-solid fa-circle-user "></i>-->
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </div>
+                        <span class="text-warning recipient-incorrect-notice"></span>
+
+                    </div>
+
+                    <div class="col-12 service-type-choice">
+                        <div class="row my-1 d-flex justify-content-center align-items-center">
+                            
+                            <!--
+                            <div class="col-4 service-type-col cursor-pointer" for="prepaid">
+                                <div class="service-type p-3 text-center">
+                                    <span class="type">Prepaid</span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-4 service-type-col cursor-pointer"  for="postpaid">
+                                <div class="service-type p-3 text-center">
+                                    <span class="type">Postpaid</span>
+                                </div>
+                            </div>
+                            -->
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3 d-none" id="dropdown-for-networks">
+
+                        <div class="row p-3 choice-row">
+                            <div class="col-12 choice-div p-3">
+                                <?php
+                                for($i=0; $i<=3; $i++){
+                                    $doos = vp_option_array($option_array,"cableid".$i);
+                                    $cable_name = vp_option_array($option_array,"cablename".$i);
+
+                                    if(preg_match("/got/i",$cable_name)){
+                                        $name = "gotv";
+                                        $ext = "jpg";
+                                    }
+                                    elseif(preg_match("/dst/i",$cable_name)){
+                                        $name = "dstv";
+                                        $ext = "jpeg";
+                                    }
+                                    elseif(preg_match("/star/i",$cable_name)){
+                                        $name = "startimes";
+                                        $ext = "jpeg";
+                                    }
+                                    if(!empty($doos)){
+
+                                ?>
+                                <div class="col-12 py-2 net-choice cursor-pointer" for="<?php echo $name;?>"  ext="<?php echo $ext;?>" cable_id="<?php echo $doos;?>">
+                                    <label for="<?php echo $name;?>" class="d-block">
+                                    <div class="row">
+                                        <div class="col  d-flex justify-content-start align-items-center">
+                                            <img src="<?php echo plugins_url('opay/');?>image/<?php echo "$name.$ext";?>" id="drop-down-image-option" class="me-2 bg-danger" ><span class="network-name"><?php echo $name;?></span>
+                                        </div>
+                                        <div class="col d-flex justify-content-end align-items-center">
+                                            <input type="radio" name="network" id="<?php echo $name;?>" class="d-none">
+                                            <label class="network-label position-relative " for="<?php echo $name;?>"></label>  
+                                        </div>
+                                    </div>
+
+                                </label>
+
+                                </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            <!--
+                                <div class="col-12 py-2 net-choice cursor-pointer" for="gotv" ext="jpg">
+                                    <label for="gotv" class="d-block">  
+                                        <div class="row">
+                                            <div class="col  d-flex justify-content-start align-items-center">
+                                                <img src="<?php echo plugins_url('opay/');?>image/gotv.jpg;?>" id="drop-down-image-option" class="me-2 bg-danger" ><span class="network-name">gotv</span>
+                                            </div>
+                                            <div class="col d-flex justify-content-end align-items-center">
+                                                <input type="radio" name="network" id="gotv" class="d-none">
+                                                <label class="network-label position-relative" for="gotv"></label>
+        
+                                            </div>
+                                        </div>
+                                    </label>
+
+
+                                </div>
+
+                                <div class="col-12 py-2 net-choice cursor-pointer" for="startimes" ext="jpeg">
+                                    <label for="startimes" class="d-block">  
+                                        <div class="row">
+                                            <div class="col  d-flex justify-content-start align-items-center">
+                                                <img src="<?php echo plugins_url('opay/');?>image/startimes.jpeg;?>" id="drop-down-image-option" class="me-2 bg-danger" ><span class="network-name">startimes</span>
+                                            </div>
+                                            <div class="col d-flex justify-content-end align-items-center">
+                                                <input type="radio" name="network" id="startimes" class="d-none">
+                                                <label class="network-label position-relative" for="startimes"></label>
+        
+                                            </div>
+                                        </div>
+                                    </label>
+
+                                </div>
+                            -->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            
+                </div>
+                
+
+
+                <!--AMOUNT CHOICE SECTION-->
+                <div id="amount-choice-div" class="row  mt-2  rounded">
+
+
+
+
+                    <div class="col-12 position-relative">
+
+                        <div id="top-green" class="p-3 position-relative d-flex justify-content-center align-items-center">
+                            <span class="me-2">Top Up And Get Cash Back</span>
+                            <button class="btn btn-sm bg-white" id="btn">GO</button>
+                        </div>
+                        
+                        <div id="amount-choices" class="p-2 bg-white">
+                            <span class="py-3">Tv Subscription</span>
+                            
+                            <div class="amount-list row px-3 py-2">
+
+                                <div  class="no_data all_data_types cursor-pointer py-2 mb-4 col-12 ">
+                                    <div id="each-list" class="py-2 d-flex flex-column align-items-center justify-content-center text-center">
+                                        <span>No plan available for <b class="dtype"></b> <b class="ntype"></b> </span>
+                                    </div>
+                                </div>
+
+                                <!--- FOR SME -->
+                            <?php
+      
+                                for($i=0; $i<=35; $i++){
+                                    $doos = vp_option_array($option_array,"ccable".$i);
+                                    $cname = vp_option_array($option_array,"ccablen".$i);
+                                    $cprice = vp_option_array($option_array,"ccablep".$i);
+                                    $plan_name = $cname.' ₦'.$cprice;
+
+                                    $gotv = "GOTV";
+                                    $dstv = "DSTV";
+                                    $startimes = "STARTIMES";
+                                    if(stripos($cname, $gotv) !== false ){
+                                        $cableclass = "gotv";
+                                    }
+                                    elseif(stripos($cname, $dstv) !== false ){
+                                      $cableclass = "dstv";
+                                    }
+                                    else{
+                                      $cableclass = "startimes";
+                                     }
+                                            if(!empty($doos) && !empty($cname) && !empty($cprice) ){
+
+                                        ?>
+
+                                            <div plan_index="<?php echo $i;?>" plan_name="<?php echo $plan_name;?>" plan_id='<?php echo $doos;?>'  amount='<?php echo $cprice;?>' class="<?php echo $cableclass;?> all_data_types cursor-pointer buy-with-this py-2 col-md-4 col-4 ">
+                                                <div id="each-list" class="py-2 d-flex flex-column align-items-center justify-content-center text-center">
+                                                    <span>1 Cashback</span>
+                                                    <span><?php echo trim(strtoupper(preg_replace("/\s{2,}/"," ",preg_replace("/$cableclass/i","",$cname))));?></span>
+                                                    <span><span class="naira-symbol">₦</span><?php echo $cprice;?></span>
+                                                </div>
+                                            </div>
+
+                                            <?php
+                                        }
+                                    }
+                                
+                                        ?>
+                                
+                            </div>
+
+                            <script>
+
+
+/*
+                                var sme_visible_networks = '<?php echo vp_option_array($option_array,"sme_visible_networks");?>';
+                                var corporate_visible_networks = '<?php echo vp_option_array($option_array,"corporate_visible_networks");?>';
+                                var direct_visible_networks = '<?php echo vp_option_array($option_array,"direct_visible_networks");?>';
+                if(sme_visible_networks != ""){
+                    sme_visible_networks = sme_visible_networks.toLowerCase();
+                }
+                if(corporate_visible_networks != ""){
+                    corporate_visible_networks = corporate_visible_networks.toLowerCase();
+                }
+                if(direct_visible_networks != ""){
+                    direct_visible_networks = direct_visible_networks.toLowerCase();
+                }
+
+                var allNetwork = ["mtn","glo","9mobile","airtel"];
+
+                jQuery.each(allNetwork, function(index, value) {
+                    
+                    if(sme_visible_networks.indexOf(value) === -1){
+                        jQuery(".sme ."+value).remove();
+                    }
+                    if(corporate_visible_networks.indexOf(value) === -1){
+                        jQuery(".corporate ."+value).remove();
+                    }
+                    if(direct_visible_networks.indexOf(value) === -1){
+                        jQuery(".direct ."+value).remove();
+                    }
+                });
+
+*/
+ 
+</script>
+
+
+
+                            <div id="form-submit-section" class="d-none row px-4 py-2 form-submit-section  ">
+                                <div class="col-9 first d-flex justify-content-start align-items-center">
+                                    <span class="naira-symbol">₦</span>
+                                    <input type="number" class="ms-2 form-control input-amount" placeholder="50-500,000" />
+                                </div>
+                                <div class="col-3 d-flex second justify-content-start justify-content-md-center">
+                                    <button class="btn paybutton inactive cursor-pointer">Pay</button>
+                                </div>
+                            
+                                <span class="text-warning amount-incorrect-notice"></span>
+
+                            </div>
+                            
+
+                        </div>
+
+
+
+                        
+                    </div>
+                </div>
+
+
+
+                <!-- CONFIRM TRANSACTION-->
+                <div id="confirm-transaction" class="d-flex align-items-end justify-content-center rounded d-none checkout_trans_levels">
+
+                    <div class="row confirm-transaction-container p-3 level_1 checkout_levels" level="1">
+                        <div class="col-12 d-flex justify-content-start">
+                            <i class="fa-solid text-muted close-confirm-transaction fa-xmark proceed_prev" current="1"></i>
+                        </div>
+
+                        <div class="col-12 my-2 d-flex justify-content-center ">
+                            <span class="naira-symbol align-self-end mb-2">₦</span><span class="amount amount-value"></span>
+                        </div>
+                        <div class="col-12 my-1 d-flex justify-content-between">
+                            <span class="text-muted product-name">Product Name</span>
+                            <span class="product-value"><img src="<?php echo plugins_url('opay/');?>image/mtn.jpg" id="drop-down-image-option" class="me-2 bg-danger changeNetworkLogo" >Mobile Data</span>
+                        </div>
+                        <div class="col-12 my-1 d-flex justify-content-between">
+                            <span class="text-muted product-name">Product Type</span>
+                            <span class="product-type text-capitalize"></span>
+                        </div>
+                        <div class="col-12 my-1 d-flex justify-content-between">
+                            <span class="text-muted product-name">Amount</span>
+                            <span class="product-value">₦<span class="amount-value"></span></span>
+                        </div>
+                        <?php
+                            if(vp_option_array($option_array,"discount_method") == "direct"){
+                        ?>
+                            <div class="col-12 my-2 d-flex justify-content-between">
+                                <span class="text-muted product-name">Amount To Pay</span>
+                                <span class="product-value">₦<span class="bonus-value">0</span></span>
+                            </div>
+                    <?php
+                        }
+                        else{
+                    ?>
+                            <div class="col-12 my-2 d-flex justify-content-between">
+                                <span class="text-muted product-name">Bonus To Earn</span>
+                                <span class="product-value">₦<span class="bonus-value">0</span></span>
+                            </div>
+                    <?php	
+                        }
+                    
+                        ?>
+                        <hr>
+                        <div class="col-12 my-2 d-flex justify-content-start">
+                            <span class="payment-method">Payment Method</span>
+                        </div>
+                        <div class="col-12 my-2 payment-method-div p-3 d-flex justify-content-between">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <span class="me-2 wallet-div d-flex justify-content-center align-items-center"><i class="fa-solid fa-wallet "></i></span>
+                                <span>Balance (₦<?php echo number_format($bal);?>)</span>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center check-sign">
+                                <i class="fa-solid fa-check fs-3"></i>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 pt-2 checkout-div position-relative">
+                            <div class="info-div d-flex justify-content-center align-items-start">
+                                <span class="">Enjoy seamless services from us!</span>
+                            </div>
+                            <div class="large-pay-div d-flex justify-content-center align-items-center ">
+                                <h4 class=" proceed_checkout proceed_next cursor-pointer" current="1">Proceed</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="enter-pin-container" class="row enter-pin-container p-3 level_2 d-none  checkout_levels" level="2">
+
+                        <div class="col-12 d-flex justify-content-end">
+                            <i class="fa-solid text-muted close-pin-container fa-xmark proceed_prev" current="2"></i>
+                        </div>
+
+                        <div class="col-12 ajax-error-response-div d-flex justify-content-center">
+                            <span id="ajax-error-response" class="ajax-error-response text-danger"></span>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center pb-2" style="font-weight:bold; font-size:20px;">
+                            <span>Enter Payment Pin</span>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center">
+                            <input type="number" class="pin_1 pin_input" min="0" max="9" pin="1" maxlength="1">
+                            <input type="number" class="mx-2 pin_2 pin_input"  min="0" max="9"   maxlength="1" pin="2">
+                            <input type="number" class="me-2 pin_3 pin_input"  min="0" max="9"  maxlength="1" pin="3">
+                            <input type="number" class="pin_4 pin_input"  min="0" max="9"  maxlength="1" pin="4">
+
+                        </div>
+                        <div class="col-12 my-3 d-flex justify-content-center">
+                            <h4 class="checkout inactive cursor-pointer">Checkout</h4>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- TRANSACTION MESSAGE-->
+                <div id="transaction-response" class="d-none  level_3  checkout_trans_levels" >
+
+                            <div class="mx-4 mt-4 d-flex justify-content-end">
+                                <span class="done-btn cursor-pointer">Done</span>
+                            </div>
+
+                        <div class="comp d-flex flex-column  mt-3 d-none">
+                            <div class="confirmation d-flex flex-column justify-content-center align-items-center">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span class="done-text mt-2">Transaction Complete</span>
+                                <span><span class="naira-symbol">₦</span><span class="amount-value"></span></span>
+                            </div>
+
+                            <div class="container">
+                                <div class="row mt-5 actions px-2">
+                                    <div class="col ">
+                                        <div link="?vend=history&sub=cable&generate=last" class="cursor-pointer p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                                            <i class="fa-solid fa-share-from-square"></i>
+                                            <span class="action-word">Share receipt</span>
+                                        </div>
+                                    </div>
+                                    <div class="col ">
+                                        <div link="?vend=history&sub=cable&generate=last&plain=yes" class="cursor-pointer p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                                            <i class="fa-solid fa-download"></i>
+                                            <span class="action-word">Download receipt</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3 p-3">
+                                    <div class="col-12 ">
+                                        <div class="get-rewards p-4">
+                                            <span class="get-reward-statement">More Services</span>
+                                            <!--Data-->
+                                            <div class="row mt-3 service-airtime ">
+                                                <div class="col d-flex justify-content-start align-items-center">
+                                                    <div class="benefit-image p-3 bg-white">
+                                                        <i class="fa-solid fa-phone"></i>
+                                                    </div>
+                                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                                        <span class="benefit-topic">
+                                                            Airtime
+                                                        </span>
+                                                        <span class="benefit-message">
+                                                            Cheap Airtime
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                                    <button  link="?vend=airtime"  class="benefit-button">Go</button>
+                                                </div>
+                                            </div>
+
+                                            <!--Cable-->
+                                            <div class="row mt-3 service-data">
+                                                <div class="col d-flex justify-content-start align-items-center">
+                                                    <div class="benefit-image p-3 bg-white">
+                                                        <i class="fa-solid fa-wifi"></i>
+                                                    </div>
+                                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                                        <span class="benefit-topic">
+                                                            Data
+                                                        </span>
+                                                        <span class="benefit-message">
+                                                            Cheap and Lasts
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                                    <button  link="?vend=data" class="benefit-button">Go</button>
+                                                </div>
+                                            </div>
+
+                                            <!--Bill-->
+                                            <div class="row mt-3 service-bill">
+                                                <div class="col d-flex justify-content-start align-items-center">
+                                                    <div class="benefit-image p-3 bg-white">
+                                                        <i class="fa-solid fa-tower-cell"></i>
+                                                    </div>
+                                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                                        <span class="benefit-topic">
+                                                            Utility
+                                                        </span>
+                                                        <span class="benefit-message">
+                                                            Always light up your house
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                                    <button link="?vend=bill" class="benefit-button">Go</button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="failed d-flex flex-column  mt-3  d-none">
+                            <div class="confirmation d-flex flex-column justify-content-center align-items-center">
+                                <i class="fa-regular fa-circle-xmark text-danger"></i>
+                                <span class="done-text mt-2 text-danger">Transaction Failed</span>
+                                <span><span class="naira-symbol">₦</span><span class="amount-value"></span></span>
+                            </div>
+
+                            <div class="container">
+                                <div class="row mt-5 actions px-2">
+                                    <div class="col ">
+                                    <div class="p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                                            <i class="fa-solid fa-circle-info text-warning"></i>
+                                            <span class="action-data-message"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                </div>
+
+                
+
+
+
+            </div>
+
+
+
+
+            <script>
+
+                function doUrl(datachoice,datatcode){
+            
+            var request_id =  run_code;
+            var ciuc = jQuery(".input-recipient").val();
+            var ctype = jQuery("#drop-down-image-select").attr("value");
+            var camount = jQuery(".buy-with-this.chosen").attr("amount");
+            var airtimechoice = datatcode;
+            var cplan = jQuery(".buy-with-this.chosen").attr("plan_id");
+            var url;
+
+                    <?php
+                echo'
+                
+                url = "cablebase'.vp_option_array($option_array,"cableendpoint")."cablepostdata1".'='.'cablepostvalue1'.'&'.vp_option_array($option_array,"crequest_id").'="+request_id+"&'."cablepostdata2".'='."cablepostvalue2".'&'.vp_option_array($option_array,"cablepostdata3").'='.vp_option_array($option_array,"cablepostvalue3").'&'.vp_option_array($option_array,"cablepostdata4").'='.vp_option_array($option_array,"cablepostvalue4").'&'.vp_option_array($option_array,"cablepostdata5").'='.vp_option_array($option_array,"cablepostvalue5").'&'.vp_option_array($option_array,"ctypeattr").'="+ctype+"&'.vp_option_array($option_array,"cableamountattribute").'="+camount+"&'.vp_option_array($option_array,"ccvariationattr").'="+cplan+"&'.vp_option_array($option_array,"ciucattr").'="+ciuc;
+            
+                ';
+                ?>
+        
+
+            
+            return url;
+                }
+            
+        </script>
+        
+    <script src="<?php echo plugins_url('opay/');?>js/airtime-service.js?ver=<?php echo $rand;?>" ></script>
+
+    <script>
+
+        var the_netc = jQuery("#drop-down-image-select").attr("for");
+        jQuery(`.net-choice[for=${the_netc}]`).addClass("active");
+        jQuery(`.net-choice[for=${the_netc}] input`).prop("checked",true);
+    
+function makeChoice(){
+	
+			var the_net = jQuery("#drop-down-image-select").attr("for");
+            var cable_id = jQuery(".net-choice.active").attr("cable_id");
+		
+            jQuery("#drop-down-image-select").attr("value",cable_id);
+
+
+}
+
+makeChoice();
+
+function calcit(){
+    makeChoice();
+
+    var original = jQuery(".input-amount").val();
+    var topay = jQuery(".bonus-value");
+	var data_network_value = jQuery("#drop-down-image-select").attr("value");
+	
+	var discount = 0;
+	//DISCOUNT BGN
+
+	<?php
+if(is_plugin_active("vprest/vprest.php")  && vp_option_array($option_array,'resell') == "yes" && isset($level) && isset($level[0]->total_level)){
+	?>
+discount = <?php echo floatval($level[0]->cable);?>;
+	<?php
+}
+?>
+
+
+	var the_amo = (original * discount)/100;
+	var the_amount = original - the_amo;
+									<?php
+					if(is_plugin_active("vprest/vprest.php")  && vp_option_array($option_array,'resell') == "yes"){
+						
+						if(vp_option_array($option_array,"discount_method") == "direct"){
+						?>
+
+
+	topay.text(the_amount);
+	<?php
+						}
+						else{
+						?>
+                        
+
+	topay.text(the_amo);
+	<?php
+					}
+					}
+					?>
+	}
+		
+	
+
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    jQuery(".verify-cable").on("click",function(){
+
+
+        var iucg =  jQuery(".input-recipient").val();
+        var cableh = jQuery("#drop-down-image-select").attr("for");
+
+        jQuery(this).removeClass("verify-cable");
+    jQuery(this).addClass("spinner-grow");
+
+        var obj = {};
+obj["iuc"] = iucg;
+obj["cable"] = cableh;
+
+
+var args = {};
+
+   jQuery.ajax({
+      url: '<?php echo esc_url(plugins_url('vtupress/cableget.php'));?>',
+      data: obj,
+	  dataType: 'text',
+	  'cache': false,
+	  "async": true,
+  error: function (jqXHR, exception) {
+	  hideLoader();
+	 jQuery("#network-select #third-col").addClass("verify-cable");
+    jQuery("#network-select #third-col").removeClass("spinner-grow");
+        var msg = "";
+        if (jqXHR.status === 0) {
+            msg = "No Connection.\n Verify Network.";
+
+            args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: msg
+            }
+            popup(args);
+
+  
+        } else if (jqXHR.status == 404) {
+            msg = "Requested page not found. [404]";
+            
+            args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: msg
+            }
+            popup(args);
+
+        } else if (jqXHR.status == 500) {
+            msg = "Internal Server Error [500].";
+            args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: msg
+            }
+            popup(args);
+
+        } else if (exception === "parsererror") {
+            msg = "Requested JSON parse failed.";
+		
+		if(jqXHR.responseText.length === 0){
+	            msg1 = "No Name Found Try Again";
+        }
+        else{
+        msg1 = jqXHR.responseText;
+        }
+			               args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: msg
+            }
+            popup(args);
+
+
+        } else if (exception === "timeout") {
+            msg = "Time out error.";
+            args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: msg
+            }
+            popup(args);
+        } else if (exception === "abort") {
+            msg = "Ajax request aborted.";
+			
+            args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: msg
+            }
+            popup(args);
+
+        } else {
+            msg = "Uncaught Error.\n" + jqXHR.responseText;
+
+            args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: msg
+            }
+            popup(args);
+
+        }
+    },
+      
+      success: function(data) {
+        hideLoader();
+        jQuery("#network-select #third-col").addClass("verify-cable");
+    jQuery("#network-select #third-col").removeClass("spinner-grow");
+	 if(typeof data == typeof undefined){
+
+	             args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: "Name not found please try again"
+            }
+            popup(args);
+}
+else if(data.length === 0){
+		
+        args = {
+                icon: {
+                    show:true,
+                    type: 'danger',
+                    color: 'white'
+                },
+                topic: 'Error',
+                message: "Name not found please try again"
+            }
+            popup(args);
+}
+else{
+
+    if(data.indexOf("nco") != -1 || data.indexOf("service") != -1 ){
+        args = {
+                icon: {
+                    show:true,
+                    type: 'warning',
+                    color: 'white'
+                },
+                topic: 'IUC No. Verification',
+                message: data
+            }
+            popup(args);
+    }else{
+        args = {
+                icon: {
+                    show:true,
+                    type: 'success',
+                    color: 'white'
+                },
+                topic: 'IUC No. Verification',
+                message: data
+            }
+            popup(args);
+    }
+
+
+}
+  
+
+	 jQuery(this).addClass("verify-cable");
+    jQuery(this).removeClass("spinner-grow");
+          
+      },
+      type: 'GET'
+   });
+
+
+    });
+
+        jQuery(".all_data_types").hide();
+
+
+function makeServiceVisible(){
+    jQuery(".all_data_types").hide();
+//What data type is active
+var dataTypesActive = jQuery(".service-type-col.active").attr("for");
+//For What Network
+var networkActive = jQuery("#drop-down-image-select").attr("for");
+
+jQuery("."+networkActive).show();
+
+if(!jQuery("."+networkActive).is(":visible")){
+    jQuery(".no_data .dtype").text(dataTypesActive);
+    jQuery(".no_data .ntype").text(networkActive);
+    jQuery(".no_data").show();
+}else{
+    jQuery(".no_data").hide();
+
+    jQuery(".product-type").text(dataTypesActive);
+
+}
+
+}
+
+makeServiceVisible();
+//What network is active
+jQuery(".net-choice, .service-type-col").on("click",function(){
+  //  jQuery(".service-type-col").removeClass("active");
+  //  jQuery(".net-choice").removeClass("active");
+  //  jQuery(this).addClass("active");
+    makeServiceVisible();
+
+});
+
+
+
+
+
+
+
+});
+
+</script>
+        
+
+

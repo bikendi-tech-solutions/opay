@@ -1,0 +1,72 @@
+span.d-flex.sec-top.mt-2.mx-3 {
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+.lower-part-1{
+    border-radius: 15px;
+}
+
+.lower-part-1 span{
+    color:#000000db;
+    font-size: 15px;
+}
+
+.lower-part-1 span.icon.me-3{
+    color: #575656;
+}
+
+span[link]{
+    margin-bottom:16px;
+}
+span[link] span.icon:last-of-type i{
+    color: var(--major-secondary-color);
+}
+
+.template-settings .txt{
+    color:var(--major-primary-color);
+}
+
+.template-settings .btn{
+    background-color:var(--major-primary-color);
+}
+
+.template-settings small {
+    font-size: 10px;
+    color: grey;
+}
+
+.template-settings .label {
+    font-size: 14px;
+    color: var(--major-secondary-color);
+}
+
+
+.template-settings .reset-template-color {
+    font-size: 12px;
+    color: grey;
+    cursor: pointer;
+}
+.template-settings input.color {
+    width: 30px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.change-details-div{
+    background: #00000080;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.change-details-div .change-details{
+    border-radius: 30px 30px 0 0;
+}
+
+.change-details-div button{
+    border: 0;
+    border-radius: 50px;
+    padding: 5px 20px;
+    width: 100%;
+}

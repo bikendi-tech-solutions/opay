@@ -1,0 +1,90 @@
+/* STICKY WHITE HEADER */
+#airtime-page-header{
+    position:sticky;
+    top:0;
+    left:0;
+    border-radius: 0;
+    z-index:999;
+}
+
+#airtime-page-header #general-text{
+    font-size:large;
+}
+#airtime-page-header .hisotry-text{
+  color:  var(--major-primary-color);
+  text-shadow: 0 0 2px var(--major-primary-color);
+}
+
+
+/* FIRST DIV FOR MANUAL TRANSFER */
+
+.manual-transfer {
+    border-radius: 10px;
+}
+.manual-transfer .first-part{
+    border-bottom: 3px dashed var(--minor-secondary-color);
+
+}
+
+
+/* Each aza divs */
+.go-btn{
+    font-weight: bold;
+}
+
+.icon-sect .icon-text-message, .second-part .first-text {
+    font-size:14px;
+    color: var(--minor-secondary-color);
+}
+
+.icon-sect .icon-div {
+    border-radius: 10px;
+    background-color: var(--minor-secondary-color);
+    color: var(--major-primary-color);
+    font-size: 1.5rem;
+    padding: 10px 15px !important;
+}
+
+.icon-sect .text-div span:nth-child(1) {
+    font-weight: bold;
+}
+
+
+/* --------------- */
+.second-part .account-number{
+    font-size: 25px;
+    text-shadow: 0px 0px black;
+
+}
+
+.second-part .aza-btn{
+    font-size: 14px;
+    width:100%;
+}
+.second-part .aza-btn .copy-account{
+    color: var(--major-primary-color);
+    font-weight:bold;
+    background-color: var(--minor-primary-color);
+    width:100%;
+    border-radius:50px;
+}
+.second-part .aza-btn .credit-information{
+    color: var(--minor-secondary-color);
+    font-weight:bold;
+    background-color: var(--major-primary-color);
+    width:100%;
+    border-radius:50px;
+}
+
+.or-div{
+    color:#00000082;
+}
+.or-div .arrows {
+    background-color: #0000001f;
+    width: 15%;
+    height: 2px;
+}
+
+.other-bnk-opt {
+    border-radius: 15px;
+}

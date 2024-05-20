@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <?php
+      $site_name = get_option("blogname");
+      ?>
+        <meta charset="UTF-8">
+        <title><?php echo $site_name;?></title>
+
+<meta name="viewport" content="width=device-width initial-scale=1.0">
+
+        <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/bootstrap-5.3.3-dist/css/bootstrap.min.css" />
+        <script  src="<?php echo plugins_url('opay/');?>css/bootstrap-5.3.3-dist/js/bootstrap.min.js" ></script>
+       <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/fontawesome-6.5.2/css/all.min.css" />
+
+       <!-- ADD ROBOTO -->
+       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+       
+       <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/var.php?ver=<?php echo $rand;?>" />
+       <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/style.css?ver=<?php echo $rand;?>" />
+       <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/toast.css?ver=<?php echo $rand;?>" />
+        <script src="<?php echo plugins_url('opay/');?>js/jquery.js?ver=<?php echo $rand;?>" ></script>
+       <script src="<?php echo plugins_url('opay/');?>js/script.js?ver=<?php echo $rand;?>" ></script>
+       <script src="<?php echo plugins_url('opay/');?>js/toast.js?ver=<?php echo $rand;?>" ></script>
+       <script>
+
+        <?php
+          if(is_user_logged_in()){
+        ?>
+
+        var networkImagesUrl = "<?php echo plugins_url('opay/');?>";
+        var run_code = "<?php echo $session;?>";
+        var username = "<?php echo $username;?>";
+        var useremail = "<?php echo $useremail;?>";
+        var vend_url = "<?php echo plugins_url('vtupress/vend.php');?>";
+
+        <?php
+          }
+        ?>
+
+
+        function showToast(message,type = "green",time = 3000) {
+          var color;
+          if(type == "green"){
+            color = "#198754";
+          }
+          else if(type == "red"){
+            color = "#dc3545";
+
+          }
+          else if(type == "yellow"){
+            color = "#ffc107";
+
+          }
+          else{
+            color = "#0d6efd";
+
+          }
+
+  
+        Toastify({
+            text: message,
+            duration: time, // duration in milliseconds
+            close: true, // show close button
+            gravity: "top", // "top" or "bottom"
+            position: "right", // "left", "center" or "right"
+            backgroundColor: color, // custom background color
+        }).showToast();
+      }
+
+
+    
+    function showLoader(){
+      var text = "A".toLowerCase();
+
+      //jQuery(".pulser").html(`<i class="fa-solid fa-${text}"></i>`);
+      jQuery(".pulser-div, .pulser").removeClass("d-none");
+    }
+    
+    function hideLoader(){
+      jQuery(".pulser-div, .pulser").addClass("d-none");
+
+      window.scrollTo(0, 0);
+
+// For older browsers
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+document.body.scrollTop = 0; // For Safari
+
+    }
+
+
+    var imageUrls = {
+          crypto: "/wp-content/plugins/opay/image/not1/crypto.jpeg",
+          giftcard: "/wp-content/plugins/opay/image/not1/giftcard.jpeg",
+          notification: "/wp-content/plugins/opay/image/not1/notification.jpeg"
+    };
+
+    for (var key in imageUrls) {
+        if (imageUrls.hasOwnProperty(key)) {
+            var img = new Image();
+            img.src = imageUrls[key];
+        }
+    }
+
+
+ 
+    </script>
+    </head>
+<body>
+  <div class="main-page-content mx-auto d-flex flex-column justify-content-between" id="main-page-content" >
+    <div class="pulser-div d-none d-flex justify-content-center align-items-center"><div class="pulser  d-flex justify-content-center align-items-center"></div></div>
+
+    <script>
+      showLoader();
+    </script>
+
+
+
+
+
+
+

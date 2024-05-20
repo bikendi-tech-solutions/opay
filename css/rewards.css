@@ -1,0 +1,89 @@
+#main-page{
+    padding:0;
+}
+.top-part {
+    background: url(/wp-content/plugins/opay/image/not1/money-falling.jpeg);
+    background-position: center;
+    background-size: contain;
+}
+
+
+.top-part::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: var(--minor-secondary-color);
+    top: 0;
+    left: 0;
+    opacity: 0.6;
+}
+
+.top-part-actions , .second-part{
+    position: relative;
+    z-index:1;
+}
+
+.rewards-text{
+    font-size: large;
+    font-weight: bold;
+}
+
+.cashback i:nth-of-type(1){
+    color:gold;
+}
+
+span.right1.d-flex.flex-column {
+    width: 40%;
+}
+
+
+/*###################### ICON - TOPIC/DESCRIPTION - CTA */
+.other-bnk-opt {
+    border-radius: 15px;
+    width: 94.5%;
+}
+
+.icon-sect .icon-text-message, .second-part .first-text {
+    font-size:14px;
+    color: var(--minor-secondary-color);
+}
+
+.icon-sect .icon-div {
+    border-radius: 10px;
+    background-color: var(--minor-secondary-color);
+    color: var(--major-primary-color);
+    font-size: 1.5rem;
+    padding: 10px 15px !important;
+}
+
+.icon-sect .text-div span:nth-child(1) {
+    font-weight: bold;
+}
+
+/*#################################*/
+
+.mid{
+    bottom: 0;
+    width: 90%;
+    transform: translate(1%, 70%);
+}
+
+.go-btn span{
+    background-color: var(--major-primary-color);
+    color: #ffffff;
+    border-radius: 50px;
+    padding:5px 10px;
+}
+
+.second-part{
+    color: var(--major-secondary-color);
+}
+
+ .amount{
+    color:var(--major-primary-color);
+}
+
+span.views span:nth-child(2){
+    font-weight: bold;
+}
