@@ -212,3 +212,70 @@ a.unavailable div.icon-image i {
 }
 
 
+
+
+
+
+span.d-flex.sec-top.mt-2.mx-3 {
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+#history-page-header .support, .service-value i{
+    color: var(--major-primary-color);
+}
+.lower-part-1, .sections{
+    border-radius: 15px;
+}
+
+
+.lower-part-1 span{
+    color:#000000db;
+    font-size: 15px;
+}
+
+.lower-part-1 span.icon.me-3{
+    color: var(--major-primary-color);
+    background: var(--minor-primary-color);
+    border-radius: 100px;
+    padding: 5px 15px;
+}
+
+span[link]{
+  /*  margin-bottom:16px; */
+}
+
+span[link] span.icon:last-of-type i{
+    color: var(--major-secondary-color);
+}
+
+.lower-part-1 .amount-span, .amount{
+    font-size: 17px !important;
+    font-weight: bold;
+}
+
+
+.lower-part-1 span.credit .icon-div, .lower-part-1 span.success .icon-div{
+    background-color:  #19875426;
+    color: var(--bs-green);
+}
+.lower-part-1 span.credit span.status, .lower-part-1 span.success span.status{
+    color:var(--bs-green);
+}
+
+
+.lower-part-1 span.debit .icon-div, .lower-part-1 span.failed .icon-div{
+    background-color:  #dc354529;
+    color: var(--bs-red);
+}
+.lower-part-1 span.debit span.status, .lower-part-1 span.failed span.status{
+    color: var(--bs-red);
+}
+
+.lower-part-1 span.processing .icon-div {
+    background-color:  #ffc10726;
+    color: var(--bs-yellow);
+}
+.lower-part-1 span.processing span.status {
+    color:  var(--bs-yellow);
+}

@@ -29,7 +29,10 @@
 /* ADS HEADER */
 
 #main-page-content .ads{
-    background-color: var(--major-primary-color);
+    background: var(--ads-image) !important;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     height:100px;
     border-radius: 10px;
 }

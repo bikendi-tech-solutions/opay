@@ -1,6 +1,16 @@
 </div>
 
 <script>
+<?php
+  $ads_banner_link = vp_option_array($option_array,"opay_ads_banner_link");
+
+  if(!preg_match("/https?:\/\//",$ads_banner_link) && !preg_match("/\/\w+/",$ads_banner_link)){
+    $ads_banner_link = "#";
+}
+
+?>
+
+jQuery("#main-page-content .ads").attr("link","<?php echo $ads_banner_link;?>");
 
 jQuery("a.back").on("click",function(){
   event.preventDefault();
@@ -209,7 +219,7 @@ document.body.scrollTop = 0; // For Safari
     });
 
     jQuery(".top-info-message").on("click",function(){
-      var mainMessage = jQuery(".top-info-message span.message").text();
+      var mainMessage = jQuery(".full_message").html();
       args = {
             icon: {
                 type:"notification",

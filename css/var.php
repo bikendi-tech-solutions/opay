@@ -36,6 +36,24 @@ if(empty($majorp) || $majorp == "false" || $majorp == "0"){
 }
 
 
+$theme_max_screen = vp_option_array($option_array,"opay_theme_max_screen");
+$ads_banner_image = vp_option_array($option_array,"opay_ads_banner_image");
+$ads_banner_link = vp_option_array($option_array,"opay_ads_banner_link");
+
+if(!preg_match("/\d+%/",$theme_max_screen) && !preg_match("/\d+px/",$theme_max_screen)  && !preg_match("/\d+em/",$theme_max_screen)  && !preg_match("/\d+rem/",$theme_max_screen)){
+    $theme_max_screen = "70%";
+}
+
+if(!preg_match("/https?:\/\//",$ads_banner_image) && !preg_match("/\/\w+/",$ads_banner_image)){
+    $ads_banner_image = $majorp;
+    $ads_banner_link = "#";
+}else{
+    $ads_banner_image = "url('$ads_banner_image')";
+}
+
+if(!preg_match("/https?:\/\//",$ads_banner_link) && !preg_match("/\/\w+/",$ads_banner_link)){
+    $ads_banner_link = "#";
+}
 // Output CSS with variables
 ?>
 
@@ -44,6 +62,8 @@ if(empty($majorp) || $majorp == "false" || $majorp == "0"){
     --minor-primary-color: <?php echo $minorp;?>;     /*Light green*/
     --major-secondary-color: <?php echo $majors;?>;     /*Darker Black*/
     --minor-secondary-color: <?php echo $minors;?>;  /*Light black like white FAINTED*/
+    --high-screen-max: <?php echo $theme_max_screen;?>;  /*Light black like white FAINTED*/
+    --ads-image: <?php echo $ads_banner_image;?>;  /*Light black like white FAINTED*/
     --border-color: #a7a5a5;
     
 }

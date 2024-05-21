@@ -467,3 +467,9 @@ div#airtime-page-header {
   position: sticky;
   top: 0;
 }
+
+@media(min-width:1200px){
+  #main-page-content #main-page{
+    max-width: var(--high-screen-max) !important;
+  }
+}

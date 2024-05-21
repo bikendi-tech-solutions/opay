@@ -9,6 +9,8 @@ error_reporting(0);
 include_once(ABSPATH."wp-load.php");
 include_once(ABSPATH.'wp-admin/includes/plugin.php');
 
+extract(vtupress_user_details());
+
 $rand = rand(10,100);
 vp_updateuser($id,'run_code',uniqid());
 $session =  vp_getuser($id,'run_code',true);

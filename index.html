@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/main-page.css?ver=<?php echo $rand;?>" />
 
+<?php
+    $mess_excerpt = preg_replace("/\n+/"," ",substr($mess,0,100));
+
+    $mess = preg_replace('/\\\s?/',"",preg_replace('/\\./',"",$mess));
+?>
 
         <div class="container" id="main-page">
             <!--HEADER-->
@@ -10,16 +15,19 @@
                 </div>
                 <div id="theader-icon-right" class="col d-flex justify-content-end  align-items-center ">
                    <span  class="header-icon mx-2 position-relative"> <i class="fs-5 top-info-message dbadge message fa-solid fa-volume-high"></i></span>
-                   <span  class="header-icon mx-2"><i class="fs-5 fa-regular fa-comment"></i></span>
-                   <span  class="header-icon ms-2  position-relative"> <i class="fs-5 dbadge fa-regular fa-bell"></i> </span>
+                   <span  class="header-icon mx-2"><i class="fs-5 dbadge fa-regular fa-comment"></i></span>
+                   <span  class="header-icon ms-2 d-none position-relative"> <i class="fs-5 dbadge fa-regular fa-bell"></i> </span>
                 </div>
         
             </div>
 
             <div class="top-info top-info-message  cursor-pointer py-1 px-3 d-flex justify-content-between align-items-center">
                 <span class="icon"><i class="fa-solid fa-volume-high"></i></span>
-                <span class="message d-flex flex-column justify-content-center"><marquee>This is me and my life</marquee></span>
+                <span class="message d-flex flex-column justify-content-center"><marquee><?php echo $mess_excerpt;?></marquee></span>
                 <span class="icon"><i class="fa-solid fa-angle-right"></i></span>
+            </div>
+            <div class="full_message d-none">
+                    <?php echo $mess;?>
             </div>
             <!--USER BAL-->
             <div  class="row opay-main-2nd mt-1 mb-3 mx-1 px-2 py-3 ">
@@ -138,6 +146,65 @@
                 }
             ?>
 
+
+
+            <div class="lower-part-1 mt-2 mx-1 bg-white px-2 py-4 m-auto">
+
+                <span class="mb-3 d-flex justify-content-between align-items-center">
+                    <span class="text" >Transactions History</span>
+                    <span class="text-icon" link="?vend=history">View All <li class="fa-solid fa-angle-right"></li></span>
+
+                </span>
+
+            <?php
+                global $wpdb;
+                $table = $wpdb->prefix."vp_wallet";
+                $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s ORDER BY ID DESC LIMIT 5",$user_id);
+                $results = $wpdb->get_results($prepare);
+
+
+                if($results != NULL && !empty($results)){
+
+                    foreach($results as $thisResult){
+                        if(!empty($thisResult)){
+
+                            $tid = $thisResult->id;
+
+                            $_GET["sub"] = "wallet";
+                            include(__DIR__."/history/functions.php");
+            ?>
+            
+
+
+                <span link="?vend=history&id=<?php echo $tid;?>" class="my-3 mx-3 cursor-pointer d-flex justify-content-between <?php echo $status;?>">
+                    <span class="icon icon-div me-3 d-flex align-items-center"><?php echo $icon;?></span>
+                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                        <span class="topic"><?php echo $type;?></span>
+                        <span class="message text-muted" id="general-text"><?php echo $time;?></span>
+                    </span>
+                    <span class="icon ms-2 d-flex flex-column align-items-end justify-content-center">
+                        <span class="amount-span"><?php echo $sign;?> ₦<span class="amount"><?php echo number_format($amount);?></span></span>
+                        <span class="status"><?php echo ucfirst($status);?></span>
+                    </span>
+                
+                </span>
+
+                            <?php
+                        }
+                    }
+                }else{
+                    ?>
+
+                    <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
+
+                        <span class="">No Transaction Recorded</span>
+                    
+                    </span>
+
+                    <?php
+                }
+                ?>
+            </div>
             
         </div>
     

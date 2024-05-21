@@ -12,6 +12,10 @@ $opay_account_bank = vp_option_array($option_array,"opay_account_bank");
 $opay_account_name = vp_option_array($option_array,"opay_account_name");
 $opay_account_number = vp_option_array($option_array,"opay_account_number");
 
+$theme_max_screen = vp_option_array($option_array,"opay_theme_max_screen");
+$ads_banner_link = vp_option_array($option_array,"opay_ads_banner_link");
+$ads_banner_image = vp_option_array($option_array,"opay_ads_banner_image");
+
 ?>
 
         <div class="container template-settings" id="main-page">
@@ -69,6 +73,35 @@ $opay_account_number = vp_option_array($option_array,"opay_account_number");
 
 
 
+            </div>
+
+            <span class="d-flex mt-2 sec-top mx-3 d-flex justify-content-start align-items-center">
+                <i class="fa-solid fa-building-columns txt me-2"></i> 
+                <span class="txt">Themeing</span>
+            </span>
+            <div class="lower-part-1 mt-2 mx-3 bg-white px-4 py-4 m-auto">
+
+
+            <div class="row">
+                    <div class="col-12 col-md my-1 d-flex flex-column align-items-start justify-content-center">
+                        <span class="icon me-3 d-flex align-items-center label">Max Width On Bigger Screen:</span>
+                        <span class="icon-text flex-grow-1 d-flex flex-column">
+                            <input type="text" class="form-control" name="opay_theme_max_screen" value="<?php echo $theme_max_screen;?>">
+                        </span>
+                    </div>
+                    <div class="col-12 col-md my-1 d-flex flex-column align-items-start justify-content-center">
+                        <span class="icon me-3 d-flex align-items-center label">Ads Banner Image:</span>
+                        <span class="icon-text flex-grow-1 d-flex flex-column">
+                            <input type="text" class="form-control" name="opay_ads_banner_image"  value="<?php echo $ads_banner_image;?>">
+                        </span>
+                    </div>
+                    <div class="col-12 col-md my-1 d-flex flex-column align-items-start justify-content-center">
+                        <span class="icon me-3 d-flex align-items-center label">Ads Banner Link:</span>
+                        <span class="icon-text flex-grow-1 d-flex flex-column">
+                            <input type="text" class="form-control" name="opay_ads_banner_link"  value="<?php echo $ads_banner_link;?>">
+                        </span>
+                    </div>
+                </div>
             </div>
 
             <span class="d-flex mt-2 sec-top mx-3 d-flex justify-content-start align-items-center">
@@ -170,6 +203,9 @@ $opay_account_number = vp_option_array($option_array,"opay_account_number");
                 var account_name = jQuery("[name=opay_account_name]").val();
                 var account_number = jQuery("[name=opay_account_number]").val();
                 var account_bank = jQuery("[name=opay_account_bank]").val();
+                var opay_theme_max_screen = jQuery("[name=opay_theme_max_screen]").val();
+                var opay_ads_banner_link = jQuery("[name=opay_ads_banner_link]").val();
+                var opay_ads_banner_image = jQuery("[name=opay_ads_banner_image]").val();
                 jQuery.ajax({
                     url:"/wp-content/plugins/opay/saves/save-template-settings.php",
                     method:"POST",
@@ -180,7 +216,10 @@ $opay_account_number = vp_option_array($option_array,"opay_account_number");
                         'opay_minor_secondary':minor_sec,
                         'opay_account_name':account_name,
                         'opay_account_number':account_number,
-                        'opay_account_bank':account_bank
+                        'opay_account_bank':account_bank,
+                        'opay_theme_max_screen':opay_theme_max_screen,
+                        'opay_ads_banner_link':opay_ads_banner_link,
+                        'opay_ads_banner_image':opay_ads_banner_image
                     },
                     success:function(data){
                         hideLoader();
