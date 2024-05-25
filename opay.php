@@ -4,13 +4,13 @@
  * 
  * @package Opay Template
  * @author Akor Victor
- * @copyright 2020 vtupress 
+ * @copyright 2020 vtupress
  * @license GPL-3.0-or-later
  *
 *Plugin Name: Opay Template
 *Plugin URI: http://vtupress.com
 *Description: This add Opay template into your vtu website
-*Version: 1.0.1
+*Version: 1.0.2
 *Author: Akor Victor
 *Author URI: https://facebook.com/vtupressceo
 Requires PHP: 7.4

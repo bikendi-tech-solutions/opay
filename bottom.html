@@ -296,7 +296,20 @@ function continueThread(performTransaction){
             jQuery("#transaction-response").removeClass("d-none");
             jQuery("#transaction-response .failed").removeClass("d-none");
             jQuery("#transaction-response .comp").addClass("d-none");
+
+            <?php
+              if(vp_getoption("hide_why") != "yes"){
+                ?>
             jQuery("#transaction-response .action-data-message").text(performTransaction);
+            <?php
+              }
+              else{
+                ?>
+            jQuery("#transaction-response .action-data-message").text("Please contact the admin");
+                <?php
+              }
+              ?>
+
         }
 
 

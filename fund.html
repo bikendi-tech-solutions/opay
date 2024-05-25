@@ -80,7 +80,7 @@ function banks_log($name=""){
                                 <button class="btn p-2 copy-account copy-this" for="main">Copy Acct. No</button>
                             </div>
                             <div class="col">
-                                <button class="btn p-2 credit-information">Information</button>
+                                <button class="btn p-2 credit-information">Full Bank Info.</button>
                             </div>
                         </div>
                     </div>
@@ -286,8 +286,7 @@ function banks_log($name=""){
                 }
 
 
-                $bank_mode = vp_getuser($id,"account_mode",true);
-                if($bank_mode == "live"){
+                if(vp_getoption('enable_monnify') == "yes"){
 
 					if(vp_getoption("charge_method") == "fixed"){
 						$charge =  "₦".floatval(vp_getoption("charge_back"));
@@ -299,7 +298,7 @@ function banks_log($name=""){
                         
                     $bankid = "5";
                     $AccountNumber = vp_getuser($id,"account_number1");
-                    $Bank = "Wema";
+                    $Bank = "Sterling";
                     $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
     
@@ -313,7 +312,7 @@ function banks_log($name=""){
                 <div class="first-part-bnk-opt  d-flex justify-content-between">
                     <span class="icon-sect d-flex justify-content-start align-items-center">
                         <span class="icon-div p-3">
-                            <img src="<?php banks_log("wema");?>" height="35" width="35" alt="Visa Logo">
+                            <img src="<?php banks_log("sterling");?>" height="35" width="35" alt="Visa Logo">
                         </span>
                         <span class="ms-3 text-div icon-text d-flex flex-column">
                             <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
@@ -335,7 +334,7 @@ function banks_log($name=""){
               
             $bankid = "6";
             $AccountNumber = vp_getuser($id,"account_number");
-            $Bank = "Sterling";
+            $Bank = "Wema";
             $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
             if(empty($AccountNumber) || $AccountNumber == "false" || !is_numeric($AccountNumber)){
@@ -348,7 +347,7 @@ function banks_log($name=""){
                 <div class="first-part-bnk-opt  d-flex justify-content-between">
                     <span class="icon-sect d-flex justify-content-start align-items-center">
                         <span class="icon-div p-3">
-                            <img src="<?php banks_log("sterling");?>" height="35" width="35" alt="Visa Logo">
+                            <img src="<?php banks_log("wema");?>" height="35" width="35" alt="Visa Logo">
                         </span>
                         <span class="ms-3 text-div icon-text d-flex flex-column">
                             <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
