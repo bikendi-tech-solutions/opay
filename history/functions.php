@@ -179,6 +179,35 @@ switch($_GET["sub"]){
                 $button = '<i class="fa-regular fa-futbol" link="?vend=bet"></i> Bet Funding';
 
             break;
+            case"verification":
+                            
+                $id = $thisResult->id;
+                $iuc = $thisResult->value;
+                $type = "ID Verification";
+                $bamt = $thisResult->before_amount;
+                $namt = $thisResult->now_amount;
+                $status = ucfirst($thisResult->status);
+                $amount = $thisResult->fund_amount;
+                $time = $thisResult->the_time;
+
+                if($status == "Approved"){
+                    $status = "success";
+                    $sign = "-";
+                }
+                elseif($status == "Pending" || $status == "Processing"){
+                    $status = "processing";
+                    $sign = "~";
+                }else{
+                    $status = "failed";
+                    $sign = "+";
+                }
+
+                $icon = '<i class="fa-solid fa-id-badge"></i>';
+                $sender = $thisResult->name;
+                $recipient = $thisResult->value;
+                $button = '<i class="fa-solid fa-id-badge" link="?vend=bvn"></i> ID Verification';
+
+            break;
 
 }
 

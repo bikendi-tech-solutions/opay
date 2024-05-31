@@ -15,7 +15,7 @@
                 </div>
                 <div id="theader-icon-right" class="col d-flex justify-content-end  align-items-center ">
                    <span  class="header-icon mx-2 position-relative"> <i class="fs-5 top-info-message dbadge message fa-solid fa-volume-high"></i></span>
-                   <span  class="header-icon mx-2"><i class="fs-5 dbadge fa-regular fa-comment"></i></span>
+                   <span  link="?vend=message" class="header-icon mx-2  position-relative"><i class="fs-5 dbadge fa-regular fa-comment dbadge"></i></span>
                    <span  class="header-icon ms-2 d-none position-relative"> <i class="fs-5 dbadge fa-regular fa-bell"></i> </span>
                 </div>
         
@@ -54,14 +54,14 @@
                     </a>
                 </div>
 
-                <div class="col d-flex flex-column service-transfer align-items-center ">
+                <div class="col d-none d-flex flex-column service-none align-items-center ">
                     <a href="?vend=transfer" class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image "><i class="fa-solid fa-money-bill-transfer"></i></div>
                         <div class="icon-text" id="general-text">W2W Transfer</div>
                     </a>
                 </div>
 
-                <div class="col d-flex service-withdraw flex-column align-items-center ">
+                <div class="col d-none d-flex service-none flex-column align-items-center ">
 
                     <a href="?vend=withdraw" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image "><i class="fa-solid fa-arrow-down-up-across-line"></i></div>
@@ -75,53 +75,161 @@
             <div class="row action1 action2 my-3 mx-1 p-2  " id="action1">
 
                 <!--FIRST COLUMN-->
-                <div class="col service-airtime d-flex flex-column align-items-center ">
+                <?php
+                if(vp_option_array($option_array,"setairtime") == "checked"){
+                    ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                     <a href="?vend=airtime" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image "><i class="fa-solid fa-mobile"></i></div>
                         <div class="icon-text" id="general-text">Airtime</div>
                     </a>
                 </div>
 
-                <div class="col service-data d-flex flex-column align-items-center ">
+                <?php
+            }
+
+            if(vp_option_array($option_array,"setdata") == "checked"){
+                ?>
+
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                     <a href="?vend=data" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image"><span class="badge" >very cheap</span><i class="fa-solid fa-wifi"></i></div>
                         <div class="icon-text" id="general-text">Data</div>
                     </a>
                 </div>
-                <div class="col service-cable d-flex flex-column align-items-center ">
+                <?php
+            }
+            if(is_plugin_active("bcmv/bcmv.php")){
+                if(vp_option_array($option_array,"setcable") == "checked"){
+            ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                     <a href="?vend=cable" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image"><i class="fa-solid fa-tv"></i></div>
                         <div class="icon-text" id="general-text">Tv</div>
                     </a>
                 </div>
-                <div class="col service-bill d-flex flex-column align-items-center ">
+            <?php
+            }
+            if(vp_option_array($option_array,"setbill") == "checked"){
+
+        ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                     <a href="?vend=bill" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image"><i class="fa-regular fa-lightbulb"></i></div>
                         <div class="icon-text" id="general-text">Bill</div>
                     </a>
                 </div>
+            <?php
+            }
+        }
+            ?>
 
-                <div class="action-divider" id="divider"></div>
+               <!--<div class="action-divider" id="divider"></div>--> 
 
                 <!--SECOND COLUMN-->
-                <div class="col service-bet d-flex flex-column align-items-center ">
+                <?php
+                if(vp_option_array($option_array,"betcontrol") == "checked"){
+                    ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                     <a href="?vend=bet" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image"><i class="fa-solid fa-futbol"></i></div>
                         <div class="icon-text" id="general-text">Bet</div>
                     </a>
                 </div>
-                <div class="col service-crypto d-flex flex-column align-items-center ">
+                <?php
+                    }
+                    if( vp_option_array($option_array,"setbvn") == "yes" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
+            ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                    <a href="?vend=bvn" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image"><i class="fa-solid fa-id-badge"></i></div>
+                        <div class="icon-text" id="general-text">ID Verification</div>
+                    </a>
+                </div>
+                <?php
+            }
+
+            if(is_plugin_active("vprest/vprest.php") && vp_option_array($option_array,"resell") == "yes" && vp_option_array($option_array,"allow_crypto") == "yes"){
+            ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                     <a href="#" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black crypto-trade" for="crypto">
                         <div class="icon-image"><i class="fa-brands fa-bitcoin"></i></div>
                         <div class="icon-text" id="general-text">Crypto</div>
                     </a>
                 </div>
-                <div class="col service-giftcard d-flex flex-column align-items-center ">
+            <?php
+                }
+                if(is_plugin_active("vprest/vprest.php") && vp_option_array($option_array,"resell") == "yes" && vp_option_array($option_array,"allow_cards") == "yes"){
+            ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                     <a href="#" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
                         <div class="icon-image"><i class="fa-brands fa-cc-apple-pay"></i></div>
                         <div class="icon-text" id="general-text">Giftcard</div>
                     </a>
                 </div>
+            <?php
+                }
+            ?>
+
+
+            <!--<div class="action-divider" id="divider"></div>-->
+
+            <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                <a href="?vend=pricing" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                    <div class="icon-image"><i class="fa-solid fa-tags"></i></div>
+                    <div class="icon-text" id="general-text">Pricing</div>
+                </a>
+            </div>
+
+            <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                <a href="?vend=messages" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                    <div class="icon-image"><i class="fa-solid fa-message"></i></div>
+                    <div class="icon-text" id="general-text">Messages</div>
+                </a>
+            </div>
+
+            <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                <a href="?vend=referral-details" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                    <div class="icon-image"><i class="fa-solid fa-person-circle-exclamation"></i></div>
+                    <div class="icon-text" id="general-text">Referal Details</div>
+                </a>
+            </div>
+
+            <div class="col-3 d-none my-2 service-none d-flex flex-column align-items-center ">
+                <a href="?vend=referrals" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                    <div class="icon-image"><i class="fa-solid fa-people-arrows"></i></div>
+                    <div class="icon-text" id="general-text">Referals</div>
+                </a>
+            </div>
+
+
+            <!--<div class="action-divider" id="divider"></div>-->
+            
+
+            <div class="col-3 d-none my-2 service-none d-flex flex-column align-items-center ">
+                <a href="?vend=upgrade" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                    <div class="icon-image"><i class="fa-solid fa-person-arrow-up-from-line"></i></div>
+                    <div class="icon-text" id="general-text">Upgrade</div>
+                </a>
+            </div>
+
+            <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                <a href="?vend=stats" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                    <div class="icon-image"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div class="icon-text" id="general-text">Statistics</div>
+                </a>
+            </div>
+
+            <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                <a href="?vend=developer" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
+                    <div class="icon-image"><i class="fa-solid fa-link"></i></div>
+                    <div class="icon-text" id="general-text">Developer</div>
+                </a>
+            </div>
+
+
+
+
 
             </div>
 

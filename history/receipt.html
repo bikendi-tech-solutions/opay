@@ -87,6 +87,13 @@
 
                             
                         break;
+                        case"verification":
+                            
+                        $table = $wpdb->prefix."vp_verifications";
+                        $info = "Verification is always instant";
+
+                            
+                        break;
     
                     }
 
@@ -220,7 +227,17 @@
                             <div class="row stat-design share-buttons">
                                 <div class="col d-flex justify-content-between align-items-center ">
                                     <span class="fw-bold report" link='<?php whatsapp_message("I am having a $type issue with ID $id");?>'>Report Issue</span>
+                                    
+                                    <?php
+
+                                    if(preg_match("/success/",$status) || preg_match("/credit/",$status) || preg_match("/approve/",$status)){
+                                    ?>
                                     <span class="fw-bold share" link="&plain=yes">Share Receipt</span>
+
+                                    <?php
+                                    }
+                                    ?>
+
                                 </div>
 
 

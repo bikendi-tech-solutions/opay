@@ -1,0 +1,394 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/airtime-page.css?ver=<?php echo $rand;?>" />
+
+
+
+            <div class="container position-relative" id="main-page">
+
+                <div id="airtime-page-header" class="row p-4 bg-white">
+                    <div class="col d-flex flex-row justify-content-start align-items-start">
+                       <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>ID Verification</span>
+                    </div>
+                    <div class="col d-flex flex-row justify-content-end align-items-end">
+                        <span link="?vend=history&sub=verification" class="general-text hisotry-text  cursor-pointer">History</span>
+                    </div>
+                </div>
+
+                <div id="network-select" class="row mt-2 p-2 bg-white rounded ">
+
+                
+                    <div class="col-12 ads position-relative">
+
+                    </div>
+              
+
+                    <div class="col-12 mt-3 border-bottom pb-2 position-relative">
+                        <div class="row">
+                            <div id="first-col" class="networks col-3 col-md-1 d-flex justify-content-start align-items-center">
+                                <img src="<?php echo plugins_url('opay/');?>image/bvn.jpg" id="drop-down-image-select" class="me-3 me-md-2 changeNetworkLogo" for="bvn" value=""><i class="fa-solid fa-caret-down"></i>
+                            </div>
+                            <div id="second-col" class="col-7 col-md-10">
+                                <input type="number"  min="0" max="9" class="form-control input-recipient" placeholder="0XX XXXX XXXX" />
+                            </div>
+                            <div id="third-col" class="col-2 col-md-1 d-flex justify-content-center align-items-center verify-cable cursor-pointer">
+                                <!--<i class="fa-solid fa-circle-user "></i>-->
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </div>
+                        <span class="text-warning recipient-incorrect-notice"></span>
+
+                    </div>
+
+                    <div class="col-12 service-type-choice d-none">
+                        <div class="row my-1 d-flex justify-content-center align-items-center">
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3 d-none" id="dropdown-for-networks">
+
+                        <div class="row p-3 choice-row">
+                            <div class="col-12 choice-div p-3">
+
+                                <div comp_id="bvn"  plan_index="1" class="col-12 py-2 net-choice cursor-pointer" for="bvn" ext="jpg">
+                                    <label for="bvn" class="d-block">
+                                        <div class="row">
+                                            <div class="col  d-flex justify-content-start align-items-center">
+                                                <img src="<?php echo plugins_url('opay/');?>image/bvn.jpg" id="drop-down-image-option" class="me-2 bg-danger" ><span class="network-name">Bank Verification Number [BVN]</span>
+                                            </div>
+                                            <div class="col d-flex justify-content-end align-items-center">
+                                                <input type="radio" name="network" id="bvn" class="d-none">
+                                                <label class="network-label position-relative " for="bvn"></label>  
+                                            </div>
+                                        </div>
+
+                                    </label>
+                                </div>
+
+                                <div comp_id="nin"  plan_index="2" class="col-12 py-2 net-choice cursor-pointer" for="nin" ext="jpg">
+                                    <label for="nin" class="d-block">
+                                        <div class="row">
+                                            <div class="col  d-flex justify-content-start align-items-center">
+                                                <img src="<?php echo plugins_url('opay/');?>image/nin.jpg" id="drop-down-image-option" class="me-2 bg-danger" ><span class="network-name">National Identity Nin [NIN]</span>
+                                            </div>
+                                            <div class="col d-flex justify-content-end align-items-center">
+                                                <input type="radio" name="network" id="nin" class="d-none">
+                                                <label class="network-label position-relative " for="nin"></label>  
+                                            </div>
+                                        </div>
+
+                                    </label>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            
+                </div>
+                
+
+                <!--AMOUNT CHOICE SECTION-->
+                <div id="amount-choice-div" class="row  mt-2 rounded">
+
+                    <div class="col-12 position-relative">
+
+                        <div id="top-green" class="p-3 position-relative d-flex justify-content-center align-items-center">
+                            <span class="me-2">Top Up And Get Cash Back</span>
+                            <button class="btn btn-sm bg-white" id="btn">GO</button>
+                        </div>
+                        
+                        <div id="amount-choices" class="p-2 bg-white">
+                            <span class="py-3">ID Verification</span>
+
+
+                            <div id="form-submit-section" class="row px-4 py-2 form-submit-section  ">
+                                <div class="col-9 first d-flex justify-content-start align-items-center">
+                                    <span class="naira-symbol">₦</span>
+                                    <input type="number" readonly  class=" disabled ms-2 form-control input-amount" placeholder="50-500,000" />
+                                </div>
+                                <div class="col-3 d-flex second justify-content-start justify-content-md-center">
+                                    <button class="btn paybutton inactive cursor-pointer">Pay</button>
+                                </div>
+                            
+                                <span class="text-warning amount-incorrect-notice"></span>
+
+                            </div>
+                            
+
+                        </div>
+
+
+
+                        
+                    </div>
+                </div>
+
+
+                <!-- CONFIRM TRANSACTION-->
+                <div id="confirm-transaction" class="d-flex align-items-end justify-content-center rounded d-none checkout_trans_levels">
+
+                    <div class="row confirm-transaction-container p-3 level_1 checkout_levels" level="1">
+                        <div class="col-12 d-flex justify-content-start">
+                            <i class="fa-solid text-muted close-confirm-transaction fa-xmark proceed_prev" current="1"></i>
+                        </div>
+
+                        <div class="col-12 my-2 d-flex justify-content-center ">
+                            <span class="naira-symbol align-self-end mb-2">₦</span><span class="amount amount-value"></span>
+                        </div>
+                        <div class="col-12 my-2 d-flex justify-content-between">
+                            <span class="text-muted product-name">Product Name</span>
+                            <span class="product-value"><img src="<?php echo plugins_url('opay/');?>image/bvn.jpg" id="drop-down-image-option" class="me-2 bg-danger changeNetworkLogo" ><span class="text-capitalize comp_name"></span> Verification</span>
+                        </div>
+                        <div class="col-12 my-2 d-flex justify-content-between">
+                            <span class="text-muted product-name">Charge</span>
+                            <span class="product-value">₦<span class="amount-charge"></span></span>
+                        </div>
+                        <hr>
+                        <div class="col-12 my-2 d-flex justify-content-start">
+                            <span class="payment-method">Payment Method</span>
+                        </div>
+                        <div class="col-12 my-2 payment-method-div p-3 d-flex justify-content-between">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <span class="me-2 wallet-div d-flex justify-content-center align-items-center"><i class="fa-solid fa-wallet "></i></span>
+                                <span>Balance (₦<?php echo number_format($bal);?>)</span>
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center check-sign">
+                                <i class="fa-solid fa-check fs-3"></i>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 pt-2 checkout-div position-relative">
+                            <div class="info-div d-flex justify-content-center align-items-start">
+                                <span class="">Enjoy seamless services from us!</span>
+                            </div>
+                            <div class="large-pay-div d-flex justify-content-center align-items-center ">
+                                <h4 class=" proceed_checkout proceed_next cursor-pointer" current="1">Proceed</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="enter-pin-container" class="row enter-pin-container p-3 level_2 d-none  checkout_levels" level="2">
+
+                        <div class="col-12 d-flex justify-content-end">
+                            <i class="fa-solid text-muted close-pin-container fa-xmark proceed_prev" current="2"></i>
+                        </div>
+
+                        <div class="col-12 ajax-error-response-div d-flex justify-content-center">
+                            <span id="ajax-error-response" class="ajax-error-response text-danger"></span>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center pb-2" style="font-weight:bold; font-size:20px;">
+                            <span>Enter Payment Pin</span>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center">
+                            <input type="number" class="pin_1 pin_input" min="0" max="9" pin="1" maxlength="1">
+                            <input type="number" class="mx-2 pin_2 pin_input"  min="0" max="9"   maxlength="1" pin="2">
+                            <input type="number" class="me-2 pin_3 pin_input"  min="0" max="9"  maxlength="1" pin="3">
+                            <input type="number" class="pin_4 pin_input"  min="0" max="9"  maxlength="1" pin="4">
+
+                        </div>
+                        <div class="col-12 my-3 d-flex justify-content-center">
+                            <h4 class="checkout inactive cursor-pointer">Checkout</h4>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- TRANSACTION MESSAGE-->
+                <div id="transaction-response" class="d-none  level_3  checkout_trans_levels" >
+
+                            <div class="mx-4 mt-4 d-flex justify-content-end">
+                                <span class="done-btn cursor-pointer">Done</span>
+                            </div>
+
+                        <div class="comp d-flex flex-column  mt-3  d-none">
+                            <div class="confirmation d-flex flex-column justify-content-center align-items-center">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span class="done-text mt-2">Transaction Complete</span>
+                                <span><span class="naira-symbol">₦</span><span class="amount-value"></span></span>
+                            </div>
+
+                            <div class="container">
+                                <div class="row mt-5 actions px-2">
+                                    <div class="col ">
+                                        <div link="?vend=history&sub=verification&generate=last" class="cursor-pointer p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                                            <i class="fa-solid fa-share-from-square"></i>
+                                            <span class="action-word">Share receipt</span>
+                                        </div>
+                                    </div>
+                                    <div class="col ">
+                                        <div link="?vend=history&sub=verification&generate=last&plain=yes" class="cursor-pointer p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                                            <i class="fa-solid fa-download"></i>
+                                            <span class="action-word">Download receipt</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3 p-3">
+                                    <div class="col-12 ">
+                                        <div class="get-rewards p-4">
+                                            <span class="get-reward-statement">More Services</span>
+
+                                            <!--Data-->
+                                            <div class="row mt-3">
+                                                <div class="col d-flex justify-content-start align-items-center">
+                                                    <div class="benefit-image p-3 bg-white">
+                                                        <i class="fa-solid fa-wifi"></i>
+                                                    </div>
+                                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                                        <span class="benefit-topic">
+                                                            Data Subscription
+                                                        </span>
+                                                        <span class="benefit-message">
+                                                            Cheap and lasts
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                                    <button class="benefit-button">Go</button>
+                                                </div>
+                                            </div>
+
+                                            <!--Cable-->
+                                            <div class="row mt-3">
+                                                <div class="col d-flex justify-content-start align-items-center">
+                                                    <div class="benefit-image p-3 bg-white">
+                                                        <i class="fa-solid fa-tv"></i>
+                                                    </div>
+                                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                                        <span class="benefit-topic">
+                                                            Tv Subscription
+                                                        </span>
+                                                        <span class="benefit-message">
+                                                            Don't miss your fav. shows
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                                    <button class="benefit-button">Go</button>
+                                                </div>
+                                            </div>
+
+                                            <!--Bill-->
+                                            <div class="row mt-3">
+                                                <div class="col d-flex justify-content-start align-items-center">
+                                                    <div class="benefit-image p-3 bg-white">
+                                                        <i class="fa-solid fa-tower-cell"></i>
+                                                    </div>
+                                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                                        <span class="benefit-topic">
+                                                            Utility
+                                                        </span>
+                                                        <span class="benefit-message">
+                                                            Always light up your house
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                                    <button class="benefit-button">Go</button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="failed d-flex flex-column  mt-3  d-none">
+                            <div class="confirmation d-flex flex-column justify-content-center align-items-center">
+                                <i class="fa-regular fa-circle-xmark text-danger"></i>
+                                <span class="done-text mt-2 text-danger">Transaction Failed</span>
+                                <span><span class="naira-symbol">₦</span><span class="amount-value"></span></span>
+                            </div>
+
+                            <div class="container">
+                                <div class="row mt-5 actions px-2">
+                                    <div class="col ">
+                                    <div class="p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                                            <i class="fa-solid fa-circle-info text-warning"></i>
+                                            <span class="action-data-message"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                </div>
+
+                
+
+
+
+            </div>
+
+
+
+
+            <script>
+
+                var bill_charge =  parseFloat(<?php echo floatval(vp_option_array($option_array,"u_bvn_verification_charge"));?>);
+
+                jQuery(".amount-charge").text(bill_charge);
+                jQuery(".input-amount").val(bill_charge);
+
+
+        var the_netc = jQuery("#drop-down-image-select").attr("for");
+        jQuery(`.net-choice[for=${the_netc}]`).addClass("active");
+        jQuery(`.net-choice[for=${the_netc}] input`).prop("checked",true);
+
+
+function makeChoice(){
+
+    var bvnc = parseInt("<?php echo vp_getoption('u_bvn_verification_charge');?>");
+    var ninc = parseInt("<?php echo vp_getoption('u_nin_verification_charge');?>");
+    var the_net = jQuery("#drop-down-image-select").attr("for");
+
+    jQuery(".comp_name").text(the_net);
+
+    if(the_net == "bvn"){
+        jQuery(".amount-charge").text(bvnc);
+        jQuery(".input-amount").val(bvnc);
+    }
+    else if (the_net == "nin"){
+        jQuery(".amount-charge").text(ninc);
+        jQuery(".input-amount").val(ninc);
+
+
+    }else{
+        alert("Verification type not known");
+    }
+
+}
+
+            
+function calcit(){
+    makeChoice();
+
+	var data_network_value = jQuery("#drop-down-image-select").attr("value");
+
+
+	}
+
+
+            
+        </script>
+        
+    <script src="<?php echo plugins_url('opay/');?>js/airtime-service.js?ver=<?php echo $rand;?>" ></script>
+
+        
+
+

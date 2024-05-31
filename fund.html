@@ -363,12 +363,39 @@ function banks_log($name=""){
                 </div>
             </div>
 
+<?php
+            $bankid = "7";
+            $AccountNumber = vp_getuser($id,"account_number2");
+            $Bank = "Monniepoint";
+            $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
+            if(empty($AccountNumber) || $AccountNumber == "false" || !is_numeric($AccountNumber)){
+                $AccountNumber = "Generate Account Number";
+                $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="monnify"></i>';
+            }
 
+            ?>
+            <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                <div class="first-part-bnk-opt  d-flex justify-content-between">
+                    <span class="icon-sect d-flex justify-content-start align-items-center">
+                        <span class="icon-div p-3">
+                            <img src="<?php banks_log("monniepoint");?>" height="35" width="35" alt="Visa Logo">
+                        </span>
+                        <span class="ms-3 text-div icon-text d-flex flex-column">
+                            <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
 
+                        </span>
 
+                    </span>
+                    <div class="go-btn d-flex justify-content-end align-items-center">
+                        <span class="charge" > <?php echo $charge;?> Charge</span>
+                    </div>
 
-            <?php
+                </div>
+            </div>
+
+<?php
 
 
                 }

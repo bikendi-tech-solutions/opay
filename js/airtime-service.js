@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded",function(){
             recipient_notice.text("");
         }
         
-        if(input_amount < 50){
+        
+        if(input_amount < 50 && url.indexOf("bvn") == -1){
             amount_notice.text("Amount shouldn't be less than ₦50");
             jQuery("#form-submit-section .second button").addClass("inactive");
             return false;
@@ -328,6 +329,14 @@ document.addEventListener("DOMContentLoaded",function(){
         obj["url"] = doUrl();
         obj["uniqidvalue"] = run_code;
         obj["id"] = "VTU-"+run_code;
+        obj["pin"] = pin;
+        obj["run_code"] = run_code;
+    }
+    else if(url.indexOf("bvn") !== -1){
+        obj["vend"] = "vend";
+        obj["type"] = jQuery(".net-choice.active").attr("comp_id");
+        obj["value"] = jQuery(".input-recipient").val();
+        obj["amount"] = parseInt(jQuery("#form-submit-section input.input-amount").val());
         obj["pin"] = pin;
         obj["run_code"] = run_code;
     }

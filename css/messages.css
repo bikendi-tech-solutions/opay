@@ -1,0 +1,7 @@
+.input-group.bg-white {
+    border-radius: 25px;
+}
+
+.input-group.bg-white input {
+    border-width: 0px !important;
+}

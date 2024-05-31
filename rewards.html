@@ -1,5 +1,18 @@
 <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/rewards.css?ver=<?php echo $rand;?>" />
 
+<?php
+
+//levels
+$level = $level[0];
+
+//airtime bonus
+$mtndata = max(array($level->mtn_sme,$level->mtn_corporate,$level->mtn_gifting));
+$glodata = max(array($level->glo_sme,$level->glo_corporate,$level->glo_gifting));
+$airteldata = max(array($level->airtel_sme,$level->airtel_corporate,$level->airtel_gifting));
+$mobiledata = max(array($level->mobile_sme,$level->mobile_corporate,$level->mobile_gifting));
+
+?>
+
         <div class="container" id="main-page">
 
             <div class="top-part pb-5 py-4 px-3 position-relative">
@@ -14,12 +27,12 @@
 
                     <span class="left1 views me-3 d-flex flex-column flex-grow-1">
                         <span class="cashback px-2" id="general-text" > <i class="fa-brands fa-bitcoin"></i> Cashback <i class="fa-regular fa-circle-question"></i> </span>
-                        <span class="amount px-2 fs-3 d-flex align-items-center   cursor-pointer" > ₦500 <i class="ms-2 fa-solid fa-angle-right fs-6 text-muted"></i></span>
+                        <span class="amount px-2 fs-3 d-flex align-items-center   cursor-pointer" > ₦<?php echo intval($total_bal_with);?> <i class="ms-2 fa-solid fa-angle-right fs-6 text-muted"></i></span>
 
                     </span>
                     <span class="right1  views  d-flex flex-column">
                         <span class="voucher px-2"  id="general-text" > Referrer</span>
-                        <span class="voucher px-2 fs-3  d-flex align-items-center text-dark  cursor-pointer" > 4 <i class="ms-2 fa-solid fa-angle-right fs-6 text-muted"></i></span>
+                        <span link="&vend=referrals" class="voucher px-2 fs-3  d-flex align-items-center text-dark  cursor-pointer" > <?php echo intval($total_refered);?> <i class="ms-2 fa-solid fa-angle-right fs-6 text-muted"></i></span>
                         
                     </span>
 
@@ -30,17 +43,17 @@
                     <div class="first-part-bnk-opt  d-flex justify-content-between">
                         <span class="icon-sect d-flex justify-content-start align-items-center">
                             <span class="icon-div">
-                                <i class="fa-solid fa-calendar-check"></i>
+                                <i class="fa-solid fa-person-arrow-up-from-line"></i>
                             </span>
                             <span class="ms-3 text-div icon-text d-flex flex-column">
-                                <span class="icon-text-title">Bank Transfer</span>
-                                <span class="icon-text-message text-muted">Bank text here</span>
+                                <span class="icon-text-title">Upgrade Now!</span>
+                                <span class="icon-text-message text-muted">Upgrading gives you chances to higher offer</span>
 
                             </span>
 
                         </span>
                         <div class="go-btn d-flex justify-content-end align-items-center">
-                            <span class="d-flex align-items-center  cursor-pointer">Get Now</span>
+                            <span link="&vend=upgrade" class="d-flex align-items-center  cursor-pointer">Upgrade Now</span>
                         </div>
 
 
@@ -62,16 +75,82 @@
                     <div class="first-part-bnk-opt  d-flex justify-content-between">
                         <span class="icon-sect d-flex justify-content-start align-items-center">
                             <span class="icon-div">
-                                <i class="fa-solid fa-calendar-check"></i>
+                                <i class="fa-solid fa-wifi"></i>
                             </span>
                             <span class="ms-3 text-div icon-text d-flex flex-column">
-                                <span class="icon-text-title">Bank Transfer</span>
-                                <span class="icon-text-message text-muted">Bank text here</span>
+                                <span class="icon-text-title">Mtn Data <span class="text-major-primary fw-bold">+<?php echo $mtndata;?>%</span></span>
+                                <span class="icon-text-message text-muted">Get even more than <span class="text-major-primary fw-bold">+<?php echo $mtndata;?>%</span> on higher purchases  </span>
 
                             </span>
 
                         </span>
-                        <div class="go-btn d-flex justify-content-end align-items-center">
+                        <div link="&vend=data" class="go-btn d-flex justify-content-end align-items-center">
+                            <span class="d-flex align-items-center  cursor-pointer  cursor-pointer">Go</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="bg-white mb-3 px-3 py-2 other-bnk-opt ">
+                    <div class="first-part-bnk-opt  d-flex justify-content-between">
+                        <span class="icon-sect d-flex justify-content-start align-items-center">
+                            <span class="icon-div">
+                                <i class="fa-solid fa-wifi"></i>
+                            </span>
+                            <span class="ms-3 text-div icon-text d-flex flex-column">
+                                <span class="icon-text-title">Glo Data <span class="text-major-primary fw-bold">+<?php echo $glodata;?>%</span></span>
+                                <span class="icon-text-message text-muted">Get even more than <span class="text-major-primary fw-bold">+<?php echo $glodata;?>%</span> on higher purchases  </span>
+
+                            </span>
+
+                        </span>
+                        <div link="&vend=data" class="go-btn d-flex justify-content-end align-items-center">
+                            <span class="d-flex align-items-center  cursor-pointer  cursor-pointer">Go</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="bg-white mb-3 px-3 py-2 other-bnk-opt ">
+                    <div class="first-part-bnk-opt  d-flex justify-content-between">
+                        <span class="icon-sect d-flex justify-content-start align-items-center">
+                            <span class="icon-div">
+                                <i class="fa-solid fa-wifi"></i>
+                            </span>
+                            <span class="ms-3 text-div icon-text d-flex flex-column">
+                                <span class="icon-text-title">Airtel Data <span class="text-major-primary fw-bold">+<?php echo $airteldata;?>%</span></span>
+                                <span class="icon-text-message text-muted">Get even more than <span class="text-major-primary fw-bold">+<?php echo $airteldata;?>%</span> on higher purchases  </span>
+
+                            </span>
+
+                        </span>
+                        <div link="&vend=data" class="go-btn d-flex justify-content-end align-items-center">
+                            <span class="d-flex align-items-center  cursor-pointer  cursor-pointer">Go</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="bg-white mb-3 px-3 py-2 other-bnk-opt ">
+                    <div class="first-part-bnk-opt  d-flex justify-content-between">
+                        <span class="icon-sect d-flex justify-content-start align-items-center">
+                            <span class="icon-div">
+                                <i class="fa-solid fa-wifi"></i>
+                            </span>
+                            <span class="ms-3 text-div icon-text d-flex flex-column">
+                                <span class="icon-text-title">9mobile Data <span class="text-major-primary fw-bold">+<?php echo $mobiledata;?>%</span></span>
+                                <span class="icon-text-message text-muted">Get even more than <span class="text-major-primary fw-bold">+<?php echo $mobiledata;?>%</span> on higher purchases  </span>
+
+                            </span>
+
+                        </span>
+                        <div link="&vend=data" class="go-btn d-flex justify-content-end align-items-center">
                             <span class="d-flex align-items-center  cursor-pointer  cursor-pointer">Go</span>
                         </div>
 

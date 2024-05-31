@@ -77,6 +77,13 @@
 
                             
                         break;
+                        case"verification":
+                            
+                        $table = $wpdb->prefix."vp_verifications";
+                        $info = "Verification is always instant";
+
+                            
+                        break;
     
                     }
 
@@ -93,7 +100,7 @@
                     $results = $wpdb->get_results($prepare);
 
 
-                    if($results != NULL && !empty($results)){
+                    if($results != NULL && !empty($results) && $sub != "verification"){
 
                         $thisResult = $results[0];
 
@@ -204,7 +211,167 @@
 <?php
 
 
-                    }else{
+                    }
+                    elseif($sub == "verification"){
+                        (isset(json_decode($results[0]->vDatas)->data))? $verify_data = json_decode($results[0]->vDatas)->data :  $verify_data = "" ;
+
+                $accountImage = "data:image/jpeg;base64,".$verify_data->photo;
+
+
+                $id = $results[0]->id;
+                $type = $results[0]->type;
+                $value = $results[0]->value;
+
+                $fn = $verify_data->firstName;
+                $ln = $verify_data->lastName;
+                $mn = $verify_data->middleName;
+                $phone = $verify_data->phone;
+                $email = $verify_data->email;
+                $dob = $verify_data->birthdate;
+                $gender = $verify_data->gender;
+                $lgar = $verify_data->lgaOfResidence;
+                $sor = $verify_data->stateOfOrigin;
+                $lgao = $verify_data->lgaOfOrigin;
+                $ra = $verify_data->residentialAddress;
+                  echo '
+                  <div class="container-fluid mt-2 border border-secondary" id="plain-receipt">
+                    <div class="row text-white">
+                        <div class="mt-2 col text-white d-flex justify-content-center">
+                                <img src="'.$accountImage.'" width="150" height="150" />
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5 class="recipient-typ">'.strtolower($type).' <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6 class="recipient-det">'.$value.'</h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>firstName <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$fn.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>lastName <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$ln.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>middleName <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$mn.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>d.o.b <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$dob.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>gender <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$gender.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>email <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$email.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>phone <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$phone.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>state Of Origin <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$sor.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>local gov. area (origin) <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$lgao.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>local gov. area (residential) <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$lgar.'</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                            <h5>residential addr. <code>*</code> : 
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <h6>'.$ra.'</h6>
+                        </div>
+                    </div>
+
+
+                
+            
+            
+            </div>
+            <div class="download-sect d-flex justify-content-center align-items-center">
+
+                <span class="download-image cursor-pointer"><i class="fa-solid fa-download"></i> Download</span>
+            </div>
+
+            
+            <script>
+                //Download image
+    
+    jQuery(".download-image").on("click",function(){
+           var ret =  jQuery(".recipient-typ").text();
+           var rec =  jQuery(".recipient-det").text();
+
+                html2canvas(document.getElementById("plain-receipt"), {
+                    onrendered: function(canvas) {
+                        canvas.toBlob(function(blob) {
+                            saveAs(blob, ret+"-"+rec+".jpeg");
+                        }, "image/jpeg");
+                    }
+                });
+
+    });
+            </script>
+            
+            ';
+                    }
+                    else{
                         ?>
                         <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
 

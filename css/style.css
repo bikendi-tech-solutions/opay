@@ -388,6 +388,7 @@ input[type=number] {
 #btm-menu{
   position: sticky;
   bottom: 0;
+  z-index: 2;
 }
 
 #btm-menu, .bottom-menu a{

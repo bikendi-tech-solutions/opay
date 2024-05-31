@@ -43,7 +43,15 @@
                                 <span class="debit-cat col cursor-pointer"  link="&status=debit">Debit</span>
 
                                 <?php
-                            }else{
+                            }
+                            elseif($_GET["sub"] == "verification"){
+                                ?>
+                                <span class="credit-cat col cursor-pointer" link="&status=approved">Verified</span>
+                                <span class="debit-cat col cursor-pointer"  link="&status=failed">Failed</span>
+
+                                <?php
+                            }
+                            else{
                                 ?>
                                 <span class="credit-cat col cursor-pointer" link="&status=successful">Successful</span>
                                 <span class="debit-cat col cursor-pointer"  link="&status=failed">Failed</span>
@@ -113,6 +121,11 @@
                     $table = $wpdb->prefix."sbet";
                         
                     break;
+                    case"verification":
+                        
+                    $table = $wpdb->prefix."vp_verifications";
+                        
+                    break;
 
                 }
                 
@@ -127,7 +140,10 @@
                 if(isset($_GET["status"])){
                     $status = $_GET["status"];
 
-                    if($status == "approved"){
+                    if($status == "approved" && $sub == "verification"){
+                        $status = " AND before_amount > now_amount";
+                    }
+                    elseif($status == "approved"){
                         $status = " AND before_amount < now_amount";
                     }
                     elseif($status == "successful"){
@@ -195,7 +211,7 @@
 
                 <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
 
-                    <span class="">No Transaction Recorded</span>
+                    <span class="">No Transaction Recorded </span>
                 
                 </span>
 

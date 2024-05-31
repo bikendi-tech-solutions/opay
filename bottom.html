@@ -99,6 +99,12 @@ window.addEventListener('resize', setPopupHeight);
 
 document.addEventListener("DOMContentLoaded",function(){
 
+  //main-page container width
+
+  var contwidth = jQuery("#main-page").width();
+
+  jQuery(".bottom-menu").width(contwidth);
+
 
   //Load Services Availability
 
@@ -319,11 +325,18 @@ function runAirtimeTransaction(obj){
 
   showLoader();
 
+    var cururl = location.href;
         var msg = "";
         //showLoader();
 
+        var url  = '<?php echo esc_url(plugins_url('vtupress/vend.php'));?>';
+
+        if(cururl.indexOf("bvn") !== -1){
+          var url  = '<?php echo esc_url(plugins_url('vtupress/bvn_verification.php'));?>';
+        }
+
         jQuery.ajax({
-            url: '<?php echo esc_url(plugins_url('vtupress/vend.php'));?>',
+            url: url,
             data: obj,
            dataType: 'text',
             'cache': false,

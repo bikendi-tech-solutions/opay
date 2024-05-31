@@ -160,114 +160,48 @@ else{
         break;
         case"bvn":
             if( vp_option_array($option_array,"setbvn") == "yes" && vp_option_array($option_array,"vtupress_custom_bvn") == "yes"){
-                echo "<div class='container'>";
-                include_once(__DIR__."/bvn.php");
-                echo "</div>";
+                include_once(__DIR__."/bvn.html");
             }
         break;
 
         case"pricing":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/pricing.php");
-            echo "</div>";
-            echo "</div>";
+            include_once(__DIR__."/pricing.html");
         break;
         case"message":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/messages.php");
-            echo "</div>";
-            echo "</div>";
-            }
+            include_once(__DIR__."/messages.html");
         break;
         case"withdraw":
-            if(vp_option_array($option_array,"resell") == "yejs"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/withdraw-referral.php");
-            echo "</div>";
-            echo "</div>";
-            }
+           // include_once(__DIR__."/withdrawal.html");
         break;
         case"referral-details":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/ref-info.html");
-            echo "</div>";
-            echo "</div>";
-            }
+            include_once(__DIR__."/ref-info.html");
         break;
         case"referrals":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/withdraw-referral.php");
-            echo "</div>";
-            echo "</div>";
-            }
+           // include_once(__DIR__."/withdrawal.html");
         break;
         case"transfer":
-            if(vp_option_array($option_array,"resell") == "yejs"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/transfer.php");
-            echo "</div>";
-            echo "</div>";
-            }
+           // include_once(__DIR__."/transfer.html");
         break;
-
         case"upgrade":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/upgrade.php");
-            echo "</div>";
-            echo "</div>";
+           // include_once(__DIR__."/upgrade.html");
         break;
         case"developer":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/developer.php");
-            echo "</div>";
-            echo "</div>";
-            }
+            include_once(__DIR__."/developer.html");
         break;
         case"stats":
-            if(vp_option_array($option_array,"resell") == "yes"){
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/statistics.php");
-            echo "</div>";
-            echo "</div>";
-            }
-        break;
-        case"history":
-            echo "<div class='container p-2'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/sections/history.php");
-            echo "</div>";
-            echo "</div>";
-            
-        break;
-        case"customize":
-            if(vp_option_array($option_array,"resell") == "yes" && current_user_can("administrator")){
-            echo "<div class='container p-2 loginit'>";
-            echo "<div class='mt-3 mx-2 p-2'>";
-            include_once(__DIR__."/customizer.php");
-            echo "</div>";
-            echo "</div>";
-            }
+            include_once(__DIR__."/statistics.html");
         break;
         default:
-      
-	    echo "<link rel=\"stylesheet\" href=\"".plugins_url('msorg_template')."/msorg_template/form.css?v=1\" media=\"all\">";
-	
-        echo "<div class='container'>";
+        echo '<div class="container position-relative" id="main-page">
+
+        <div id="airtime-page-header" class="row p-4 bg-white">
+            <div class="col d-flex flex-row justify-content-start align-items-start">
+               <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Developer</span>
+            </div>
+        </div>';
         do_action("template_user_feature");
-        echo "</div>";
+
+        echo '</div>';
         break;
     }
 
