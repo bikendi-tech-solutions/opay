@@ -64,6 +64,7 @@ if(!preg_match("/https?:\/\//",$ads_banner_link) && !preg_match("/\/\w+/",$ads_b
     --minor-secondary-color: <?php echo $minors;?>;  /*Light black like white FAINTED*/
     --high-screen-max: <?php echo $theme_max_screen;?>;  /*Light black like white FAINTED*/
     --ads-image: <?php echo $ads_banner_image;?>;  /*Light black like white FAINTED*/
+    --loader-image: url('<?php echo get_site_icon_url( 75, '/wp-content/plugins/opay/image/vlogo.png');?>');  /*Light black like white FAINTED*/
     --border-color: #a7a5a5;
     
 }

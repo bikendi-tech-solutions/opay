@@ -165,7 +165,7 @@
   width: 55px;
   height: 55px;
    /* background: rebeccapurple;*/
-   background: url('/wp-content/plugins/opay/image/vlogo.png');
+   background: var(--loader-image);
    background-size: contain;
    background-position: center;
     border-radius: 50%;
