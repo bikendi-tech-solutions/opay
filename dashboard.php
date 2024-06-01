@@ -208,7 +208,7 @@ else{
                <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Others</span>
             </div>
         </div>';
-        do_action("template_user_feature");
+        do_action("opay_user_feature");
 
         echo '</div>';
         break;
