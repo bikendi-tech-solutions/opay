@@ -298,7 +298,7 @@ function banks_log($name=""){
                         
                     $bankid = "5";
                     $AccountNumber = vp_getuser($id,"account_number1");
-                    $Bank = strtolower(vp_getuser($id,"bank_name1"));
+                    $Bank = preg_replace("/\s+Bank/i","",strtolower(vp_getuser($id,"bank_name1")));
                     $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
     
@@ -334,7 +334,7 @@ function banks_log($name=""){
               
             $bankid = "6";
             $AccountNumber = vp_getuser($id,"account_number");
-            $Bank = strtolower(vp_getuser($id,"bank_name"));
+            $Bank = preg_replace("/\s+Bank/i","",strtolower(vp_getuser($id,"bank_name")));
             $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
             if(empty($AccountNumber) || $AccountNumber == "false" || !is_numeric($AccountNumber)){
@@ -366,7 +366,7 @@ function banks_log($name=""){
 <?php
             $bankid = "7";
             $AccountNumber = vp_getuser($id,"account_number2");
-            $Bank = strtolower(vp_getuser($id,"bank_name2"));
+            $Bank = preg_replace("/\s+Bank/i","",strtolower(vp_getuser($id,"bank_name2")));
 
             $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
