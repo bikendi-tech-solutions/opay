@@ -298,7 +298,7 @@ function banks_log($name=""){
                         
                     $bankid = "5";
                     $AccountNumber = vp_getuser($id,"account_number1");
-                    $Bank = "Sterling";
+                    $Bank = strtolower(vp_getuser($id,"bank_name1"));
                     $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
     
@@ -312,11 +312,11 @@ function banks_log($name=""){
                 <div class="first-part-bnk-opt  d-flex justify-content-between">
                     <span class="icon-sect d-flex justify-content-start align-items-center">
                         <span class="icon-div p-3">
-                            <img src="<?php banks_log("sterling");?>" height="35" width="35" alt="Visa Logo">
+                            <img src="<?php banks_log($Bank);?>" height="35" width="35" alt="Visa Logo">
                         </span>
                         <span class="ms-3 text-div icon-text d-flex flex-column">
                             <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
-                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+                            <span class="icon-text-message text-muted"><?php echo ucfirst($Bank);?></span>
 
                         </span>
 
@@ -334,7 +334,7 @@ function banks_log($name=""){
               
             $bankid = "6";
             $AccountNumber = vp_getuser($id,"account_number");
-            $Bank = "Wema";
+            $Bank = strtolower(vp_getuser($id,"bank_name"));
             $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
             if(empty($AccountNumber) || $AccountNumber == "false" || !is_numeric($AccountNumber)){
@@ -347,11 +347,11 @@ function banks_log($name=""){
                 <div class="first-part-bnk-opt  d-flex justify-content-between">
                     <span class="icon-sect d-flex justify-content-start align-items-center">
                         <span class="icon-div p-3">
-                            <img src="<?php banks_log("wema");?>" height="35" width="35" alt="Visa Logo">
+                            <img src="<?php banks_log($Bank);?>" height="35" width="35" alt="Visa Logo">
                         </span>
                         <span class="ms-3 text-div icon-text d-flex flex-column">
                             <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
-                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+                            <span class="icon-text-message text-muted"><?php echo ucfirst($Bank);?></span>
 
                         </span>
 
@@ -366,7 +366,8 @@ function banks_log($name=""){
 <?php
             $bankid = "7";
             $AccountNumber = vp_getuser($id,"account_number2");
-            $Bank = "Monniepoint";
+            $Bank = strtolower(vp_getuser($id,"bank_name2"));
+
             $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
             if(empty($AccountNumber) || $AccountNumber == "false" || !is_numeric($AccountNumber)){
@@ -379,11 +380,11 @@ function banks_log($name=""){
                 <div class="first-part-bnk-opt  d-flex justify-content-between">
                     <span class="icon-sect d-flex justify-content-start align-items-center">
                         <span class="icon-div p-3">
-                            <img src="<?php banks_log("monniepoint");?>" height="35" width="35" alt="Visa Logo">
+                            <img src="<?php banks_log($Bank);?>" height="35" width="35" alt="Visa Logo">
                         </span>
                         <span class="ms-3 text-div icon-text d-flex flex-column">
                             <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
-                            <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+                            <span class="icon-text-message text-muted"><?php echo ucfirst($Bank);?></span>
 
                         </span>
 
