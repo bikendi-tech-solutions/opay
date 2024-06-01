@@ -201,16 +201,7 @@ else{
             include_once(__DIR__."/statistics.html");
         break;
         default:
-        echo '<div class="container position-relative" id="main-page">
-
-        <div id="airtime-page-header" class="row p-4 bg-white">
-            <div class="col d-flex flex-row justify-content-start align-items-start">
-               <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Others</span>
-            </div>
-        </div>';
         do_action("opay_user_feature");
-
-        echo '</div>';
         break;
     }
 
