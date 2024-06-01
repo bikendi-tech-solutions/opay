@@ -1,0 +1,27 @@
+.source-amt input, .source-sel select, .user_id{
+    border: 0 solid white;
+
+}
+
+label.form-label {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.withdrawit, .fund_other{
+    border: 0;
+    border-radius: 25px !important;
+}
+
+form.withdraw_now,  .fund-other-wallet {
+    border-radius: 15px;
+}
+
+input, select {
+    height: 50px;
+}
+
+.user_id_div{
+    border-radius: var(--bs-border-radius);
+    border: 1px solid var(--bs-border-color);
+}

@@ -54,20 +54,31 @@
                     </a>
                 </div>
 
-                <div class="col d-none d-flex flex-column service-none align-items-center ">
+                <?php
+                if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+                    ?>
+                <div class="col  d-flex flex-column service-none align-items-center ">
                     <a href="?vend=transfer" class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image "><i class="fa-solid fa-money-bill-transfer"></i></div>
                         <div class="icon-text" id="general-text">W2W Transfer</div>
                     </a>
                 </div>
+                <?php
+                    }
 
-                <div class="col d-none d-flex service-none flex-column align-items-center ">
+                    if(strtolower(vp_option_array($option_array,"allow_withdrawal")) == "yes"){
+                ?>
+
+                <div class="col d-flex service-none flex-column align-items-center ">
 
                     <a href="?vend=withdraw" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
                         <div class="icon-image "><i class="fa-solid fa-arrow-down-up-across-line"></i></div>
                         <div class="icon-text" id="general-text">Withdraw</div>
                     </a>
                 </div>
+                <?php
+                    }
+                ?>
 
             </div>
 
@@ -195,7 +206,7 @@
                 </a>
             </div>
 
-            <div class="col-3 d-none my-2 service-none d-flex flex-column align-items-center ">
+            <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                 <a href="?vend=referrals" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
                     <div class="icon-image"><i class="fa-solid fa-people-arrows"></i></div>
                     <div class="icon-text" id="general-text">Referals</div>
@@ -206,7 +217,7 @@
             <!--<div class="action-divider" id="divider"></div>-->
             
 
-            <div class="col-3 d-none my-2 service-none d-flex flex-column align-items-center ">
+            <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
                 <a href="?vend=upgrade" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
                     <div class="icon-image"><i class="fa-solid fa-person-arrow-up-from-line"></i></div>
                     <div class="icon-text" id="general-text">Upgrade</div>

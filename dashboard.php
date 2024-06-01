@@ -145,6 +145,7 @@ else{
         break;
         case"template-settings":
             if(current_user_can("vtupress_admin")){
+
             include_once(__DIR__."/template-settings.html");
             include_once(__DIR__."/index-btm.html");
 
@@ -171,19 +172,27 @@ else{
             include_once(__DIR__."/messages.html");
         break;
         case"withdraw":
-           // include_once(__DIR__."/withdrawal.html");
+            if(is_plugin_active('vpmlm/vpmlm.php')  && vp_option_array($option_array,'mlm') == "yes" ){
+           include_once(__DIR__."/withdrawal.html");
+            }
         break;
         case"referral-details":
             include_once(__DIR__."/ref-info.html");
         break;
         case"referrals":
-           // include_once(__DIR__."/withdrawal.html");
+            if(is_plugin_active('vpmlm/vpmlm.php')  && vp_option_array($option_array,'mlm') == "yes" ){
+           include_once(__DIR__."/referrals.html");
+            }
         break;
         case"transfer":
-           // include_once(__DIR__."/transfer.html");
+        if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+
+           include_once(__DIR__."/transfer.html");
+
+        }
         break;
         case"upgrade":
-           // include_once(__DIR__."/upgrade.html");
+           include_once(__DIR__."/upgrade.html");
         break;
         case"developer":
             include_once(__DIR__."/developer.html");
@@ -196,7 +205,7 @@ else{
 
         <div id="airtime-page-header" class="row p-4 bg-white">
             <div class="col d-flex flex-row justify-content-start align-items-start">
-               <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Developer</span>
+               <span class="general-text"><a href="#" class="back cursor-pointer text-decoration-none text-black"><i class="fa-solid fa-angle-left me-3 "></i></a>Others</span>
             </div>
         </div>';
         do_action("template_user_feature");

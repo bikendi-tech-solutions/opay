@@ -1,3 +1,8 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/withdrawal.css?ver=<?php echo $rand;?>" />
+
+
+
+
 <div class="container position-relative" id="main-page">
 
     <div id="airtime-page-header" class="row p-4 bg-white">
@@ -8,232 +13,243 @@
 
 
     <?php
-if(isset($_GET["vend"]) && $_GET["vend"]=="transfer" && vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+$min = intval(vp_getoption('minimum_amount_transferable'));
 
+if($min < 100){
+    $min = 100;
+}
 echo'
-<style>
-	.side-wallet-w{background-color: white !important;
-    padding: 20px !important;
-    text-align: center !important;
-    border-radius: 10px !important;
-	border:2px solid purple;
-		  }
-		  
-</style>
-		
-<div id="side-wallet-w" class="side-wallet-w dark-white">
-<div class="fund-other-wallet">
-
-<form method="post" target="_self" >
-
-<label for="user-id" class="form-label">User ID</label><br>
-
-<div class="input-group mb-2">
-<input type="number" name="user_id" class="form-control user_id" required><br>
-<span class="dark-white input-group-text" id="basic-addon1">
-                            <div class="spinner-grow text-secondary visually-hidden" role="status">
-                            </div>
-                            <input type="button" class="btn p-2 text-xs font-bold text-white uppercase bg-indigo-600 rounded shadow  verify-user btn-secondary" value="Verify">
- </span>
-</div>
-
-<label for="amount" class="form-label">Amount [Min. '.esc_html(vp_getoption('minimum_amount_transferable')).']</label><br>
-<input type="number" name="amount" class="form-control mb-2 amount" max="'.$bal.'" required><br>
-
-<input type="button" name="fund_other" class="form-submit form-control mb-2 btn-primary w-full p-2 text-xs font-bold text-white uppercase bg-indigo-600 rounded shadow fund_other" value="Transfer"><br>
-
-</form>
-
-<script>
-
-/*VERIFY USERS JQUERY*/
-jQuery(".verify-user").click(function(){
-	jQuery(".spinner-grow").removeClass("visually-hidden");
-	var user_id = jQuery(".user_id").val();
-	jQuery(".verify-user").hide();
-	var obj = {};
-obj["verify_user"] = "verify_user";
-obj["user_id"] = user_id;
-
-
-jQuery.ajax({
-  url: "'.esc_url(plugins_url("vtupress/vend.php")).'",
-  data: obj,
-  dataType: "json",
-  "cache": false,
-  "async": true,
-  
-  error: function (jqXHR, exception) {
-	  hideLoader();
-	jQuery(".spinner-grow").addClass("visually-hidden");
-	jQuery(".verify-user").show();
-        var msg = "";
-        if (jqXHR.status === 0) {
-            msg = "No Connection. Verify Network.";
-        } else if (jqXHR.status == 404) {
-            msg = "Requested page not found. [404]";
-
-        } else if (jqXHR.status == 500) {
-            msg = "Internal Server Error [500].";
-
-        } else if (exception === "parsererror") {
-            msg = "Requested JSON parse failed.";
-
-        } else if (exception === "timeout") {
-            msg = "Time out error.";
-
-        } else if (exception === "abort") {
-            msg = "Ajax request aborted.";
-
-        } else {
-            msg = "Uncaught Error." + jqXHR.responseText;
-
-        }
-
-        showToast(msg,"red");
-    },
-  success: function(data) {
-    var msg = "";
-	jQuery(".spinner-grow").addClass("visually-hidden");
-	jQuery(".verify-user").show();
-        if(data.status == "100" && data.user_name != "" ){
-            msg = data.user_name;
-            showToast(msg,"green");
-
-	  }
-	  else{
-	jQuery(".spinner-grow").addClass("visually-hidden");
-	jQuery(".verify-user").show();
-
-  msg = "No User With ID "+jQuery(".user_id").val();
-  showToast(msg,"red");
-
-	  }
-  },
-  type: "POST"
-});
-
-});
-
-
-
-
-/*FUND OTHER JQUERY*/
-jQuery(".fund_other").click(function(){
-
-if(jQuery(".amount").val() <= '.$bal.'){
-showLoader();
 	
-var obj = {};
-obj["fund_other"] = "fund_other";
-obj["amount"] = jQuery(".amount").val();
-obj["user_id"] = jQuery(".user_id").val();
+<div class="row  ">
+    <div class="fund-other-wallet col bg-white py-5 px-2 mx-2 my-2">
 
-jQuery.ajax({
-  url: "'.esc_url(plugins_url("vtupress/vend.php")).'",
-  data: obj,
-  dataType: "json",
-  "cache": false,
-  "async": true,
+    <form method="post" target="_self" class="px-2" >
 
-  error: function (jqXHR, exception) {
-    hideLoader();
-	jQuery(".spinner-grow").addClass("visually-hidden");
-	jQuery(".verify-user").show();
-        var msg = "";
-        if (jqXHR.status === 0) {
-            msg = "No Connection. Verify Network.";
-        showToast(msg,"red");
+    <label for="user-id" class="form-label">User ID</label>
 
-  
-        } else if (jqXHR.status == 404) {
-            msg = "Requested page not found. [404]";
-        showToast(msg,"red");
-        } else if (jqXHR.status == 500) {
-            msg = "Internal Server Error [500].";
-        showToast(msg,"red");
+    <div class="d-flex justify-content-between user_id_div mb-2">
+        <input type="number" name="user_id" class="form-control user_id" required ><br>
+                <span class=" d-flex justify-content-center btn-div" id="basic-addon1">
+                                <div class="spinner-grow text-secondary visually-hidden" role="status">
+                                </div>
+                                <button type="button" class="btn p-2 text-xs fw-bold text-white  rounded verify-user btn-success" ><i class="fa-solid fa-magnifying-glass"></i></button>
+                </span>
+    </div>
 
-        } else if (exception === "parsererror") {
-            msg = "Requested JSON parse failed.";
-        showToast(msg,"red");
+    <label for="amount" class="form-label mt-2">Amount [Min. ₦'.$min.' ]</label><br>
+    <input type="number" placeholder="From balance of ₦'.$bal.'" name="amount" class="form-control mb-2 amount" min="'.$min.'" max="'.$bal.'" required><br>
 
-        } else if (exception === "timeout") {
-            msg = "Time out error.";
-        showToast(msg,"red");
+    <input type="button" name="fund_other" class="form-submit form-control mb-2 w-100 p-2 fw-bold text-white bg-success fund_other" value="Transfer"><br>
 
-        } else if (exception === "abort") {
-            msg = "Ajax request aborted.";
-        showToast(msg,"red");
+    </form>
 
-        } else {
-            msg = "Uncaught Error.\n" + jqXHR.responseText;
+    <script>
+
+    /*VERIFY USERS JQUERY*/
+    jQuery(".verify-user").click(function(){
+
+        jQuery(".btn-div").addClass("align-items-center");
+        jQuery(".spinner-grow").removeClass("visually-hidden");
+        var user_id = jQuery(".user_id").val();
+
+        if(user_id == ""){
+            showToast("User ID can\'t be empty","red");
+            jQuery(".btn-div").removeClass("align-items-center");
+
+            jQuery(".spinner-grow").addClass("visually-hidden");
+            jQuery(".verify-user").show();
+            return false;
+        }
+        jQuery(".verify-user").hide();
+        var obj = {};
+    obj["verify_user"] = "verify_user";
+    obj["user_id"] = user_id;
+
+
+    jQuery.ajax({
+    url: "'.esc_url(plugins_url("vtupress/vend.php")).'",
+    data: obj,
+    dataType: "json",
+    "cache": false,
+    "async": true,
+    
+    error: function (jqXHR, exception) {
+        jQuery(".btn-div").removeClass("align-items-center");
+
+        hideLoader();
+        jQuery(".spinner-grow").addClass("visually-hidden");
+        jQuery(".verify-user").show();
+            var msg = "";
+            if (jqXHR.status === 0) {
+                msg = "No Connection. Verify Network.";
+            } else if (jqXHR.status == 404) {
+                msg = "Requested page not found. [404]";
+
+            } else if (jqXHR.status == 500) {
+                msg = "Internal Server Error [500].";
+
+            } else if (exception === "parsererror") {
+                msg = "Requested JSON parse failed.";
+
+            } else if (exception === "timeout") {
+                msg = "Time out error.";
+
+            } else if (exception === "abort") {
+                msg = "Ajax request aborted.";
+
+            } else {
+                msg = "Uncaught Error." + jqXHR.responseText;
+
+            }
+
             showToast(msg,"red");
-			 
+        },
+    success: function(data) {
+        var msg = "";
+        jQuery(".btn-div").removeClass("align-items-center");
+        jQuery(".spinner-grow").addClass("visually-hidden");
+        jQuery(".verify-user").show();
+            if(data.status == "100" && data.user_name != "" ){
+                msg = data.user_name;
+                showToast(msg,"green");
+
+                location.reload();
+
+        }
+        else{
+        jQuery(".spinner-grow").addClass("visually-hidden");
+        jQuery(".verify-user").show();
+
+    msg = "No User With ID "+jQuery(".user_id").val();
+    showToast(msg,"red");
+
         }
     },
-  
-  success: function(data) {
-    hideLoader();
-	 jQuery(".user-balance").text(data.balance);
-	
-     var msg = data.balance;
+    type: "POST"
+    });
 
-        if(data.status == "100"){
+    });
 
-            msg = "Transaction Successful!";
-            showToast(msg,"green");
-	    
-	  }
-	  else if(data.status == "200"){
 
-        msg = data.balance;
-        showToast(msg,"red");
+
+
+    /*FUND OTHER JQUERY*/
+    jQuery(".fund_other").click(function(){
+
+        var amount = jQuery(".amount").val();
+        var bal = parseInt('.$bal.');
+        var min = parseInt('.$min.');
+
+        if(amount > bal){
+            showToast("Insufficient Funds","red");
+            return;
+        }else if(amount < min){
+            showToast("Minimum Transferable Amount is "+min,"red");
+            return;
+        }
+
+    if( amount <= '.$bal.'){
+    showLoader();
+        
+    var obj = {};
+    obj["fund_other"] = "fund_other";
+    obj["amount"] = jQuery(".amount").val();
+    obj["user_id"] = jQuery(".user_id").val();
+
+    jQuery.ajax({
+    url: "'.esc_url(plugins_url("vtupress/vend.php")).'",
+    data: obj,
+    dataType: "json",
+    "cache": false,
+    "async": true,
+
+    error: function (jqXHR, exception) {
+        hideLoader();
+        jQuery(".spinner-grow").addClass("visually-hidden");
+        jQuery(".verify-user").show();
+            var msg = "";
+            if (jqXHR.status === 0) {
+                msg = "No Connection. Verify Network.";
+            showToast(msg,"red");
+
+    
+            } else if (jqXHR.status == 404) {
+                msg = "Requested page not found. [404]";
+            showToast(msg,"red");
+            } else if (jqXHR.status == 500) {
+                msg = "Internal Server Error [500].";
+            showToast(msg,"red");
+
+            } else if (exception === "parsererror") {
+                msg = "Requested JSON parse failed.";
+            showToast(msg,"red");
+
+            } else if (exception === "timeout") {
+                msg = "Time out error.";
+            showToast(msg,"red");
+
+            } else if (exception === "abort") {
+                msg = "Ajax request aborted.";
+            showToast(msg,"red");
+
+            } else {
+                msg = "Uncaught Error.\n" + jqXHR.responseText;
+                showToast(msg,"red");
+                
+            }
+        },
+    
+    success: function(data) {
+        hideLoader();
+        jQuery(".user-balance").text(data.balance);
+        
+        var msg = data.balance;
+
+            if(data.status == "100"){
+
+                msg = "Transaction Successful!";
+                showToast(msg,"green");
+            
+        }
+        else if(data.status == "200"){
+
+            msg = data.balance;
+            showToast(msg,"red");
+            
+        }
+    else{
+
+            msg = "There Was A Problem Processing Transfer!","red";
+            showToast(msg,"red");
+
+    }
+
+
+
+
+    },
+    type: "POST"
+    });
+    }else{
+
+
+        showToast("Balance Too Low!","red");
+
+    }
+
+    });
+    </script>
+
+    <br>
+    ';
+
+    echo'
+
+    </div>
+</div>	
 		
-	  }
-  else{
-
-        msg = "There Was A Problem Processing Transfer!","red";
-        showToast(msg,"red");
-
-}
-
-
-
-
-  },
-  type: "POST"
-});
-}else{
-
-
-    showToast("Balance Too Low!","red");
-
-}
-
-});
-</script>
-
-<br>
 ';
 
-echo'
-
-</div>
-		
-		
-		
-		</div>
-		
-		<!-- Account End -->
-		
-		';
-		
-}
-else{
-
-echo "<h1>TRANSFER NOT ENABLED FOR THIS PLAN OR HAS BEEN TURNED OFF GENERALLY</h1>";
-	
-}
 
 ?>
 

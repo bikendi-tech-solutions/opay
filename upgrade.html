@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/upgrade.css?ver=<?php echo $rand;?>" />
 
 <div class="container position-relative" id="main-page">
 
@@ -8,30 +9,301 @@
     </div>
 
 <?php
+extract(vtupress_user_details());
+ 
+$resc = vp_getoption("resc");
+$id = get_current_user_id();
+$bal = vp_getuser($id, "vp_bal", true);
+$rplan = vp_getuser($id, "vr_plan", true);
+$ud = vp_getuser($id, "vr_id", true);
+$data = get_userdata($id);
 
+global $wpdb;
+$table_name = $wpdb->prefix."vp_levels";
+$data = $wpdb->get_results("SELECT * FROM  $table_name");
+$my_data = $wpdb->get_results("SELECT * FROM  $table_name WHERE name = '$rplan'");
 
-if(is_plugin_active('vprest/vprest.php') && vp_option_array($option_array,"resell") == "yes"){		
-			if(isset($_GET["vend"]) && $_GET["vend"]=="upgrade"){
-				echo'
-	<style>
-		  .side-upgrade-w{background-color: white !important;
-    padding: 20px !important;
-    text-align: center !important;
-    border-radius: 10px !important;
-		  }
-		</style>
-		
+?>
 
-				<div id="side-upgrade-w" style="background-color:white; padding:20px; text-align:center; border-radius:10px;">';
-	do_action("vpaccount");
+<label class="fw-bold mt-3 mb-1">Current Plan Details:</label>
+<div class="plan-details bg-white py-4 px-3 ">
+	<div class="det my-2 d-flex justify-content-between align-items-center">
+		<span class="plan">Plan</span>
+		<span class="plan fw-bold"><?php echo $rplan;?></span>
+	</div>
+	<div class="det d-flex justify-content-between align-items-center">
+		<span class="apikey ">ApiKey</span>
+		<span class="apikey fw-bold"><?php echo $ud;?></span>
+	</div>
+</div>
+
+<label class="fw-bold mt-3 mb-1">Plans:</label>
+	<?php
+foreach($data as $level){
+
 	
-		echo'
-		</div>
-			
-		';
-			}
-		}
-		
-		?>
+	$vtu = max(array(floatval($level->mtn_vtu),floatval($level->glo_vtu),floatval($level->mobile_vtu),floatval($level->airtel_vtu)));
+	$share = max(array(floatval($level->mtn_share),floatval($level->glo_share),floatval($level->mobile_share),floatval($level->airtel_share)));
+	$awuf = max(array(floatval($level->mtn_awuf),floatval($level->glo_awuf),floatval($level->mobile_awuf),floatval($level->airtel_awuf)));
 
+
+	$sme = max(array(floatval($level->mtn_sme),floatval($level->glo_sme),floatval($level->mobile_sme),floatval($level->airtel_sme)));
+	$corporate = max(array(floatval($level->mtn_corporate),floatval($level->glo_corporate),floatval($level->mobile_corporate),floatval($level->airtel_corporate)));
+	$gifting = max(array(floatval($level->mtn_gifting),floatval($level->glo_gifting),floatval($level->mobile_gifting),floatval($level->airtel_gifting)));
+
+
+	$id= $level->id;
+	$name = $level->name;
+	$airtime = max(array($vtu,$share,$awuf));
+	$data = max(array($sme,$corporate,$gifting));
+	$cable = floatval($level->cable);
+	$bill = floatval($level->bill_prepaid);
+	$upgrade_amount = $level->upgrade;
+	$api_access = strtoupper($level->developer);
+	$transfer_access = strtoupper($level->transfer);
+
+	$upgrade_bonus = $level->upgrade_bonus;
+	$upgrade_pv = $level->upgrade_pv;
+
+	$monthly_referee = intval($level->monthly_referee);
+	$monthly_transactions_number = intval($level->monthly_transactions_number);
+	$monthly_transactions_amount = intval($level->monthly_transactions_amount);
+	$charge_back_percentage = intval($level->charge_back_percentage);
+	$monthly_sub = $level->monthly_sub;
+	?>
+	<div data-bs-toggle="modal" data-bs-target="#plan<?php echo $id;?>Modal" class="cursor-pointer bg-white mb-3 px-3 py-2 this_plan" plan_id="<?php echo $id;?>">
+		<div class="first-part-bnk-opt  d-flex justify-content-between">
+			<span class="icon-sect d-flex justify-content-start align-items-center">
+				<span class="icon-div p-3">
+					<i class="fa-solid fa-person-arrow-up-from-line"></i>
+				</span>
+				<span class="ms-3 text-div icon-text d-flex flex-column">
+					<span class="icon-text-title"><span class="this-plan-<?php echo $id;?> fw-bold text-capitalize"><?php echo $name;?></span> </span>
+					<span class="icon-text-message text-muted">₦<?php echo $upgrade_bonus;?> upgrade bonus</span>
+
+				</span>
+
+			</span>
+			<div class="go-btn d-flex justify-content-end align-items-center">
+				<span class="charge fw-bold" > ₦<?php echo $upgrade_amount;?> Charge</span>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Add Bootstrap Modal-->
+	<div class="modal fade" id="plan<?php echo $id;?>Modal" tabindex="-1" aria-labelledby="plan<?php echo $id;?>ModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h1 class="modal-title fs-5" id="plan<?php echo $id;?>ModalLabel"><?php echo ucfirst($name);?> Plan</h1>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="det my-2 d-flex justify-content-between align-items-center">
+					<span class="plan">Upgrade Bonus</span>
+					<span class="plan fw-bold"><?php echo $upgrade_bonus;?></span>
+				</div>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Upgrade PV</span>
+					<span class="apikey fw-bold"><?php echo $upgrade_pv;?></span>
+				</div>
+				<?php
+				if(vp_option_array($option_array,"setairtime") == "checked"){
+					?>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Max. Airtime Bon.</span>
+					<span class="apikey fw-bold"><?php echo $airtime;?></span>
+				</div>
+				<?php
+					}
+				if(vp_option_array($option_array,"setdata") == "checked"){
+					?>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Max. Data Bon.</span>
+					<span class="apikey fw-bold"><?php echo $data;?></span>
+				</div>
+				<?php
+					}
+				if(vp_option_array($option_array,"setcable") == "checked"){
+					?>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Max. Cable Bon.</span>
+					<span class="apikey fw-bold"><?php echo $cable;?></span>
+				</div>
+				<?php
+					}
+				if(vp_option_array($option_array,"setbill") == "checked"){
+					?>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Max. Bill Bon.</span>
+					<span class="apikey fw-bold"><?php echo $bill;?></span>
+				</div>
+				<?php
+					}
+				?>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Api Access</span>
+					<span class="apikey fw-bold"><?php echo $api_access;?></span>
+				</div>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Transfer Access</span>
+					<span class="apikey fw-bold"><?php echo $transfer_access;?></span>
+				</div>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Transfer Access</span>
+					<span class="apikey fw-bold"><?php echo $transfer_access;?></span>
+				</div>
+				<?php
+					if(vp_option_array($option_array,"vtupress_custom_mlmsub") == "yes"){
+						if($level->enable_extra_service == "enabled"){
+							$airtime_bonus_ex1 = $level->airtime_bonus_ex1;
+							$data_bonus_ex1 = $level->data_bonus_ex1." - ".strtoupper($level->data_bonus_type_ex1);
+				?>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Monthly Airtime Bonus</span>
+					<span class="apikey fw-bold"><?php echo $airtime_bonus_ex1;?></span>
+				</div>
+				<div class="det d-flex justify-content-between align-items-center">
+					<span class="apikey ">Monthly Data Bonus</span>
+					<span class="apikey fw-bold"><?php echo $data_bonus_ex1;?></span>
+				</div>
+				<?php
+					}
+				}
+				?>
+
+
+				<div class="extra-Services">
+					<div class="det d-flex justify-content-between align-items-center">
+						<span class="apikey ">Monthly Subscription</span>
+						<span class="apikey fw-bold"> <?php echo $monthly_sub;?></span>
+					</div>
+					<div class="det d-flex justify-content-between align-items-center">
+						<span class="apikey ">Funding Commission From Ref.</span>
+						<span class="apikey fw-bold"> <?php echo $charge_back_percentage;?>%</span>
+					</div>
+					
+					<div class="p-1 border mt-3">
+					Monthly Membership Rule: (0) means the condition is not applied
+					  <div class="p-2 border">
+						<p>Monthly Referees Expected: <?php echo $monthly_referee;?></p>
+						<p>Number Of Transactions: <?php echo $monthly_transactions_number;?></p>
+						<p>Total Transactions Amount: <?php echo $monthly_transactions_amount;?></p>
+		  
+					  </div>
+					<code>You will be downgraded to the customer plan if those rules are not met</code>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			  <?php
+			  if(strtolower($level->status) != "active"){
+				?>
+				<span class="text-danger p-3">Plan Inactive For Now</span>
+
+				<?php
+			  }
+			  elseif(strtolower($rplan) != strtolower($name) && floatval($bal) >= floatval($upgrade_amount) && !is_numeric(stripos($all_my_plans,$name))){
+				?>
+			  <button type="button" class="btn btn-primary " onclick="upgrade('<?php echo $id;?>','<?php echo $name;?>')">Upgrade @ ₦<?php echo $upgrade_amount;?></button>
+			  <?php
+			  	}elseif(strtolower($rplan) != strtolower($name) && $bal < $upgrade_amount){
+				?>
+				<span class="text-danger p-3">Insufficient Wallet Balance</span>
+				<?php
+				}
+				elseif(is_numeric(stripos($all_my_plans,$name))){
+				?>
+				<span class="text-warning p-3">Can't Downgrade</span>
+				<?php
+				}
+				elseif(strtolower($rplan) == strtolower($name)){
+				?>
+				<span class="text-info p-3">On This Plan</span>
+				<?php
+					}
+			  	?>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  
+
+<?php
+}
+?>
+
+
+<script>
+	function upgrade(el,name){
+	var obj = {};
+	
+	obj["level_id"] = el;
+	obj["level_name"] = name;
+	obj["paywall"] = name;
+	var text = "You've Been Upgraded To "+name;
+	var the_name = text.toUpperCase();
+
+	showToast("Processing","yellow",3000);
+	
+	
+	
+	jQuery.ajax({
+	  url: '<?php echo esc_url(plugins_url("vtupress/vend.php"));?>',
+	  data: obj,
+	 dataType: 'text',
+	  'cache': false,
+	  "async": true,
+	  error: function (jqXHR, exception) {
+		
+			var msg = "";
+			if (jqXHR.status === 0) {
+				msg = "No Connection. Verify Network.";
+	  
+			} else if (jqXHR.status == 404) {
+				msg = "Requested page not found. [404]";
+			} else if (jqXHR.status == 500) {
+				msg = "Internal Server Error [500].";
+			} else if (exception === "parsererror") {
+				msg = "Requested JSON parse failed.";
+			} else if (exception === "timeout") {
+				msg = "Time out error.";
+			} else if (exception === "abort") {
+				msg = "Ajax request aborted.";
+			} else {
+				msg = "Uncaught Error." + jqXHR.responseText;
+			}
+
+			showToast(msg,"red",5000);
+
+		},
+	  
+	  success: function(data){
+
+			if(data == "100"){
+
+				showToast(the_name,"green",5000);
+				setTimeout(function(){
+					location.reload();
+				},2000);
+		  }
+		  else if(data == "101"){
+			showToast("Balance Too Low","red",2000);
+
+		  }
+		  else{
+			
+			showToast(data,"red",5000);
+
+		  }
+	  },
+	  type: 'POST'
+	});
+		
+		
+	}
+</script>
 </div>

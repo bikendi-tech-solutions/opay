@@ -1,0 +1,15 @@
+.plan-details,.this_plan{
+    border-radius: 15px;
+}
+
+.icon-div {
+    border-radius: 10px;
+    background-color: var(--minor-secondary-color);
+    color: var(--major-primary-color);
+    font-size: 1rem;
+    padding: 10px 15px !important;
+}
+
+.this_plan:hover{
+    background-color: var(--minor-secondary-color);
+}
