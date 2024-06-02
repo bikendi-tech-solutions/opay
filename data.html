@@ -294,6 +294,64 @@
                                 <span class="text-warning amount-incorrect-notice"></span>
 
                             </div>
+
+                            <div class="lower-part-1 mx-1 bg-white px-2 py-4 m-auto">
+
+                                <span class="mb-3 d-flex justify-content-between align-items-center">
+                                    <span class="text" >Last Data Transactions History</span>
+                                    <span class="text-icon" link="?vend=history&sub=data">View All <li class="fa-solid fa-angle-right"></li></span>
+                
+                                </span>
+                
+                            <?php
+                                global $wpdb;
+                                $table = $wpdb->prefix."sdata";
+                                $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s ORDER BY ID DESC LIMIT 1",$user_id);
+                                $results = $wpdb->get_results($prepare);
+                
+                
+                                if($results != NULL && !empty($results)){
+                
+                                    foreach($results as $thisResult){
+                                        if(!empty($thisResult)){
+                
+                                            $tid = $thisResult->id;
+                
+                                            $_GET["sub"] = "data";
+                                            include(__DIR__."/history/functions.php");
+                            ?>
+                            
+                
+                
+                                <span link="?vend=history&id=<?php echo $tid;?>" class="my-3 mx-3 cursor-pointer d-flex justify-content-between <?php echo $status;?>">
+                                    <span class="icon icon-div me-3 d-flex align-items-center"><?php echo $icon;?></span>
+                                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                                        <span class="topic"><?php echo $type;?></span>
+                                        <span class="message text-muted" id="general-text"><?php echo $time;?></span>
+                                    </span>
+                                    <span class="icon ms-2 d-flex flex-column align-items-end justify-content-center">
+                                        <span class="amount-span"><?php echo $sign;?> ₦<span class="amount"><?php echo number_format($amount);?></span></span>
+                                        <span class="status"><?php echo ucfirst($status);?></span>
+                                    </span>
+                                
+                                </span>
+                
+                                            <?php
+                                        }
+                                    }
+                                }else{
+                                    ?>
+                
+                                    <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
+                
+                                        <span class="">No Data Transaction Recorded</span>
+                                    
+                                    </span>
+                
+                                    <?php
+                                }
+                                ?>
+                            </div>
                             
 
                         </div>
