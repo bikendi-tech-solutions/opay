@@ -129,6 +129,10 @@
                         else{
                             $statusText = $status;
                         }
+
+                        if($sub == "wallet"){
+                            $info = ucfirst($thisResult->description);
+                        }
 ?>
 
                         <div class="container  mt-2 px-2 py-3 m-auto sections first-section d-flex bg-white flex-column justify-content-center align-items-center">
