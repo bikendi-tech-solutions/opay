@@ -39,6 +39,7 @@ if(!defined('ABSPATH')){
 if(WP_DEBUG == false){
 error_reporting(0);	
 }
+
 include_once(ABSPATH ."wp-load.php");
 include_once(ABSPATH .'wp-admin/includes/plugin.php');
 require_once(ABSPATH.'wp-admin/includes/upgrade.php');
