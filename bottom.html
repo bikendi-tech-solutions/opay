@@ -41,6 +41,8 @@ jQuery(".generate_account").on("click",function(){
                   
                     if(data == "100" || data == 100){
                       location.reload();
+                    }else{
+                      showToast(data,"red",5000);
                     }
                   }
               });
