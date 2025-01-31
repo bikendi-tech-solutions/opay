@@ -37,6 +37,9 @@ function banks_log($name=""){
     elseif(strtolower($name) == "billstack"){
         echo plugins_url('opay')."/image/9psb.jpeg";
     }
+    elseif(strtolower($name) == "paymentpoint"){
+        echo plugins_url('opay')."/image/palmpay.jpeg";
+    }
     
     else{
         echo plugins_url('opay')."/image/bank.png";
@@ -198,7 +201,7 @@ function banks_log($name=""){
                 if(vp_getoption('enable_billstack') == "yes"  && vp_getoption("vtupress_custom_billstack") == "yes"){
 
 
-                    $bankid = "2";
+                    $bankid = "3";
                     $AccountNumber = vp_getuser($id,"billstack_accountnumber");
                     $Bank = "9psb";
                     $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
@@ -243,6 +246,55 @@ function banks_log($name=""){
                 }
 
 
+                                
+                if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){
+
+
+                    $bankid = "4";
+                    $AccountNumber = vp_getuser($id,"paymentpoint_accountnumber");
+                    $Bank = "Palmpay";
+                    $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
+
+                    if(empty($AccountNumber) || $AccountNumber == "false"){
+                        $AccountNumber = "Generate Account Number";
+                        $sign = '<i class="ms-2 fa-solid fa-clock-rotate-left  text-major-primary generate_account" for="paymentpoint"></i>';
+                    }
+
+                    if(vp_getoption("paymentpoint_charge_method") == "fixed"){
+                        $charge =  "₦".floatval(vp_getoption("paymentpoint_charge_back"));
+                    }
+                    else{
+                         $charge =  floatval(vp_getoption("paymentpoint_charge_back"))."%";
+                    }
+
+                ?>
+
+                <div class="bg-white mb-3 px-3 py-2 other-bnk-opt">
+                    <div class="first-part-bnk-opt  d-flex justify-content-between">
+                        <span class="icon-sect d-flex justify-content-start align-items-center">
+                            <span class="icon-div p-3">
+                                <img src="<?php banks_log("paymentpoint");?>" height="35" width="35" alt="Visa Logo">
+                            </span>
+                            <span class="ms-3 text-div icon-text d-flex flex-column">
+                                <span class="icon-text-title"><span class="this-aza-<?php echo $bankid;?>"><?php echo $AccountNumber;?></span> <?php echo $sign;?> </span>
+                                <span class="icon-text-message text-muted"><?php echo $Bank;?></span>
+
+                            </span>
+
+                        </span>
+                        <div class="go-btn d-flex justify-content-end align-items-center">
+                            <span class="charge" > <?php echo $charge;?> Charge</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            
+            <?php
+
+                }
+
+
             if(vp_getoption('enablesquadco') == "yes"  && vp_getoption("vtupress_custom_gtbank") == "yes"){
            
 
@@ -253,7 +305,7 @@ function banks_log($name=""){
                 $charge =  floatval(vp_getoption("gtb_charge_back"))."%";
             }
 
-                $bankid = "3";
+                $bankid = "5";
                 $AccountNumber = vp_getuser($id,"squadAccountNumber");
                 $Bank = "GTBank";
                 $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
@@ -298,7 +350,7 @@ function banks_log($name=""){
                 }
 
                     
-                $bankid = "4";
+                $bankid = "6";
                 $AccountNumber = vp_getuser($id,"kudaAccountNumber");
                 $Bank = "Kuda";
                 $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
@@ -347,7 +399,7 @@ function banks_log($name=""){
 					}
     
                         
-                    $bankid = "5";
+                    $bankid = "7";
                     $AccountNumber = vp_getuser($id,"account_number1");
                     $Bank = preg_replace("/\s+Bank/i","",strtolower(vp_getuser($id,"bank_name1")));
                     $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
@@ -383,7 +435,7 @@ function banks_log($name=""){
             <?php
 
               
-            $bankid = "6";
+            $bankid = "8";
             $AccountNumber = vp_getuser($id,"account_number");
             $Bank = preg_replace("/\s+Bank/i","",strtolower(vp_getuser($id,"bank_name")));
             $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
@@ -415,7 +467,7 @@ function banks_log($name=""){
             </div>
 
 <?php
-            $bankid = "7";
+            $bankid = "9";
             $AccountNumber = vp_getuser($id,"account_number2");
             $Bank = preg_replace("/\s+Bank/i","",strtolower(vp_getuser($id,"bank_name2")));
 
