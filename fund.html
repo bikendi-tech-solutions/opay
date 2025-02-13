@@ -32,7 +32,7 @@ function banks_log($name=""){
         echo plugins_url('opay')."/image/vpay.jpg";
     }
     elseif(strtolower($name) == "ncwallet"){
-        echo plugins_url('opay')."/image/providus.jpeg";
+        echo plugins_url('opay')."/image/bankly.jpg";
     }
     elseif(strtolower($name) == "billstack"){
         echo plugins_url('opay')."/image/9psb.jpeg";
@@ -155,7 +155,7 @@ function banks_log($name=""){
 
                     $bankid = "2";
                     $AccountNumber = vp_getuser($id,"ncwallet_accountnumber");
-                    $Bank = "Providus";
+                    $Bank = "Bankly";
                     $sign = "<i class='ms-2 fa-regular fa-copy copy-this sub-banks text-major-primary' for='$bankid'></i>";
 
                     if(empty($AccountNumber) || $AccountNumber == "false"){
