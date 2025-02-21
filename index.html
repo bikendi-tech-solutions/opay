@@ -57,12 +57,18 @@
                 <?php
                 if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
                     ?>
-                <div class="col  d-flex flex-column service-none align-items-center ">
-                    <a href="?vend=transfer" class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
-                        <div class="icon-image "><i class="fa-solid fa-money-bill-transfer"></i></div>
-                        <div class="icon-text" id="general-text">W2W Transfer</div>
-                    </a>
-                </div>
+                    <div class="col  d-flex flex-column service-none align-items-center ">
+                        <a href="?vend=transfer" class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                            <div class="icon-image "><i class="fa-solid fa-money-bill-transfer"></i></div>
+                            <div class="icon-text" id="general-text">W2W Transfer</div>
+                        </a>
+                    </div>
+                    <div class="col  d-flex flex-column service-none align-items-center ">
+                        <a href="?vend=transfer2" class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                            <div class="icon-image "><i class="fa-solid fa-money-bill-transfer"></i></div>
+                            <div class="icon-text" id="general-text">Bank Transfer</div>
+                        </a>
+                    </div>
                 <?php
                     }
 
@@ -275,42 +281,42 @@
 
                 </span>
 
-            <?php
-                global $wpdb;
-                $table = $wpdb->prefix."vp_wallet";
-                $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s ORDER BY ID DESC LIMIT 5",$user_id);
-                $results = $wpdb->get_results($prepare);
+                <?php
+                    global $wpdb;
+                    $table = $wpdb->prefix."vp_wallet";
+                    $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s ORDER BY ID DESC LIMIT 5",$user_id);
+                    $results = $wpdb->get_results($prepare);
 
 
                 if($results != NULL && !empty($results)){
 
-                    foreach($results as $thisResult){
-                        if(!empty($thisResult)){
+                        foreach($results as $thisResult){
+                            if(!empty($thisResult)){
 
-                            $tid = $thisResult->id;
+                                $tid = $thisResult->id;
 
-                            $_GET["sub"] = "wallet";
-                            include(__DIR__."/history/functions.php");
-            ?>
+                                $_GET["sub"] = "wallet";
+                                include(__DIR__."/history/functions.php");
+                                    ?>
             
 
 
-                <span link="?vend=history&id=<?php echo $tid;?>" class="my-3 mx-3 cursor-pointer d-flex justify-content-between <?php echo $status;?>">
-                    <span class="icon icon-div me-3 d-flex align-items-center"><?php echo $icon;?></span>
-                    <span class="icon-text flex-grow-1 d-flex flex-column">
-                        <span class="topic"><?php echo $type;?></span>
-                        <span class="message text-muted" id="general-text"><?php echo $time;?></span>
-                    </span>
-                    <span class="icon ms-2 d-flex flex-column align-items-end justify-content-center">
-                        <span class="amount-span"><?php echo $sign;?> ₦<span class="amount"><?php echo number_format($amount);?></span></span>
-                        <span class="status"><?php echo ucfirst($status);?></span>
-                    </span>
-                
-                </span>
+                                <span link="?vend=history&id=<?php echo $tid;?>" class="my-3 mx-3 cursor-pointer d-flex justify-content-between <?php echo $status;?>">
+                                    <span class="icon icon-div me-3 d-flex align-items-center"><?php echo $icon;?></span>
+                                    <span class="icon-text flex-grow-1 d-flex flex-column">
+                                        <span class="topic"><?php echo $type;?></span>
+                                        <span class="message text-muted" id="general-text"><?php echo $time;?></span>
+                                    </span>
+                                    <span class="icon ms-2 d-flex flex-column align-items-end justify-content-center">
+                                        <span class="amount-span"><?php echo $sign;?> ₦<span class="amount"><?php echo number_format($amount);?></span></span>
+                                        <span class="status"><?php echo ucfirst($status);?></span>
+                                    </span>
+                                
+                                </span>
 
-                            <?php
+                                    <?php
+                            }
                         }
-                    }
                 }else{
                     ?>
 

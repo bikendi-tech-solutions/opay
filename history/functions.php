@@ -11,8 +11,31 @@ switch($_GET["sub"]){
                         $amount = $thisResult->fund_amount;
                         $time = $thisResult->the_time;
 
+                        $icon = '<i class="fa-solid fa-wallet"></i>';
+                        $sender = $thisResult->name;
+                        $recipient = $username."/".$user_id;
+                        $button = '<i class="fa-solid fa-wallet" link="?vend=wallet"></i> Fund Wallet';
 
-                        if(($status == "Approved" || $status == "Approve") && ($namt > $bamt) ){
+                        $useTransfer = false;
+                        if(isset($thisResult->type)){
+                            if(strtolower($thisResult->type) == "transfer"){
+                                if(!empty($thisResult->bank)){
+                                    $recipient = $thisResult->bank;
+                                    $useTransfer = true;
+                                }
+                            }
+                        
+                        }
+
+                        if($useTransfer && $status == "Approved"){
+                            $status = "success";
+                            $sign = "-";
+                        }
+                        elseif($useTransfer && $status !== "Approved"){
+                            $status = "failed";
+                            $sign = "+";
+                        }
+                        elseif(($status == "Approved" || $status == "Approve") && ($namt > $bamt) ){
                             $status = "credit";
                             $sign = "+";
                         }
@@ -27,10 +50,6 @@ switch($_GET["sub"]){
 
                         }
 
-                        $icon = '<i class="fa-solid fa-wallet"></i>';
-                        $sender = $thisResult->name;
-                        $recipient = $username."/".$user_id;
-                        $button = '<i class="fa-solid fa-wallet" link="?vend=wallet"></i> Fund Wallet';
             break;
             case"airtime":
                     
@@ -41,6 +60,7 @@ switch($_GET["sub"]){
                 $status = ucfirst($thisResult->status);
                 $amount = $thisResult->amount;
                 $time = $thisResult->the_time;
+
 
                 if($status == "Successful"){
                     $status = "success";
@@ -210,5 +230,7 @@ switch($_GET["sub"]){
             break;
 
 }
+
+
 
 ?>

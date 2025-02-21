@@ -38,7 +38,7 @@ if(($email_verification == "yes" && $email_verification_status != "verified") &&
 else{
 
 if(!isset($_GET["vend"])){
-include_once(__DIR__."/index.html");
+include_once(__DIR__."/index2.html");
 }
 else{
 
@@ -75,7 +75,7 @@ else{
     switch($_GET["vend"]){
         case"dashboard":
             
-            include_once(__DIR__."/index.html");
+            include_once(__DIR__."/index2.html");
             include_once(__DIR__."/index-btm.html");
         break;
         case"airtime":
@@ -185,11 +185,31 @@ else{
             }
         break;
         case"transfer":
-        if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+            if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+    
+               include_once(__DIR__."/transfer.html");
+    
+            }
+        break;
+        case"transfer2":
+            if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+    
+               include_once(__DIR__."/transfer2.html");
+    
+            }
+        break;
+        case"transfer3":
+            if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
 
-           include_once(__DIR__."/transfer.html");
+            include_once(__DIR__."/transfer3.html");
+            include_once(__DIR__."/index-btm.html");
 
-        }
+
+            }
+        break;
+        case"services":
+            include_once(__DIR__."/services.html");
+            include_once(__DIR__."/index-btm.html");
         break;
         case"upgrade":
            include_once(__DIR__."/upgrade.html");

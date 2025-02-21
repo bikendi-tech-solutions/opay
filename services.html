@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/sevices.css?ver=<?php echo $rand;?>">
+    <div class="container py-2">
+        <div class="row bg-light">
+            <div class="col-">
+        <h2 class="mb-4">Services</h2>
+      <div class="row g-3">
+        <!-- Service Items -->
+                 
+        <?php
+      if(vp_option_array($option_array,"setairtime") == "checked"){
+          ?>
+        <div class="col-6 col-md-3 rounded" link="?vend=airtime">
+          <div class="service-card">
+            <i class="fa-solid fa-phone"></i>
+            <div class="service-title">Airtime</div>
+          </div>
+        </div>
+
+        <?php
+      }
+        if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+            ?>
+        <div class="col-6 col-md-3" link="?vend=data">
+          <div class="service-card">
+            <i class="fas fa-mobile-alt"></i>
+            <div class="service-title">Data</div>
+          </div>
+        </div>
+        
+        <?php
+      }
+
+      if(vp_option_array($option_array,"setdata") == "checked"){
+          ?>
+        <div class="col-6 col-md-3" link="?vend=transfer3">
+            <div class="service-card">
+                <i class="fa-brands fa-telegram "></i>
+              <div class="service-title">Transfer</div>
+            </div>
+        </div>
+        <?php
+      }
+      if(is_plugin_active("bcmv/bcmv.php")){
+        if(vp_option_array($option_array,"setcable") == "checked"){
+          ?>
+        <div class="col-6 col-md-3" link="?vend=cable">
+          <div class="service-card">
+            <i class="fa-solid fa-tv"></i>
+            <div class="service-title">CableTv</div>
+          </div>
+        </div>
+        <?php
+      }
+      if(vp_option_array($option_array,"setbill") == "checked"){
+
+      ?>
+        <div class="col-6 col-md-3" link="?vend=bill">
+          <div class="service-card">
+            <i class="fas fa-qrcode"></i>
+            <div class="service-title">Electricity</div>
+          </div>
+        </div>
+
+        <?php
+            }
+        }
+        ?>
+
+        <div class="col-6 col-md-3">
+          <div class="service-card">
+            <i class="fa-brands fa-airbnb"></i>
+            <div class="service-title">Beulah AI <small>(coming soon)</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      

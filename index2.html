@@ -1,0 +1,236 @@
+    <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/home.css?ver=<?php echo $rand;?>">
+    <link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/main-page.css?ver=<?php echo $rand;?>" />
+
+    <?php
+        $mess_excerpt = preg_replace("/\n+/"," ",substr($mess,0,100));
+
+        $mess = preg_replace('/\\\s?/',"",preg_replace('/\\./',"",$mess));
+    ?>
+
+  <div class="container py-4 pt-3">
+    <!-- Navbar -->
+    <div class="row mx-2">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light shadow-sm d-flex justify-content-between">
+        <a class="navbar-brand d-flex align-items-center" href="?vend=me">
+          <b style="font-size:38px;">👤</b>
+          <div class="ms-2">
+            <span>Hi, <?php echo ucfirst($username);?> <i class="fa-solid fa-check bg-primary text-white ms-2 me-3 rounded-circle" style="font-size: 12px; padding: 3px;"></i></span>
+            <div class="text-muted mx-2" style="font: size 10px;">ID: <?php echo $id;?></div>
+          </div>
+          
+        </a>
+        <div class="text-muted mx-2">
+          <i class="fa-solid fa-headphones top-info-message"></i>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Bank Info -->
+     <?php
+     $AccountNumber = vp_getuser($id,"ncwallet_accountnumber");
+     $AccountName = vp_getuser($id,"ncwallet_accountname");
+     preg_match("/\(.+?\)/",strtoupper($AccountName),$matches);
+     if(isset($matches[0])){
+        $AccountName = preg_replace("/\(|\)/","",$matches[0]);
+     }else{
+        $AccountName = $AccountName;
+     }
+     if(strtolower($AccountName) == "false" || empty($AccountName)){
+        $AccountName = "";
+     }
+     $isAvailable = false;
+     if(vp_getoption('enable_ncwallet') == "yes"  && vp_getoption("vtupress_custom_ncwallet") == "yes"){
+        $isAvailable = true;
+     }
+     ?>
+    <div class="row my-3">
+      <div class="col-12 col-md-12">
+        <div class="d-flex align-items-center justify-content-between bg-white p-3 rounded shadow-sm">
+          <div class="d-flex align-items-center">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <span class="fw-bold"><?php echo ucfirst(substr($username,0,1));?></span>
+            </div>
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="transform:translateX(-13px); width: 40px; height: 40px; background-image: url('<?php echo plugins_url('opay/image/providus.jpeg');?>'); background-size:cover; border: 1px solid var(--bs-primary); background-position: center;">
+                
+  
+            </div>
+
+            <div class="ms-3">
+              <div class="fw-bold"><?php echo $AccountName;?></div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="me-3  text-muted fw-bold aza">
+                <?php
+                if($isAvailable && !empty($AccountNumber) && is_numeric($AccountNumber)){
+                    echo $AccountNumber;
+                    ?>
+                        <i class="fa-solid fa-copy text-primary copy-this"></i>
+                    <?php
+                }else{
+                    echo "<a href='?vend=wallet'>Fund Wallet</a>";
+                }
+                ?>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <marquee behavior="left" direction="right"><?php echo $mess_excerpt;?></marquee>
+
+    <!-- Account Balance -->
+    <div class="row my-3 opay-main-2nd">
+      <div class="col-12">
+        <div class="bg-primary text-white rounded-4 p-3 d-flex justify-content-between align-items-center">
+          <div>
+            <span class="" id="general-text"> <i class="fa-solid fa-shield me-1"></i>Available Balance <i class="fa-solid cursor-pointer fa-eye toggle-bal-visible"></i></span>
+            <span class="mt-2 available-balance  d-flex justify-content-start align-items-baseline " id="general-text">
+                <span class="amount-currency">₦</span>
+                <span class="amount"><?php echo number_format($bal);?></span>
+            </span>
+          </div>
+          <a href="?vend=history&sub=wallet" class="text-white text-decoration-none">
+            <span class="mx-md-3">History<i class="fa-solid fa-angle-right ms-1 mx-md-2"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="full_message d-none">
+        <?php echo $mess;?>
+    </div>
+
+
+    <!-- Payment Options -->
+    <div class="row text-center g-2 py-3 shadow" style="font-size: 10px;">
+        <?php
+        if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+            ?>
+            <div class="col-3" link="?vend=transfer3">
+                <div class="payment-option">
+                <i class="fa-brands fa-telegram "></i>
+                <p>Transfer</p>
+                </div>
+            </div>
+        <?php
+            }
+            if(vp_option_array($option_array,"setairtime") == "checked"){
+        ?>
+            <div class="col-3" link="?vend=airtime">
+                <div class="payment-option">
+                <i class="fas fa-mobile-alt"></i>
+                <p>Top-Up</p>
+                </div>
+            </div>
+      <?php
+        }
+
+    if(vp_option_array($option_array,"setdata") == "checked"){
+        ?>
+      <div class="col-3" link="?vend=data">
+        <div class="payment-option">
+          <i class="fas fa-file-invoice-dollar"></i>
+          <p>Data</p>
+        </div>
+      </div>
+      <?php
+    }
+    ?>
+      <div class="col-3" link="?vend=services">
+        <div class="payment-option">
+          <i class="fas fa-qrcode"></i>
+          <p>More</p>
+        </div>
+      </div>
+    </div>
+    <!-- Chat Card -->
+    <div class="row my-4">
+      <div class="col-12">
+        <div class="chat-card" link="whatsapp://send?phone=234<?php echo vp_option_array($option_array,"vp_whatsapp");?>">
+          <div class="d-flex align-items-center">
+            <i class="fa-brands fa-airbnb"></i>
+            <span class="ms-2">Chat with Beulah Ai</span>
+          </div>
+          <i class="fa-brands fa-telegram"></i>
+        </div>
+      </div>
+    </div>
+    <!-- Recent Activities -->
+    <div class="lower-part-1 mt-2 mx-1 bg-white px-2 py-4 m-auto">
+
+        <span class="mb-3 d-flex justify-content-between align-items-center">
+            <span class="text" >Transactions History</span>
+            <span class="text-icon" link="?vend=history">View All <li class="fa-solid fa-angle-right"></li></span>
+
+        </span>
+
+        <?php
+            global $wpdb;
+            $table = $wpdb->prefix."vp_wallet";
+            $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s ORDER BY ID DESC LIMIT 5",$user_id);
+            $results = $wpdb->get_results($prepare);
+
+
+        if($results != NULL && !empty($results)){
+
+                foreach($results as $thisResult){
+                    if(!empty($thisResult)){
+
+                        $tid = $thisResult->id;
+
+                        $_GET["sub"] = "wallet";
+                        include(__DIR__."/history/functions.php");
+                            ?>
+    
+
+
+                        <span link="?vend=history&id=<?php echo $tid;?>" class="my-3 mx-3 cursor-pointer d-flex justify-content-between <?php echo $status;?>">
+                            <span class="icon icon-div me-3 d-flex align-items-center"><?php echo $icon;?></span>
+                            <span class="icon-text flex-grow-1 d-flex flex-column">
+                                <span class="topic"><?php echo $type;?></span>
+                                <span class="message text-muted" id="general-text"><?php echo $time;?></span>
+                            </span>
+                            <span class="icon ms-2 d-flex flex-column align-items-end justify-content-center">
+                                <span class="amount-span"><?php echo $sign;?> ₦<span class="amount"><?php echo number_format($amount);?></span></span>
+                                <span class="status"><?php echo ucfirst($status);?></span>
+                            </span>
+                        
+                        </span>
+
+                            <?php
+                    }
+                }
+        }else{
+            ?>
+
+            <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
+
+                <span class="">No Transaction Recorded</span>
+            
+            </span>
+
+            <?php
+        }
+        ?>
+    </div>
+
+  </div>
+
+
+
+  <script src="<?php echo plugins_url('opay/');?>js/main-page.js?ver=<?php echo $rand;?>" ></script>
+  <script>
+                jQuery(".copy-this").on("click",function(){
+
+                    var textToCopy = jQuery(".aza").text().trim();
+                    navigator.clipboard.writeText(textToCopy).then(function() {
+                        alert('copied!');
+                    }).catch(function(err) {
+                        alert('error copying!');
+
+                    });
+
+                });
+  </script>
