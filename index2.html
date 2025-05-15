@@ -1,0 +1,236 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/home.css?ver=<?php echo $rand;?>">
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/main-page.css?ver=<?php echo $rand;?>" />
+
+<?php
+    $mess_excerpt = preg_replace("/\n+/"," ",substr($mess,0,100));
+
+    $mess = preg_replace('/\\\s?/',"",preg_replace('/\\./',"",$mess));
+?>
+
+<div class="container py-4 pt-3">
+<!-- Navbar -->
+<div class="row mx-2">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light shadow-sm d-flex justify-content-between">
+    <a class="navbar-brand d-flex align-items-center" href="?vend=me">
+      <b style="font-size:38px;">👤</b>
+      <div class="ms-2">
+        <span>Hi, <?php echo ucfirst($username);?> <i class="fa-solid fa-check bg-primary text-white ms-2 me-3 rounded-circle" style="font-size: 12px; padding: 3px;"></i></span>
+        <div class="text-muted mx-2" style="font: size 10px;">ID: <?php echo $id;?></div>
+      </div>
+      
+    </a>
+    <div class="text-muted mx-2">
+        <a href="http://chat.whatsapp.com/J11Q3iWG3JhKPKy6UxBFiG"><i class="fa-solid fa-headset top-info-message text-muted"></i></a>
+    </div>
+  </nav>
+</div>
+
+<!-- Bank Info -->
+ <?php
+ $AccountNumber = vp_getuser($id,"paymentpoint_accountnumber");
+ $AccountName = vp_getuser($id,"paymentpoint_accountname");
+ preg_match("/\(.+?\)/",strtoupper($AccountName),$matches);
+ if(isset($matches[0])){
+    $AccountName = preg_replace("/\(|\)/","",$matches[0]);
+ }else{
+    $AccountName = $AccountName;
+ }
+ if(strtolower($AccountName) == "false" || empty($AccountName)){
+    $AccountName = "";
+ }
+ $isAvailable = false;
+ if(vp_getoption('enable_paymentpoint') == "yes"  && vp_getoption("vtupress_custom_paymentpoint") == "yes"){
+    $isAvailable = true;
+ }
+ ?>
+<div class="row my-3">
+  <div class="col-12 col-md-12">
+    <div class="d-flex align-items-center justify-content-between bg-white p-3 rounded shadow-sm">
+      <div class="d-flex align-items-center">
+        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+          <span class="fw-bold"><?php echo ucfirst(substr($username,0,1));?></span>
+        </div>
+        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="transform:translateX(-13px); width: 40px; height: 40px; background-image: url('data:image/jpeg;base64,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'); background-size:cover; border: 1px solid var(--bs-primary); background-position: center;">
+            
+
+        </div>
+
+        <div class="ms-3">
+          <div class="fw-bold"><?php echo $AccountName;?></div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center">
+        <div class="me-3  text-muted fw-bold aza">
+            <?php
+            if($isAvailable && !empty($AccountNumber) && is_numeric($AccountNumber)){
+                echo $AccountNumber;
+                ?>
+                    <i class="fa-solid fa-copy text-primary copy-this"></i>
+                <?php
+            }else{
+                echo "<a href='?vend=wallet'>Fund Wallet</a>";
+            }
+            ?>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<marquee behavior="right" direction="left"><?php echo $mess_excerpt;?></marquee>
+
+<!-- Account Balance -->
+<div class="row my-3 opay-main-2nd">
+  <div class="col-12">
+    <div class="bg-primary text-white rounded-4 p-3 d-flex justify-content-between align-items-center">
+      <div>
+        <span class="" id="general-text"> <i class="fa-solid fa-shield me-1"></i>Available Balance <i class="fa-solid cursor-pointer fa-eye toggle-bal-visible"></i></span>
+        <span class="mt-2 available-balance  d-flex justify-content-start align-items-baseline " id="general-text">
+            <span class="amount-currency">₦</span>
+            <span class="amount"><?php echo number_format($bal);?></span>
+        </span>
+      </div>
+      <a href="?vend=history&sub=wallet" class="text-white text-decoration-none">
+        <span class="mx-md-3">History<i class="fa-solid fa-angle-right ms-1 mx-md-2"></i></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="full_message d-none">
+    <?php echo $mess;?>
+</div>
+
+
+<!-- Payment Options -->
+<div class="row text-center g-2 py-3 shadow" style="font-size: 10px;">
+    <?php
+    if(vp_getoption('wallet_to_wallet') == "yes" && isset($level) && strtolower($level[0]->transfer) == "yes" ){
+        ?>
+        <div class="col-3" link="?vend=transfer3">
+            <div class="payment-option">
+            <i class="fa-brands fa-telegram "></i>
+            <p>Transfer</p>
+            </div>
+        </div>
+    <?php
+        }
+        if(vp_option_array($option_array,"setairtime") == "checked"){
+    ?>
+        <div class="col-3" link="?vend=airtime">
+            <div class="payment-option">
+            <i class="fas fa-mobile-alt"></i>
+            <p>Top-Up</p>
+            </div>
+        </div>
+  <?php
+    }
+
+if(vp_option_array($option_array,"setdata") == "checked"){
+    ?>
+  <div class="col-3" link="?vend=data">
+    <div class="payment-option">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <p>Data</p>
+    </div>
+  </div>
+  <?php
+}
+?>
+  <div class="col-3" link="?vend=services">
+    <div class="payment-option">
+      <i class="fas fa-qrcode"></i>
+      <p>More</p>
+    </div>
+  </div>
+</div>
+<!-- Chat Card -->
+<div class="row my-4">
+  <div class="col-12">
+    <div class="chat-card" link="whatsapp://send?phone=234<?php echo vp_option_array($option_array,"vp_whatsapp");?>">
+      <div class="d-flex align-items-center">
+        <i class="fa-brands fa-airbnb"></i>
+        <span class="ms-2">Chat with Beulah Ai</span>
+      </div>
+      <i class="fa-brands fa-telegram"></i>
+    </div>
+  </div>
+</div>
+<!-- Recent Activities -->
+<div class="lower-part-1 mt-2 mx-1 bg-white px-2 py-4 m-auto">
+
+    <span class="mb-3 d-flex justify-content-between align-items-center">
+        <span class="text" >Transactions History</span>
+        <span class="text-icon" link="?vend=history">View All <li class="fa-solid fa-angle-right"></li></span>
+
+    </span>
+
+    <?php
+        global $wpdb;
+        $table = $wpdb->prefix."vp_wallet";
+        $prepare = $wpdb->prepare("SELECT * FROM $table WHERE user_id = %s ORDER BY ID DESC LIMIT 5",$user_id);
+        $results = $wpdb->get_results($prepare);
+
+
+    if($results != NULL && !empty($results)){
+
+            foreach($results as $thisResult){
+                if(!empty($thisResult)){
+
+                    $tid = $thisResult->id;
+
+                    $_GET["sub"] = "wallet";
+                    include(__DIR__."/history/functions.php");
+                        ?>
+
+
+
+                    <span link="?vend=history&id=<?php echo $tid;?>" class="my-3 mx-3 cursor-pointer d-flex justify-content-between <?php echo $status;?>">
+                        <span class="icon icon-div me-3 d-flex align-items-center"><?php echo $icon;?></span>
+                        <span class="icon-text flex-grow-1 d-flex flex-column">
+                            <span class="topic"><?php echo $type;?></span>
+                            <span class="message text-muted" id="general-text"><?php echo $time;?></span>
+                        </span>
+                        <span class="icon ms-2 d-flex flex-column align-items-end justify-content-center">
+                            <span class="amount-span"><?php echo $sign;?> ₦<span class="amount"><?php echo number_format($amount);?></span></span>
+                            <span class="status"><?php echo ucfirst($status);?></span>
+                        </span>
+                    
+                    </span>
+
+                        <?php
+                }
+            }
+    }else{
+        ?>
+
+        <span link="#" class=" cursor-pointer d-flex justify-content-center align-items-center <?php echo $status;?>">
+
+            <span class="">No Transaction Recorded</span>
+        
+        </span>
+
+        <?php
+    }
+    ?>
+</div>
+
+</div>
+
+
+
+<script src="<?php echo plugins_url('opay/');?>js/main-page.js?ver=<?php echo $rand;?>" ></script>
+<script>
+            jQuery(".copy-this").on("click",function(){
+
+                var textToCopy = jQuery(".aza").text().trim();
+                navigator.clipboard.writeText(textToCopy).then(function() {
+                    alert('copied!');
+                }).catch(function(err) {
+                    alert('error copying!');
+
+                });
+
+            });
+</script>

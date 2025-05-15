@@ -313,7 +313,17 @@ function continueThread(performTransaction){
               }
               else{
                 ?>
-            jQuery("#transaction-response .action-data-message").text("Please Retry");
+                var url = location.href;
+                if(url.indexOf("data") !== -1){
+                  jQuery("#transaction-response .action-data-message").text("Service is Currently Unavailable 😔, kindly try another plan or try again later, Thank you ");
+                }
+                else if(url.indexOf("airtime") !== -1){
+                    jQuery("#transaction-response .action-data-message").text("Network Unavailable at the moment try again later.");
+                }
+                else{
+                  jQuery("#transaction-response .action-data-message").text("Please retry again later.");
+                }
+
                 <?php
               }
               ?>
