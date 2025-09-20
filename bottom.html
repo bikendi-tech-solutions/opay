@@ -289,6 +289,58 @@ document.body.scrollTop = 0; // For Safari
 
 function continueThread(performTransaction){
 
+    var url = location.href;
+    if (url.indexOf("recharge") !== -1) {
+      var json = jQuery.parseJSON(performTransaction);
+      var code = json["code"];
+      var message = json["pin"] ? json["pin"] : (json["message"] ? json["message"] : performTransaction);
+
+      if (code == "100") {
+        jQuery("#confirm-transaction").addClass("d-none");
+        jQuery("#transaction-response").removeClass("d-none");
+        jQuery("#transaction-response .comp").removeClass("d-none");
+        jQuery("#transaction-response .failed").addClass("d-none");
+        jQuery("#transaction-response .action-data-message-bold").html(message);
+
+      }else{
+        jQuery("#confirm-transaction").addClass("d-none");
+        jQuery("#transaction-response").removeClass("d-none");
+        jQuery("#transaction-response .failed").removeClass("d-none");
+        jQuery("#transaction-response .comp").addClass("d-none");
+        jQuery("#transaction-response .action-data-message").html(message);
+
+      }
+        return;
+
+    }
+
+    if(url.indexOf("coupon") !== -1){
+        var json = jQuery.parseJSON(performTransaction);
+        var code = json["status"];
+        var message = json["message"] ? json["message"] : performTransaction;
+
+        if (code == "100") {
+          jQuery("#confirm-transaction").addClass("d-none");
+          jQuery("#transaction-response").removeClass("d-none");
+          jQuery("#transaction-response .comp").removeClass("d-none");
+          jQuery("#transaction-response .failed").addClass("d-none");
+          jQuery("#transaction-response .action-data-message-bold").html(message);
+
+        }
+        else{
+          jQuery("#confirm-transaction").addClass("d-none");
+          jQuery("#transaction-response").removeClass("d-none");
+          jQuery("#transaction-response .failed").removeClass("d-none");
+          jQuery("#transaction-response .comp").addClass("d-none");
+          jQuery("#transaction-response .action-data-message").html(message);
+
+        }
+
+        return;
+
+      }
+
+
         if(performTransaction == "success"){
             jQuery("#confirm-transaction").addClass("d-none");
             jQuery("#transaction-response").removeClass("d-none");
@@ -345,6 +397,13 @@ function runAirtimeTransaction(obj){
 
         if(cururl.indexOf("bvn") !== -1){
           var url  = '<?php echo esc_url(plugins_url('vtupress/bvn_verification.php'));?>';
+        }
+        
+        else if(cururl.indexOf("recharge") !== -1){
+          var url  = '<?php echo esc_url(plugins_url('vpcards/index.php'));?>';
+        }
+        else if(cururl.indexOf("coupon") !== -1){
+          var url  = '<?php echo esc_url(plugins_url('vtupress/admin/pages/settings/saves/coupon.php'));?>';
         }
 
         jQuery.ajax({

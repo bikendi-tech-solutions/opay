@@ -110,6 +110,17 @@
                 </div>
                 <?php
             }
+                if(vp_option_array($option_array,"cardscontrol") == "checked"){
+                    ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                    <a href="?vend=recharge" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image "><i class="fa-solid fa-mobile"></i></div>
+                        <div class="icon-text" id="general-text">Recharge Card</div>
+                    </a>
+                </div>
+
+                <?php
+            }
             if(is_plugin_active("bcmv/bcmv.php")){
                 if(vp_option_array($option_array,"setcable") == "checked"){
             ?>
@@ -176,6 +187,16 @@
                     <a href="#" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black giftcard-trade"  for="giftcard">
                         <div class="icon-image"><i class="fa-brands fa-cc-apple-pay"></i></div>
                         <div class="icon-text" id="general-text">Giftcard</div>
+                    </a>
+                </div>
+            <?php
+                }
+                if(vp_option_array($option_array,"enable_coupon") == "yes"){
+            ?>
+                <div class="col-3 my-2 service-none d-flex flex-column align-items-center ">
+                    <a href="?vend=coupon" class=" d-flex flex-column justify-content-center align-items-center text-decoration-none text-black">
+                        <div class="icon-image"><i class="fa-solid fa-ticket"></i></div>
+                        <div class="icon-text" id="general-text">Coupon</div>
                     </a>
                 </div>
             <?php

@@ -1,0 +1,194 @@
+<link rel="stylesheet" href="<?php echo plugins_url('opay/');?>css/airtime-page.css?ver=<?php echo $rand;?>" />
+
+
+
+<div class="container position-relative" id="main-page">
+
+    <div id="airtime-page-header" class="row p-4 bg-white">
+        <div class="col d-flex flex-row justify-content-start align-items-start">
+            <span class="general-text "><a href="#" class="back cursor-pointer text-decoration-none text-black"><i
+                        class="fa-solid fa-angle-left me-3 "></i></a>Coupon Code</span>
+        </div>
+    </div>
+
+    <!--NETWORK CHOICE SECTION-->
+
+    <div id="network-select" class="row mt-2 p-2 bg-white rounded ">
+
+
+        <div class="col-12 ads position-relative">
+
+        </div>
+
+
+        <div class="col-12 mt-3 border-bottom pb-2 position-relative">
+            <div class="row">
+                <div id="second-col" class=" col-7 col-md-10">
+                    <input type="text" class="form-control input-recipient"
+                        placeholder="Coupon Code" />
+                </div>
+            </div>
+            <span class="text-warning recipient-incorrect-notice"></span>
+
+        </div>
+
+        <div class="col-12 my-3 d-flex justify-content-center">
+            <h4 class="checkout btn btn-success rounded-pill cursor-pointer">Redeem Code</h4>
+        </div>
+
+    </div>
+
+
+
+    <!-- TRANSACTION MESSAGE-->
+    <div id="transaction-response" class="d-none  level_3  checkout_trans_levels">
+
+        <div class="mx-4 mt-4 d-flex justify-content-end">
+            <span class="done-btn cursor-pointer">Done</span>
+        </div>
+
+        <div class="comp d-flex flex-column mt-3 d-none">
+            <div class="confirmation d-flex flex-column justify-content-center align-items-center">
+                <i class="fa-regular fa-circle-check"></i>
+                <span class="done-text mt-2">Coupon Code Redeemed Successfully</span>
+                <span class="action-data-message-bold fw-bold fs-3 my-3"></span>
+            </div>
+
+            <div class="container">
+                <div class="row mt-5 actions px-2">
+                    <div class="col ">
+                        <div link="?vend=history&sub=airtime&generate=last"
+                            class="cursor-pointer p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                            <i class="fa-solid fa-share-from-square"></i>
+                            <span class="action-word">Share receipt</span>
+                        </div>
+                    </div>
+                    <div class="col ">
+                        <div link="?vend=history&sub=airtime&generate=last&plain=yes"
+                            class="cursor-pointer p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                            <i class="fa-solid fa-download"></i>
+                            <span class="action-word">Download receipt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3 p-3">
+                    <div class="col-12 ">
+                        <div class="get-rewards p-4">
+                            <span class="get-reward-statement">More Services</span>
+
+                            <!--Data-->
+                            <div class="row mt-3 service-data ">
+                                <div class="col d-flex justify-content-start align-items-center">
+                                    <div class="benefit-image p-3 bg-white">
+                                        <i class="fa-solid fa-wifi"></i>
+                                    </div>
+                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                        <span class="benefit-topic">
+                                            Data
+                                        </span>
+                                        <span class="benefit-message">
+                                            Cheap and lasts
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                    <button link="?vend=data" class="benefit-button">Go</button>
+                                </div>
+                            </div>
+
+                            <!--Cable-->
+                            <div class="row mt-3 service-cable">
+                                <div class="col d-flex justify-content-start align-items-center">
+                                    <div class="benefit-image p-3 bg-white">
+                                        <i class="fa-solid fa-tv"></i>
+                                    </div>
+                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                        <span class="benefit-topic">
+                                            Tv Subscription
+                                        </span>
+                                        <span class="benefit-message">
+                                            Don't miss your fav. show
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                    <button link="?vend=cable" class="benefit-button">Go</button>
+                                </div>
+                            </div>
+
+                            <!--Bill-->
+                            <div class="row mt-3 service-bill">
+                                <div class="col d-flex justify-content-start align-items-center">
+                                    <div class="benefit-image p-3 bg-white">
+                                        <i class="fa-solid fa-tower-cell"></i>
+                                    </div>
+                                    <div class="ms-2 benefit-messages d-flex flex-column">
+                                        <span class="benefit-topic">
+                                            Utility
+                                        </span>
+                                        <span class="benefit-message">
+                                            Always light up your house
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex justify-content-end align-items-center">
+                                    <button link="?vend=bill" class="benefit-button">Go</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="failed d-flex flex-column  mt-3  d-none">
+            <div class="confirmation d-flex flex-column justify-content-center align-items-center">
+                <i class="fa-regular fa-circle-xmark text-danger"></i>
+                <span class="done-text mt-2 text-danger">Transaction Failed</span>
+                <span><span class="naira-symbol">₦</span><span class="amount-value"></span></span>
+            </div>
+
+            <div class="container">
+                <div class="row mt-5 actions px-2">
+                    <div class="col ">
+                        <div class="p-4 d-flex flex-column justify-content-center align-items-center work-on">
+                            <i class="fa-solid fa-circle-info text-warning"></i>
+                            <span class="action-data-message"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+<script>
+
+    function makeChoice() {
+
+    }
+
+    function calcit() {
+
+
+    }
+
+</script>
+
+<script src="<?php echo plugins_url('opay/');?>js/airtime-service.js?ver=<?php echo $rand;?>"></script>

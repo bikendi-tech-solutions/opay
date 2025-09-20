@@ -85,6 +85,20 @@ else{
             include_once(__DIR__."/airtime.html");
             }
         break;
+        case"recharge":
+
+            if(vp_option_array($option_array,"cardscontrol") == "checked"){
+
+            include_once(__DIR__."/recharge_cards.html");
+            }
+        break;
+        case"coupon":
+
+            if(vp_option_array($option_array,"enable_coupon") == "yes"){
+
+            include_once(__DIR__."/coupon.html");
+            }
+        break;
         case"data":
             if(vp_option_array($option_array,"setdata") == "checked"){
             include_once(__DIR__."/data.html");

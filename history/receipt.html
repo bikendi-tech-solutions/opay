@@ -94,6 +94,11 @@
 
                             
                         break;
+                        case"recharge":
+                        
+                            $table = $wpdb->prefix."scards";
+                        
+                        break;
     
                     }
 
@@ -188,6 +193,15 @@
                                     <span class="mt-2 detail d-flex justify-content-between align-items-center">
                                         <span class="key">Meter Token</span>
                                         <span class="value"><?php echo $meter_token;?></span>
+                                    </span>
+                                    <?php
+                                        }
+                                        elseif($_GET["sub"] == "recharge"){
+
+                                    ?>
+                                    <span class="mt-2 detail d-flex justify-content-between align-items-center">
+                                        <span class="key">PIN</span>
+                                        <span class="value"><?php echo $code;?></span>
                                     </span>
                                     <?php
                                         }

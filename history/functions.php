@@ -61,6 +61,36 @@ switch($_GET["sub"]){
 
 
             break;
+            case"recharge":
+                    
+                $id = $thisResult->id;
+                $type = ucfirst($thisResult->type)." /Recharge Card";
+                $bamt = $thisResult->bal_bf;
+                $namt = $thisResult->bal_nw;
+                $status = ucfirst($thisResult->status);
+                $amount = $thisResult->amount;
+                $time = $thisResult->the_time;
+
+                if($status == "Successful"){
+                    $status = "success";
+                    $sign = "-";
+                }
+                elseif($status == "Pending" || $status == "Processing"){
+                    $status = "processing";
+                    $sign = "~";
+                }else{
+                    $status = "failed";
+                    $sign = "+";
+                }
+
+                $icon = '<i class="fa-solid fa-square-phone-flip"></i>';
+                $sender = $username;
+                $recipient = $username;
+                $button = '<i class="fa-solid fa-mobile-retro" link="?vend=recharge"></i> Buy Recharge Card';
+                $code = $thisResult->pin;
+
+
+            break;
             case"data":
                             
                 $id = $thisResult->id;
