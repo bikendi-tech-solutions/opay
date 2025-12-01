@@ -10,7 +10,7 @@
 *Plugin Name: Opay Template
 *Plugin URI: http://vtupress.com
 *Description: This add Opay template into your vtu website
-*Version: 1.1.9
+*Version: 1.2.0
 *Author: Akor Victor
 *Author URI: https://facebook.com/vtupressceo
 Requires PHP: 7.4

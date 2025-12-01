@@ -8,6 +8,12 @@
     $ads_banner_link = "#";
 }
 
+
+$majorp = vp_option_array($option_array,"opay_major_primary");
+$minorp = vp_option_array($option_array,"opay_minor_primary");
+$majors = vp_option_array($option_array,"opay_major_secondary");
+$minors = vp_option_array($option_array,"opay_minor_secondary");
+
 ?>
 
 jQuery("#main-page-content .ads").attr("link","<?php echo $ads_banner_link;?>");
